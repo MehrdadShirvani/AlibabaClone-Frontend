@@ -5,7 +5,7 @@ export interface TransportationSearchResult{
     toLocationTitle : string;
     fromCityTitle : string;
     toCityTitle : string;
-    startDateTime : Date;
-    endDateTime ?: Date;
+    startDateTime : Date | string;
+    endDateTime ?: Date | string;
     price : number;
 }
