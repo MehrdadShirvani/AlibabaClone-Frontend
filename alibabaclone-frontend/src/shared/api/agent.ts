@@ -1,8 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 import { TransportationSearchRequest } from '../models/transportation/transportationSearchRequest';
 import { TransportationSearchResult } from '../models/transportation/transportationSearchResult';
+import { City } from '../models/location/city';
 
-axios.defaults.baseURL = 'https://localhost:44337/api';
+axios.defaults.baseURL = 'https://localhost:44377/api';
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -17,8 +18,13 @@ const TransportationSearch = {
     search: (data: TransportationSearchRequest) => request.post<TransportationSearchResult[]>('/transportation/search', data),
 }
 
+const Cities = {
+    list: () => request.get<City[]>('/city'),
+}
+
 const agent = {
-    TransportationSearch 
+    TransportationSearch,
+    Cities
 }
 
 export default agent;
