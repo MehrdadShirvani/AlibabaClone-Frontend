@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { TransportationSearchRequest } from '../models/transportation/transportationSearchRequest';
+import { TransportationSearchResult } from '../models/transportation/transportationSearchResult';
 
 axios.defaults.baseURL = 'https://localhost:44337/api';
 
@@ -12,9 +13,12 @@ const request = {
     delete: <T>(url: string) => axios.delete<T>(url).then(responseBody)
 }
 
+const TransportationSearch = {
+    search: (data: TransportationSearchRequest) => request.post<TransportationSearchResult[]>('/transportation/search', data),
+}
+
 const agent = {
-    transportationSearch: (data: TransportationSearchRequest) =>
-        request.post('/transportation/search', data),
+    TransportationSearch 
 }
 
 export default agent;
