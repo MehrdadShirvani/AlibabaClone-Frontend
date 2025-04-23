@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { TransportationSearchRequest } from '../models/transportation/transportationSearchRequest';
 
 axios.defaults.baseURL = 'https://localhost:44337/api';
 
@@ -12,7 +13,8 @@ const request = {
 }
 
 const agent = {
-    
+    transportationSearch: (data: TransportationSearchRequest) =>
+        request.post('/transportation/search', data),
 }
 
 export default agent;
