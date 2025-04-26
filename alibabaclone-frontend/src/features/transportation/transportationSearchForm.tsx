@@ -8,8 +8,9 @@ const TransportationSearchForm = () => {
   const [form, setForm] = useState<TransportationSearchRequest>({
     fromCityId: undefined,
     toCityId: undefined,
-    startDate: "",
-    endDate: "",
+    startDate: null,
+    endDate: null,
+    vehicleTypeId: undefined,
   });
 
   useEffect(() => {
