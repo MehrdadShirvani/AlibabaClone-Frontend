@@ -12,34 +12,14 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
       <Button>Click me</Button>
-      <h1>Vite + React</h1>
+      <h1>Transportation Search</h1>
       <div className="card">
         <div>
           <h2>Choose the transportation search form</h2>
           <TransportationSearchForm />
         </div>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      {
-        //console.log(agent.TransportationSearch());
-      }
     </>
   );
 }
