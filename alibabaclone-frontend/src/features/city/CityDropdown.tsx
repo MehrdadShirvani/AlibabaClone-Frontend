@@ -1,6 +1,5 @@
 import agent from "@/shared/api/agent";
 import { City } from "@/shared/models/location/city";
-import { validateHeaderValue } from "http";
 import { useEffect, useState } from "react";
 
 const CityDropdown = () => {
