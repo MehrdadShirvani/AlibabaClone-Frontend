@@ -17,6 +17,23 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+body {
+  background-color: white;
+  color: black;
+}
+
+input,
+select,
+button {
+  background-color: white;
+  color: black;
+  border-color: #ccc;
+}
+
+input::placeholder {
+  color: #888;
+}
+
 
 @keyframes logo-spin {
   from {
