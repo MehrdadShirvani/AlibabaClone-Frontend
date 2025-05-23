@@ -152,3 +152,8 @@ button:focus-visible {
     @apply bg-background text-foreground;
   }
 }
+
+
+.nav-link {
+  color: black !important;
+}
