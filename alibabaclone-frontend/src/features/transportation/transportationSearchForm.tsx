@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import agent from "@/shared/api/agent";
 import { City } from "@/shared/models/location/city";
 import { TransportationSearchRequest } from "@/shared/models/transportation/transportationSearchRequest";
-import { TransportationSearchResult } from "@/shared/models/transportation/transportationSearchResult";
-import TransportationCard from "./transportationCard";
 
 import {
   Select,
@@ -33,10 +31,7 @@ const TransportationSearchForm = () => {
   const navigate = useNavigate();
 
   const [cities, setCities] = useState<City[]>([]);
-  const [searchResults, setSearchResults] = useState<
-    TransportationSearchResult[]
-  >([]);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [form, setForm] = useState<TransportationSearchRequest>({
     fromCityId: undefined,
     toCityId: undefined,
