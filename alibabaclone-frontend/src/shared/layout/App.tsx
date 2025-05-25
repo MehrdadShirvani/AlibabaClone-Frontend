@@ -2,8 +2,8 @@ import Navbar from "@/shared/components/navbar";
 import "./App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SearchPage from "@/pages/SearchPage";
-import SearchResultsPage from "@/pages/SearchResultsPage";
+import SearchPage from "@/features/transportation/pages/SearchPage";
+import SearchResultsPage from "@/features/transportation/pages/SearchResultsPage";
 
 function App() {
   return (
