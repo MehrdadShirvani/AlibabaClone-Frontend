@@ -27,7 +27,8 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.5.1",
     "tailwind-merge": "^3.2.0",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",

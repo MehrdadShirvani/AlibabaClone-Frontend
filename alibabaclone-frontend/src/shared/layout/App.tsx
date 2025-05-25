@@ -1,17 +1,26 @@
 import Navbar from "@/components/navbar";
 import "./App.css";
-import TransportationSearchForm from "@/features/transportation/transportationSearchForm";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SearchPage from "@/pages/SearchPage";
+import SearchResultsPage from "@/pages/SearchResultsPage";
 
 function App() {
   return (
-    <>
-      <div className="card">
-        <Navbar />
-        <div>
-          <TransportationSearchForm />
-        </div>
+    <Router>
+      <Navbar /> {/* Navbar will show on all pages */}
+      <div className="pt-16">
+        {" "}
+        {/* padding top if navbar is fixed */}
+        <Routes>
+          <Route path="/" element={<SearchPage />} />
+          <Route
+            path="/:vehicleId/:fromCityId/:toCityId"
+            element={<SearchResultsPage />}
+          />
+        </Routes>
       </div>
-    </>
+    </Router>
   );
 }
 

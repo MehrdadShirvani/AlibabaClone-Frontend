@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import agent from "@/shared/api/agent";
 import { City } from "@/shared/models/location/city";
 import { TransportationSearchRequest } from "@/shared/models/transportation/transportationSearchRequest";
-import { TransportationSearchResult } from "@/shared/models/transportation/transportationSearchResult";
-import TransportationCard from "./transportationCard";
 
 import {
   Select,
@@ -27,12 +25,13 @@ const vehicleTypes = [
   { id: 3, name: "Airplane", imageUrl: "/images/airplane.png" },
 ];
 
+import { useNavigate } from "react-router-dom";
+
 const TransportationSearchForm = () => {
+  const navigate = useNavigate();
+
   const [cities, setCities] = useState<City[]>([]);
-  const [searchResults, setSearchResults] = useState<
-    TransportationSearchResult[]
-  >([]);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [form, setForm] = useState<TransportationSearchRequest>({
     fromCityId: undefined,
     toCityId: undefined,
@@ -48,16 +47,34 @@ const TransportationSearchForm = () => {
   }, []);
 
   const handleSearch = () => {
-    setLoading(true);
-    agent.TransportationSearch.search(form)
-      .then((results) => {
-        setSearchResults(results); // update results
-      })
-      .catch((error) => {
-        console.error("Search failed:", error);
-        setSearchResults([]); // clear previous results on error
-      })
-      .finally(() => setLoading(false));
+    if (
+      !form.fromCityId ||
+      !form.toCityId ||
+      !form.startDate ||
+      !form.vehicleTypeId
+    )
+      return;
+    const params = new URLSearchParams();
+    if (form.startDate instanceof Date)
+      params.append("departing", form.startDate.toISOString());
+    else if (typeof form.startDate === "string")
+      params.append("departing", form.startDate);
+
+    if (form.endDate instanceof Date)
+      params.append("arriving", form.endDate.toISOString());
+    else if (typeof form.endDate === "string")
+      params.append("arriving", form.endDate);
+
+    console.log(
+      `/${form.vehicleTypeId}/${form.fromCityId}/${
+        form.toCityId
+      }?${params.toString()}`
+    );
+    navigate(
+      `/${form.vehicleTypeId}/${form.fromCityId}/${
+        form.toCityId
+      }?${params.toString()}`
+    );
   };
 
   // Adjust vehicle type button styles for stronger distinction
@@ -205,22 +222,6 @@ const TransportationSearchForm = () => {
             {loading ? "Searching..." : "Search"}
           </Button>
         </div>
-      </div>
-
-      <div className="mt-6 max-h-[400px] overflow-y-auto">
-        {loading ? (
-          <p className="text-gray-500">Loading...</p>
-        ) : searchResults.length === 0 ? (
-          <p className="text-gray-500">No results found</p>
-        ) : (
-          <div className="space-y-6">
-            {" "}
-            {/* Changed grid layout to vertical list with space between items */}
-            {searchResults.map((result) => (
-              <TransportationCard key={result.id} transportation={result} />
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );
