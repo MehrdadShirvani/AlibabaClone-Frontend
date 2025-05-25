@@ -1,4 +1,4 @@
-import TransportationSearchForm from "@/features/transportation/TransportationSearchForm";
+import TransportationSearchForm from "@/features/transportation/transportationSearchForm";
 
 const SearchPage = () => {
   return (
