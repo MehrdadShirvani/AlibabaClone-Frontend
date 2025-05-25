@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import agent from "@/shared/api/agent";
 import { TransportationSearchResult } from "@/shared/models/transportation/transportationSearchResult";

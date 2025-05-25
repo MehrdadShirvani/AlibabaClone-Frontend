@@ -1,4 +1,3 @@
-import React from "react";
 import TransportationSearchForm from "@/features/transportation/TransportationSearchForm";
 
 const SearchPage = () => {
