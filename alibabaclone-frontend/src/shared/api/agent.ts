@@ -2,6 +2,8 @@ import axios, { AxiosResponse } from 'axios';
 import { TransportationSearchRequest } from '../models/transportation/transportationSearchRequest';
 import { TransportationSearchResult } from '../models/transportation/transportationSearchResult';
 import { City } from '../models/location/city';
+import { RegisterRequestDto } from '../models/authentication/RegisterRequestDto';
+import { LoginRequestDto } from '../models/authentication/LoginRequestDto';
 
 axios.defaults.baseURL = 'https://localhost:44377/api';
 
@@ -21,10 +23,19 @@ const TransportationSearch = {
 const Cities = {
     list: () => request.get<City[]>('/city'),
 }
+const Auth = {
+register: (data: RegisterRequestDto) =>
+    request.post<{ token: string }>('/auth/register', data),
+  login: (data: LoginRequestDto) =>
+    request.post<{ token: string }>('/auth/login', data),
+};
 
 const agent = {
     TransportationSearch,
-    Cities
+    Cities,
+    Auth
 }
+
+
 
 export default agent;
