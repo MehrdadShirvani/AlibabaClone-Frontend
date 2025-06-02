@@ -61,7 +61,7 @@ const RegisterModal: React.FC<Props> = ({ onClose }) => {
 
       const response = await agent.Auth.register(requestData);
 
-      login(response.token);
+      login(response);
       setForm({ phoneNumber: "", password: "", confirmPassword: "" });
       onClose();
     } catch (err: any) {

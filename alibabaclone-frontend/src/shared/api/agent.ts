@@ -4,6 +4,7 @@ import { TransportationSearchResult } from '../models/transportation/transportat
 import { City } from '../models/location/city';
 import { RegisterRequestDto } from '../models/authentication/RegisterRequestDto';
 import { LoginRequestDto } from '../models/authentication/LoginRequestDto';
+import { AuthResponseDto } from '../models/authentication/AuthResponseDto';
 
 axios.defaults.baseURL = 'https://localhost:44377/api';
 
@@ -25,9 +26,9 @@ const Cities = {
 }
 const Auth = {
 register: (data: RegisterRequestDto) =>
-    request.post<{ token: string }>('/auth/register', data),
+    request.post<AuthResponseDto>('/auth/register', data),
   login: (data: LoginRequestDto) =>
-    request.post<{ token: string }>('/auth/login', data),
+    request.post<AuthResponseDto>('/auth/login', data),
 };
 
 const agent = {

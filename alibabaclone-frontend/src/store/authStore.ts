@@ -1,8 +1,9 @@
+import { AuthResponseDto } from '@/shared/models/authentication/AuthResponseDto';
 import {create} from 'zustand';
 
 interface User {
   phoneNumber: string;
-  // Add more fields like roles or ID if needed
+  roles: any;
 }
 
 interface AuthState {
@@ -10,7 +11,7 @@ interface AuthState {
   user: User | null;
   token: string | null;
 
-  login: (token: string) => void;
+  login: (response: AuthResponseDto) => void;
   logout: () => void;
   setToken: (token: string) => void;
 }
@@ -20,11 +21,17 @@ export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   token: null,
 
-  login: (token) =>
-    set(() => ({
-      token,
-      isLoggedIn: true,
-    })),
+  login: (response) =>
+  set(() => ({
+    token: response.token,
+    user: {
+      phoneNumber: response.phoneNumber,
+      roles: response.roles
+      // You can extend this if you add roles or IDs
+    },
+    isLoggedIn: true,
+  })),
+
 
   logout: () =>
     set(() => ({
