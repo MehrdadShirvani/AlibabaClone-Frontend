@@ -37,7 +37,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
 
     try {
       const response = await agent.Auth.login(form);
-      login(response.token); // update store with full auth info
+      login(response); // update store with full auth info
       setError(null);
       onClose();
     } catch (err: any) {
