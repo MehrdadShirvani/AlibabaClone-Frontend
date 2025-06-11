@@ -3,7 +3,7 @@ import {create} from 'zustand';
 
 interface User {
   phoneNumber: string;
-  roles: any;
+  roles: string[];
 }
 
 interface AuthState {
@@ -13,7 +13,6 @@ interface AuthState {
 
   login: (response: AuthResponseDto) => void;
   logout: () => void;
-  setToken: (token: string) => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -27,7 +26,6 @@ export const useAuthStore = create<AuthState>((set) => ({
     user: {
       phoneNumber: response.phoneNumber,
       roles: response.roles
-      // You can extend this if you add roles or IDs
     },
     isLoggedIn: true,
   })),
@@ -38,12 +36,5 @@ export const useAuthStore = create<AuthState>((set) => ({
       token: null,
       user: null,
       isLoggedIn: false,
-    })),
-
-  setToken: (token) =>
-    set((state) => ({
-      token,
-      isLoggedIn: !!token,
-      user: state.user,
     })),
 }));
