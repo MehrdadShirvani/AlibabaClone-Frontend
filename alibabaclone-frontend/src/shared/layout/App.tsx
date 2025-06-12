@@ -4,6 +4,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SearchPage from "@/features/transportation/pages/SearchPage";
 import SearchResultsPage from "@/features/transportation/pages/SearchResultsPage";
+import ProfilePage from "@/features/account/ProfilePage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             path="/:vehicleId/:fromCityId/:toCityId"
             element={<SearchResultsPage />}
           />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </div>
     </Router>
