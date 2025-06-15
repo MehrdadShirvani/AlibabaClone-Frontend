@@ -2,6 +2,7 @@ import LoginModal from "@/features/authentication/modals/LoginModal";
 import RegisterModal from "@/features/authentication/modals/RegisterModal";
 import { useAuthStore } from "@/store/authStore";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { isLoggedIn, logout } = useAuthStore();
@@ -54,6 +55,12 @@ const Navbar = () => {
           ) : (
             <>
               <span className="font-semibold nav-link">You have entered</span>
+              <Link
+                to="/profile"
+                className="nav-link px-3 py-1 rounded-md hover:text-white hover:shadow-md hover:shadow-blue-500/50"
+              >
+                Profile
+              </Link>
               <a
                 href="/my-travels"
                 className="nav-link px-3 py-1 rounded-md hover:text-white hover:shadow-md hover:shadow-blue-500/50"
