@@ -1,41 +1,20 @@
-import React, { useState } from "react";
-import AccountInfo from "./AccountInfo"; // your combined component with 4 parts
-import Support from "./Support";
-import Transactions from "./Transactions";
-import MyTravels from "./MyTravels";
-import ListOfTravelers from "./ListOfTravelers";
-import Favorites from "./Favorites";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 
 const tabs = [
-  { id: "accountInfo", label: "Account Info" },
-  { id: "myTravels", label: "My Travels" },
-  { id: "listOfTravelers", label: "List Of Travelers" },
-  { id: "favorites", label: "Favorites" },
-  { id: "support", label: "Support" },
-  { id: "transactions", label: "Transactions" },
+  { id: "accountInfo", label: "Account Info", path: "account-info" },
+  { id: "myTravels", label: "My Travels", path: "my-travels" },
+  {
+    id: "listOfTravelers",
+    label: "List Of Travelers",
+    path: "list-of-travelers",
+  },
+  { id: "favorites", label: "Favorites", path: "favorites" },
+  { id: "support", label: "Support", path: "support" },
+  { id: "transactions", label: "Transactions", path: "transactions" },
 ];
 
 const ProfilePage = () => {
-  const [activeTab, setActiveTab] = useState("accountInfo");
-
-  const renderContent = () => {
-    switch (activeTab) {
-      case "accountInfo":
-        return <AccountInfo />;
-      case "myTravels":
-        return <MyTravels />;
-      case "listOfTravelers":
-        return <ListOfTravelers />;
-      case "favorites":
-        return <Favorites />;
-      case "support":
-        return <Support />;
-      case "transactions":
-        return <Transactions />;
-      default:
-        return null;
-    }
-  };
+  const location = useLocation();
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -46,25 +25,29 @@ const ProfilePage = () => {
       >
         <div className="p-4 font-bold text-lg border-b">Profile Menu</div>
         <ul className="flex flex-col flex-grow">
-          {tabs.map(({ id, label }) => (
-            <li key={id}>
-              <button
-                onClick={() => setActiveTab(id)}
-                className={`w-full text-left px-4 py-3 hover:bg-blue-100 transition-colors ${
-                  activeTab === id
-                    ? "bg-blue-500 text-white font-semibold"
-                    : "text-gray-700"
-                }`}
+          {tabs.map(({ path, label }) => (
+            <li key={path}>
+              <NavLink
+                to={path}
+                className={({ isActive }) =>
+                  `w-full block text-left px-4 py-3 transition-colors ${
+                    isActive
+                      ? "bg-blue-500 text-white font-semibold"
+                      : "text-gray-700 hover:bg-blue-100"
+                  }`
+                }
               >
                 {label}
-              </button>
+              </NavLink>
             </li>
           ))}
         </ul>
       </nav>
 
-      {/* Main content area */}
-      <main className="flex-grow p-6">{renderContent()}</main>
+      {/* Main content */}
+      <main className="flex-grow p-6">
+        <Outlet />
+      </main>
     </div>
   );
 };
