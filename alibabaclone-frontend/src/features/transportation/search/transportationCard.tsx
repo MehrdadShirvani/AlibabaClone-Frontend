@@ -25,7 +25,9 @@ const TransportationCard: React.FC<Props> = ({ transportation }) => {
         <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded transition">
           Select Ticket
         </button>
-        <div className="text-xs text-gray-500 mt-2">? seats left</div>
+        <div className="text-xs text-gray-500 mt-2">
+          {transportation.remainingCapacity} seats left
+        </div>
       </div>
 
       {/* Middle Section: Route and Info */}

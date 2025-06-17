@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import agent from "@/shared/api/agent";
 import { TransportationSearchResult } from "@/shared/models/transportation/transportationSearchResult";
-import TransportationCard from "@/features/transportation/transportationCard";
+import TransportationCard from "@/features/transportation/search/transportationCard";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);

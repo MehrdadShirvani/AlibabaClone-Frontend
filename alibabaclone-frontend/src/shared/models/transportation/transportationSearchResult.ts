@@ -8,4 +8,5 @@ export interface TransportationSearchResult{
     startDateTime : Date | string;
     endDateTime ?: Date | string;
     price : number;
+    remainingCapacity : number;
 }

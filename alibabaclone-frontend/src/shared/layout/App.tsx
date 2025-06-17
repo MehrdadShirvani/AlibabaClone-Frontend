@@ -2,16 +2,16 @@ import Navbar from "@/shared/components/navbar";
 import "./App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SearchPage from "@/features/transportation/pages/SearchPage";
-import SearchResultsPage from "@/features/transportation/pages/SearchResultsPage";
-import ProfilePage from "@/features/account/ProfilePage";
-import TravelOrderDetails from "@/features/account/TravelOrderDetails";
-import MyTravels from "@/features/account/MyTravels";
-import AccountInfo from "@/features/account/AccountInfo";
-import ListOfTravelers from "@/features/account/ListOfTravelers";
-import Favorites from "@/features/account/Favorites";
-import MyTransactions from "@/features/account/MyTransactions";
-import Support from "@/features/account/Support";
+import SearchPage from "@/features/transportation/search/SearchPage";
+import SearchResultsPage from "@/features/transportation/search/SearchResultsPage";
+import ProfilePage from "@/features/account/profilePages/ProfilePage";
+import TravelOrderDetails from "@/features/account/profilePages/TravelOrderDetails";
+import MyTravels from "@/features/account/profilePages/MyTravels";
+import AccountInfo from "@/features/account/profilePages/AccountInfo";
+import ListOfTravelers from "@/features/account/profilePages/ListOfTravelers";
+import Favorites from "@/features/account/profilePages/Favorites";
+import MyTransactions from "@/features/account/profilePages/MyTransactions";
+import Support from "@/features/account/profilePages/Support";
 
 function App() {
   return (
