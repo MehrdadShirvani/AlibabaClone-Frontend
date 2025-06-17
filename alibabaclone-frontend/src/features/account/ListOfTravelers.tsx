@@ -21,12 +21,7 @@ const ListOfTravelers = () => {
   const [editingPerson, setEditingPerson] = useState<PersonDto | null>(null);
   const [showModal, setShowModal] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<PersonDto>();
+  const { register, handleSubmit, reset } = useForm<PersonDto>();
 
   const loadPeople = async () => {
     const data = await agent.Profile.getMyPeople();

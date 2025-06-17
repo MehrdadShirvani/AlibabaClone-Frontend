@@ -5,21 +5,28 @@ import { cn } from "@/lib/utils";
 import agent from "@/shared/api/agent";
 import { TransactionDto } from "@/shared/models/transaction/TransactionDto";
 
-interface Props {
-  currentBalance: number;
-}
-
 const MyTransactions = () => {
   const [transactions, setTransactions] = useState<TransactionDto[]>([]);
+  const [currentBalance, setCurrentBalance] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [topUpAmount, setTopUpAmount] = useState("");
 
+  const loadCurrentBalance = async () => {
+    try {
+      const data = await agent.Profile.getProfile();
+      setCurrentBalance(data.currentBalance);
+    } catch (err) {
+      console.error("Failed to load current balance", err);
+    }
+  };
+
   useEffect(() => {
     agent.Profile.getMyTransactions().then(setTransactions);
+    loadCurrentBalance();
   }, []);
 
   const handleAddBalance = () => {
-    // Simulate a balance update call here
+    //TODO: Simulate a balance update call here
     setShowModal(false);
     alert(`Balance increased by ${topUpAmount}`);
     setTopUpAmount("");
@@ -29,7 +36,8 @@ const MyTransactions = () => {
     <div className="max-w-4xl mx-auto mt-6 p-4">
       <div className="flex justify-between items-center mb-4">
         <div className="text-xl font-semibold">
-          Current Balance: <span className="text-blue-600">{} تومان</span>
+          Current Balance:{" "}
+          <span className="text-blue-600">{currentBalance} $</span>
         </div>
         <Button onClick={() => setShowModal(true)}>Increase Balance</Button>
       </div>

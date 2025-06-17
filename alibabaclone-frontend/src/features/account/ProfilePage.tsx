@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const tabs = [
   { id: "accountInfo", label: "Account Info", path: "account-info" },
@@ -14,8 +14,6 @@ const tabs = [
 ];
 
 const ProfilePage = () => {
-  const location = useLocation();
-
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
