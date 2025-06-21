@@ -14,6 +14,7 @@ import { TravelerTicketDto } from '../models/transportation/TravelerTicketDto';
 import { TicketOrderSummaryDto } from '../models/transportation/TicketOrderSummaryDto';
 import { useAuthStore } from '@/store/authStore';
 import { TransactionDto } from '../models/transaction/TransactionDto';
+import { topUpDto } from '../models/account/topUpDto';
 
 axios.defaults.baseURL = 'https://localhost:44377/api';
 
@@ -59,6 +60,7 @@ const Profile = {
   getTravelOrderDetails: (ticketOrderId: number) =>
     request.get<TravelerTicketDto[]>(`/account/my-travels/${ticketOrderId}`),
   getMyTransactions: () => request.get<TransactionDto[]>('/account/my-transactions'), 
+  topUp: (data : topUpDto) => request.post<number>('/account/top-up', data)
 };
 
 
