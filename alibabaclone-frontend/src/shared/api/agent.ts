@@ -14,7 +14,9 @@ import { TravelerTicketDto } from '../models/transportation/TravelerTicketDto';
 import { TicketOrderSummaryDto } from '../models/transportation/TicketOrderSummaryDto';
 import { useAuthStore } from '@/store/authStore';
 import { TransactionDto } from '../models/transaction/TransactionDto';
+import { createTicketOrderDto } from '../models/ticketOrder/createTicketOrderDto';
 import { topUpDto } from '../models/account/topUpDto';
+import { transportationSeatDto } from '../models/transportation/transportationSeatDto';
 
 axios.defaults.baseURL = 'https://localhost:44377/api';
 
@@ -46,7 +48,12 @@ axios.interceptors.response.use(
   }
 );
 
-
+const TicketOrder = {
+  create: (data : createTicketOrderDto) => request.post<number>('/ticketOrder/create', data),
+  downloadPdf: (ticketOrderId : number) => request.get<Blob>(`/ticketOrder/${ticketOrderId}/pdf`, {
+      responseType: 'blob',
+    }),
+}
 const Profile = {
   getProfile: () => request.get<ProfileDto>('/account/profile'),
   editEmail: (data: EditEmailDto) => request.put<void>('/account/email', data),
@@ -79,6 +86,7 @@ const Auth = {
 };
 
 const agent = {
+  TicketOrder,
   Profile,
   TransportationSearch,
   Cities,
