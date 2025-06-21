@@ -73,6 +73,8 @@ const Profile = {
 
 const TransportationSearch = {
     search: (data: TransportationSearchRequest) => request.post<TransportationSearchResult[]>('/transportation/search', data),
+    getSeats: (transportationId: number) => 
+      request.get<transportationSeatDto[]>(`/transportation/${transportationId}/seats`)
 }
 
 const Cities = {
