@@ -11,7 +11,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
@@ -35,7 +34,7 @@ const TransportationSearchForm = () => {
   const [form, setForm] = useState<TransportationSearchRequest>({
     fromCityId: undefined,
     toCityId: undefined,
-    startDate: null,
+    startDate: new Date().toISOString().slice(0, 10),
     endDate: null,
     vehicleTypeId: 1,
   });
@@ -55,15 +54,8 @@ const TransportationSearchForm = () => {
     )
       return;
     const params = new URLSearchParams();
-    if (form.startDate instanceof Date)
-      params.append("departing", form.startDate.toISOString());
-    else if (typeof form.startDate === "string")
-      params.append("departing", form.startDate);
-
-    if (form.endDate instanceof Date)
-      params.append("arriving", form.endDate.toISOString());
-    else if (typeof form.endDate === "string")
-      params.append("arriving", form.endDate);
+    if (form.startDate) params.append("departing", form.startDate);
+    if (form.endDate) params.append("arriving", form.endDate);
 
     console.log(
       `/${form.vehicleTypeId}/${form.fromCityId}/${
@@ -170,15 +162,19 @@ const TransportationSearchForm = () => {
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-full p-0 bg-white shadow-lg rounded-md">
-              <Calendar
-                mode="single"
-                selected={form.startDate ? new Date(form.startDate) : undefined}
-                onSelect={(date) =>
+              <input
+                id="startDate"
+                type="date"
+                value={form.startDate ? form.startDate.slice(0, 10) : ""}
+                onChange={(e) =>
                   setForm((prev) => ({
                     ...prev,
-                    startDate: date?.toISOString() ?? null,
+                    startDate: e.target.value
+                      ? new Date(e.target.value).toISOString()
+                      : null,
                   }))
                 }
+                className="border rounded px-2 py-1 w-full"
               />
             </PopoverContent>
           </Popover>
@@ -198,15 +194,19 @@ const TransportationSearchForm = () => {
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-full p-0 bg-white shadow-lg rounded-md">
-              <Calendar
-                mode="single"
-                selected={form.endDate ? new Date(form.endDate) : undefined}
-                onSelect={(date) =>
+              <input
+                id="endDateTime"
+                type="date"
+                value={form.endDate ? form.endDate.slice(0, 10) : ""}
+                onChange={(e) =>
                   setForm((prev) => ({
                     ...prev,
-                    endDate: date?.toISOString() ?? null,
+                    endDateTime: e.target.value
+                      ? new Date(e.target.value).toISOString()
+                      : null,
                   }))
                 }
+                className="border rounded px-2 py-1 w-full"
               />
             </PopoverContent>
           </Popover>
