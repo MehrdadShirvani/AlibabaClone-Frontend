@@ -20,10 +20,10 @@ axios.defaults.baseURL = 'https://localhost:44377/api';
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 const request = {
-    get: <T>(url: string) => axios.get<T>(url).then(responseBody),
-    post: <T>(url: string, body: {}) => axios.post<T>(url, body).then(responseBody),
-    put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
-    delete: <T>(url: string) => axios.delete<T>(url).then(responseBody)
+    get: <T>(url: string, config = {}) =>  axios.get<T>(url, config).then(responseBody),
+    post: <T>(url: string, body: {}, config = {}) => axios.post<T>(url, body, config).then(responseBody),
+    put: <T>(url: string, body: {}, config = {}) => axios.put<T>(url, body, config).then(responseBody),
+    delete: <T>(url: string, config = {}) => axios.delete<T>(url, config).then(responseBody)
 }
 
 
@@ -70,17 +70,17 @@ const Cities = {
     list: () => request.get<City[]>('/city'),
 }
 const Auth = {
-register: (data: RegisterRequestDto) =>
+  register: (data: RegisterRequestDto) =>
     request.post<AuthResponseDto>('/auth/register', data),
   login: (data: LoginRequestDto) =>
     request.post<AuthResponseDto>('/auth/login', data),
 };
 
 const agent = {
-    Profile,
-    TransportationSearch,
-    Cities,
-    Auth
+  Profile,
+  TransportationSearch,
+  Cities,
+  Auth
 }
 
 
