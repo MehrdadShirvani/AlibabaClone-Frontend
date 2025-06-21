@@ -1,5 +1,6 @@
 export interface TransportationSearchResult{
     id : number;
+    vehicleTypeId : number;
     companyTitle : string;
     fromLocationTitle : string;
     toLocationTitle : string;

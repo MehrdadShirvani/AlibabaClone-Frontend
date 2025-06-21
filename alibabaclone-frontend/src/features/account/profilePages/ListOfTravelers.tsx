@@ -11,7 +11,7 @@ const emptyPerson: PersonDto = {
   idNumber: "",
   genderId: 1,
   phoneNumber: "",
-  birthDate: null,
+  birthDate: "",
   englishFirstName: "",
   englishLastName: "",
 };
