@@ -12,6 +12,11 @@ import ListOfTravelers from "@/features/account/profilePages/ListOfTravelers";
 import Favorites from "@/features/account/profilePages/Favorites";
 import MyTransactions from "@/features/account/profilePages/MyTransactions";
 import Support from "@/features/account/profilePages/Support";
+import ReservationLayout from "@/features/transportation/reservation/ReservationLayout";
+import TravelerDetailsForm from "@/features/transportation/reservation/TravelerDetailsForm";
+import ReviewAndConfirm from "@/features/transportation/reservation/ReviewAndConfirm";
+import PaymentForm from "@/features/transportation/reservation/PaymentForm";
+import TicketIssued from "@/features/transportation/reservation/TicketIssued";
 
 function App() {
   return (
@@ -34,6 +39,12 @@ function App() {
             <Route path="favorites" element={<Favorites />} />
             <Route path="support" element={<Support />} />
             <Route path="transactions" element={<MyTransactions />} />
+          </Route>
+          <Route path="/reserve" element={<ReservationLayout />}>
+            <Route path="travelers" element={<TravelerDetailsForm />} />
+            <Route path="review" element={<ReviewAndConfirm />} />
+            <Route path="payment" element={<PaymentForm />} />
+            <Route path="success" element={<TicketIssued />} />
           </Route>
         </Routes>
       </div>
