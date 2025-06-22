@@ -13,27 +13,55 @@ const ProfileSummary: React.FC<ProfileSummaryProps> = ({
   balance,
 }) => {
   return (
-    <div className="flex justify-between items-center bg-white shadow-md p-6 rounded-xl mb-6">
+    <div
+      className="flex justify-between items-center p-6 rounded-xl shadow-md mb-6"
+      style={{
+        backgroundColor: "var(--surface)",
+        border: "1px solid var(--border)",
+      }}
+    >
       {/* Left: Profile Image */}
       <div className="flex items-center">
         <img
           src="/images/sample-avatar.png"
           alt="Profile"
           className="w-20 h-20 rounded-full object-cover mr-6"
+          style={{ border: "2px solid var(--border)" }}
         />
         <div>
-          <h2 className="text-xl font-bold">{fullName}</h2>
-          <p className="text-gray-600">{phoneNumber}</p>
+          <h2
+            className="text-xl font-bold mb-1"
+            style={{ color: "var(--text-primary)" }}
+          >
+            {fullName}
+          </h2>
+          <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
+            {phoneNumber}
+          </p>
         </div>
       </div>
 
       {/* Right: Balance */}
       <div className="text-right">
-        <p className="text-lg font-semibold text-gray-700">Current Balance</p>
-        <p className="text-2xl font-bold text-green-600 mb-2">
+        <p
+          className="text-lg font-semibold mb-1"
+          style={{ color: "var(--text-primary)" }}
+        >
+          Current Balance
+        </p>
+        <p
+          className="text-2xl font-bold mb-2"
+          style={{ color: "var(--accent)" }}
+        >
           {balance.toLocaleString()} تومان
         </p>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+        <button
+          className="px-4 py-2 rounded-md transition"
+          style={{
+            backgroundColor: "var(--primary)",
+            color: "var(--primary-foreground)",
+          }}
+        >
           Increase Balance
         </button>
       </div>
