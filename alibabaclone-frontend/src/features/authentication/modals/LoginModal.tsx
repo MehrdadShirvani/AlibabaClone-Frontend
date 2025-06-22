@@ -14,7 +14,6 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
     phoneNumber: "",
     password: "",
   });
-
   const [error, setError] = useState<string | null>(null);
 
   const validate = () => {
@@ -37,7 +36,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
 
     try {
       const response = await agent.Auth.login(form);
-      login(response); // update store with full auth info
+      login(response);
       setError(null);
       onClose();
     } catch (err: any) {
@@ -46,85 +45,51 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
   };
 
   return (
-    <div style={styles.overlay}>
-      <div style={styles.modal}>
-        <h2 style={{ marginBottom: "1rem" }}>Login</h2>
+    <div
+      className="fixed inset-0 flex items-center justify-center z-50"
+      style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+    >
+      <div className="bg-[var(--surface)] p-6 rounded-lg shadow-lg w-80 flex flex-col">
+        <h2 className="text-xl font-semibold mb-4 text-[var(--text-primary)]">
+          Login
+        </h2>
+
         <input
           type="text"
           placeholder="Phone Number"
           value={form.phoneNumber}
-          onChange={(e) => setForm({ ...form, phoneNumber: e.target.value })}
-          style={styles.input}
+          onChange={(e) =>
+            setForm((f) => ({ ...f, phoneNumber: e.target.value }))
+          }
+          className="input mb-4"
         />
+
         <input
           type="password"
           placeholder="Password"
           value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-          style={styles.input}
+          onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))}
+          className="input mb-4"
         />
-        <button onClick={handleSubmit} style={styles.button}>
+
+        <button
+          onClick={handleSubmit}
+          className="button-primary mb-2"
+          type="button"
+        >
           Login
         </button>
+
         {error && (
-          <p style={{ color: "red", marginTop: "0.5rem", fontWeight: "bold" }}>
-            {error}
-          </p>
+          <p className="text-[var(--destructive)] font-medium mb-2">{error}</p>
         )}
-        <button
-          onClick={onClose}
-          style={{
-            ...styles.button,
-            marginTop: "0.5rem",
-            backgroundColor: "#ccc",
-            color: "#333",
-          }}
-        >
+
+        <button onClick={onClose} className="button-secondary" type="button">
           Cancel
         </button>
       </div>
     </div>
   );
-};
-
-const styles: { [key: string]: React.CSSProperties } = {
-  overlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 1000,
-  },
-  modal: {
-    backgroundColor: "white",
-    padding: "2rem",
-    borderRadius: "8px",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
-    width: "320px",
-    display: "flex",
-    flexDirection: "column",
-  },
-  input: {
-    marginBottom: "1rem",
-    padding: "0.5rem",
-    fontSize: "1rem",
-    borderRadius: "4px",
-    border: "1px solid #ccc",
-  },
-  button: {
-    padding: "0.6rem 1.2rem",
-    fontSize: "1rem",
-    borderRadius: "4px",
-    border: "none",
-    backgroundColor: "#007bff",
-    color: "white",
-    cursor: "pointer",
-  },
 };
 
 export default LoginModal;

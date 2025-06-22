@@ -2,83 +2,113 @@ import LoginModal from "@/features/authentication/modals/LoginModal";
 import RegisterModal from "@/features/authentication/modals/RegisterModal";
 import { useAuthStore } from "@/store/authStore";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const { isLoggedIn, logout } = useAuthStore();
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const location = useLocation();
+
+  const navLinks = [
+    { label: "Home", to: "/" },
+    { label: "About", to: "/about" },
+  ];
+
+  const userLinks = [
+    { label: "Profile", to: "/profile" },
+    { label: "My Travels", to: "/my-travels" },
+    { label: "Online Support", to: "/support" },
+  ];
+
+  const isActive = (path: string) =>
+    location.pathname === path || (path === "/" && location.pathname === "/");
 
   return (
     <>
-      <nav className="bg-blue-800 text-white px-6 py-3 flex justify-between items-center shadow-md">
-        {/* Left side: Logo and main links */}
+      <nav
+        className="fixed top-0 left-0 w-full flex justify-between items-center px-6 py-3 shadow-sm z-50"
+        style={{
+          backgroundColor: "var(--surface)",
+          borderBottom: "1px solid var(--border)",
+        }}
+      >
+        {/* Left: Links */}
         <div className="flex items-center space-x-6">
-          {/* Logo */}
-          <img
-            src="/images/alibaba.svg"
-            alt="Alibaba Logo"
-            className="h-10 w-auto"
-          />
-
-          {/* Main navigation links */}
-          {["Home", "Search", "About"].map((link) => (
-            <a
-              key={link}
-              href={`/${
-                link.toLowerCase() === "home" ? "" : link.toLowerCase()
-              }`}
-              className="nav-link px-3 py-1 rounded-md transition-shadow duration-300 hover:text-white hover:shadow-md hover:shadow-blue-500/50"
+          {navLinks.map(({ label, to }) => (
+            <Link
+              key={label}
+              to={to}
+              className="nav-link"
+              style={{
+                color: isActive(to) ? "var(--primary)" : "var(--text-primary)",
+                backgroundColor: isActive(to)
+                  ? "var(--primary-foreground)"
+                  : "transparent",
+              }}
             >
-              {link}
-            </a>
+              {label}
+            </Link>
           ))}
         </div>
 
-        {/* Right side: User menu */}
-        <div className="flex items-center space-x-6 text-sm">
+        {/* Right: Auth */}
+        <div className="flex items-center space-x-4">
           {!isLoggedIn ? (
             <>
-              <button
-                onClick={() => setShowLogin(true)}
-                className="nav-link px-3 py-1 rounded-md hover:text-white hover:shadow-md hover:shadow-blue-500/50"
+              <a
+                href="#login"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowLogin(true);
+                }}
+                className="nav-link"
+                style={{ color: "var(--text-primary)" }}
               >
                 Login
-              </button>
-              <button
-                onClick={() => setShowRegister(true)}
-                className="nav-link px-3 py-1 rounded-md hover:text-white hover:shadow-md hover:shadow-blue-500/50"
+              </a>
+              <a
+                href="#register"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowRegister(true);
+                }}
+                className="nav-link"
+                style={{ color: "var(--text-primary)" }}
               >
                 Register
-              </button>
+              </a>
             </>
           ) : (
             <>
-              <span className="font-semibold nav-link">You have entered</span>
-              <Link
-                to="/profile"
-                className="nav-link px-3 py-1 rounded-md hover:text-white hover:shadow-md hover:shadow-blue-500/50"
-              >
-                Profile
-              </Link>
+              {userLinks.map(({ label, to }) => (
+                <Link
+                  key={label}
+                  to={to}
+                  className="nav-link"
+                  style={{
+                    color: isActive(to)
+                      ? "var(--primary)"
+                      : "var(--text-primary)",
+                    backgroundColor: isActive(to)
+                      ? "var(--primary-foreground)"
+                      : "transparent",
+                  }}
+                >
+                  {label}
+                </Link>
+              ))}
               <a
-                href="/my-travels"
-                className="nav-link px-3 py-1 rounded-md hover:text-white hover:shadow-md hover:shadow-blue-500/50"
-              >
-                My Travels
-              </a>
-              <a
-                href="/support"
-                className="nav-link px-3 py-1 rounded-md hover:text-white hover:shadow-md hover:shadow-blue-500/50"
-              >
-                Online Support
-              </a>
-              <button
-                onClick={logout}
-                className="nav-link px-3 py-1 rounded-md hover:text-white hover:shadow-md hover:shadow-blue-500/50"
+                href="#logout"
+                onClick={(e) => {
+                  e.preventDefault();
+                  logout();
+                }}
+                className="nav-link"
+                style={{ color: "var(--text-primary)" }}
               >
                 Logout
-              </button>
+              </a>
             </>
           )}
         </div>

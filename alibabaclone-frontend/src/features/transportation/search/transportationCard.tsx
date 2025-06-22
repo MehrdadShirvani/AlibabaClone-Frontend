@@ -28,49 +28,89 @@ const TransportationCard: React.FC<Props> = ({ transportation }) => {
   );
 
   return (
-    <div className="flex items-center justify-between p-4 bg-white border rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 w-full mb-4">
+    <div
+      className="flex items-center justify-between p-4 rounded-2xl transition-shadow duration-300 mb-4 w-full"
+      style={{
+        backgroundColor: "var(--surface)",
+        border: "1px solid var(--border)",
+      }}
+    >
       {/* Left Side: Price and Button */}
-      <div className="text-center px-4 min-w-[140px]">
-        <div className="text-blue-600 font-bold text-xl mb-2">
+      <div
+        className="text-center px-4 min-w-[140px]"
+        style={{ color: "var(--text-primary)" }}
+      >
+        <div
+          className="font-bold text-xl mb-2"
+          style={{ color: "var(--primary)" }}
+        >
           {transportation.price.toLocaleString()} Toman
         </div>
+
         <button
           onClick={handleSelectTransportation}
-          className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded transition"
+          className="button-primary text-sm"
+          type="button"
         >
           Select Ticket
         </button>
-        <div className="text-xs text-gray-500 mt-2">
+
+        <div
+          className="text-xs mt-2"
+          style={{ color: "var(--text-secondary)" }}
+        >
           {transportation.remainingCapacity} seats left
         </div>
       </div>
 
       {/* Middle Section: Route and Info */}
       <div className="flex-1 text-center px-4">
-        <div className="inline-block bg-gray-200 text-gray-600 text-xs px-2 py-1 rounded mb-1">
-          {/* VIP ({transportation.vehicleName || "Bus"}) */}
+        <div
+          className="inline-block px-2 py-1 rounded mb-1 text-xs"
+          style={{
+            backgroundColor: "var(--border)",
+            color: "var(--text-secondary)",
+          }}
+        >
+          {/* e.g. VIP */}
         </div>
-        <div className="text-lg text-gray-700 font-semibold">
+        <div
+          className="text-lg font-semibold"
+          style={{ color: "var(--text-primary)" }}
+        >
           {transportation.fromCityTitle}
-          <span className="mx-2 text-gray-400">→</span>
+          <span className="mx-2" style={{ color: "var(--border)" }}>
+            →
+          </span>
           {transportation.toCityTitle}
         </div>
-        <div className="mt-2 text-sm text-blue-600 space-x-4 underline cursor-pointer">
-          <span>Bus Info</span>
-          <span>Refund Policy</span>
-          <span>Seat Map</span>
+        <div className="mt-2 text-sm space-x-4 underline cursor-pointer">
+          {["Bus Info", "Refund Policy", "Seat Map"].map((label) => (
+            <span key={label} style={{ color: "var(--primary)" }}>
+              {label}
+            </span>
+          ))}
         </div>
       </div>
 
       {/* Right Side: Company Logo and Time */}
       <div className="flex flex-col items-end px-4 text-right min-w-[120px]">
-        <div className="text-gray-800 font-semibold text-sm mb-1">
+        <div
+          className="font-semibold text-sm mb-1"
+          style={{ color: "var(--text-primary)" }}
+        >
           {transportation.companyTitle}
         </div>
-        <div className="text-2xl font-bold text-black mb-2">
+        <div
+          className="font-bold text-2xl mb-2"
+          style={{ color: "var(--text-primary)" }}
+        >
           {formattedDate}
         </div>
-        <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
+        <div
+          className="w-12 h-12 rounded-full flex items-center justify-center overflow-hidden"
+          style={{ backgroundColor: "var(--border)" }}
+        >
           <img
             src="/images/company-placeholder.png"
             alt="Company Logo"

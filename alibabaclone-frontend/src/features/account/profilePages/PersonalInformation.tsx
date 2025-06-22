@@ -14,18 +14,16 @@ const PersonalInformation: React.FC<Props> = ({
 }) => {
   const [isEditing, setIsEditing] = useState(false);
 
-  // react-hook-form setup
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
       firstName: profile.firstName,
       lastName: profile.lastName,
       idNumber: profile.idNumber,
       emergencyPhoneNumber: profile.personPhoneNumber,
-      birthDate: profile.birthDate ? profile.birthDate.split("T")[0] : "", // Format for input[type=date]
+      birthDate: profile.birthDate ? profile.birthDate.split("T")[0] : "",
     },
   });
 
-  // On clicking edit button: switch to edit mode and reset form values
   const onEditClick = () => {
     reset({
       firstName: profile.firstName,
@@ -37,18 +35,13 @@ const PersonalInformation: React.FC<Props> = ({
     setIsEditing(true);
   };
 
-  // On cancel, exit edit mode without saving
   const onCancel = () => {
     setIsEditing(false);
   };
 
-  // On save, send data to API and refresh profile
   const onSubmit = async (data: any) => {
     try {
-      await agent.Profile.upsertAccountPerson({
-        ...data,
-        // Include any required fixed fields here if needed
-      });
+      await agent.Profile.upsertAccountPerson(data);
       setIsEditing(false);
       onProfileUpdated();
     } catch (error) {
@@ -58,37 +51,59 @@ const PersonalInformation: React.FC<Props> = ({
   };
 
   return (
-    <section className="p-6 bg-white rounded shadow space-y-4">
-      <h2 className="text-xl font-semibold">Personal Information</h2>
+    <section
+      className="p-6 mb-6 rounded-lg shadow-sm"
+      style={{
+        backgroundColor: "var(--surface)",
+        border: "1px solid var(--border)",
+      }}
+    >
+      <h2
+        className="text-xl font-semibold mb-4"
+        style={{ color: "var(--text-primary)" }}
+      >
+        Personal Information
+      </h2>
 
       {!isEditing ? (
-        <div className="grid grid-cols-2 gap-4 text-gray-700">
-          <div>
-            <label className="font-semibold">First and Last Name:</label>
-            <p>
-              {profile.firstName} {profile.lastName}
-            </p>
-          </div>
-          <div>
-            <label className="font-semibold">National ID:</label>
-            <p>{profile.idNumber}</p>
-          </div>
-          <div>
-            <label className="font-semibold">Emergency Phone Number:</label>
-            <p>{profile.personPhoneNumber || "-"}</p>
-          </div>
-          <div>
-            <label className="font-semibold">Birth Date:</label>
-            <p>
-              {profile.birthDate
+        <div className="grid grid-cols-2 gap-4">
+          {[
+            {
+              label: "First and Last Name",
+              value: `${profile.firstName} ${profile.lastName}`,
+            },
+            { label: "National ID", value: profile.idNumber },
+            {
+              label: "Emergency Phone Number",
+              value: profile.personPhoneNumber || "-",
+            },
+            {
+              label: "Birth Date",
+              value: profile.birthDate
                 ? new Date(profile.birthDate).toLocaleDateString()
-                : "-"}
-            </p>
-          </div>
-          <div className="col-span-2">
+                : "-",
+            },
+          ].map(({ label, value }) => (
+            <div key={label}>
+              <label
+                className="font-semibold block mb-1"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                {label}:
+              </label>
+              <p style={{ color: "var(--text-primary)" }}>{value}</p>
+            </div>
+          ))}
+
+          <div className="col-span-2 mt-4">
             <button
               onClick={onEditClick}
-              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="px-4 py-2 rounded transition"
+              style={{
+                backgroundColor: "var(--primary)",
+                color: "var(--primary-foreground)",
+              }}
+              type="button"
             >
               Edit
             </button>
@@ -99,82 +114,78 @@ const PersonalInformation: React.FC<Props> = ({
           onSubmit={handleSubmit(onSubmit)}
           className="grid grid-cols-2 gap-4"
         >
-          <div className="col-span-1">
-            <label className="block font-semibold mb-1" htmlFor="firstName">
-              First Name
-            </label>
-            <input
-              id="firstName"
-              {...register("firstName", { required: "First Name is required" })}
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-
-          <div className="col-span-1">
-            <label className="block font-semibold mb-1" htmlFor="lastName">
-              Last Name
-            </label>
-            <input
-              id="lastName"
-              {...register("lastName", { required: "Last Name is required" })}
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-
-          <div className="col-span-1">
-            <label className="block font-semibold mb-1" htmlFor="idNumber">
-              National ID
-            </label>
-            <input
-              id="idNumber"
-              {...register("idNumber", {
-                required: "National ID is required",
-                pattern: {
-                  value: /^\d{10}$/,
-                  message: "National ID must be exactly 10 digits",
-                },
-              })}
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-
-          <div className="col-span-1">
-            <label
-              className="block font-semibold mb-1"
-              htmlFor="emergencyPhoneNumber"
-            >
-              Emergency Phone Number
-            </label>
-            <input
-              id="emergencyPhoneNumber"
-              {...register("emergencyPhoneNumber")}
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-
-          <div className="col-span-1">
-            <label className="block font-semibold mb-1" htmlFor="birthDate">
-              Birth Date
-            </label>
-            <input
-              id="birthDate"
-              type="date"
-              {...register("birthDate", { required: "Birth Date is required" })}
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
+          {[
+            {
+              id: "firstName",
+              label: "First Name",
+              field: register("firstName", { required: true }),
+            },
+            {
+              id: "lastName",
+              label: "Last Name",
+              field: register("lastName", { required: true }),
+            },
+            {
+              id: "idNumber",
+              label: "National ID",
+              field: register("idNumber", {
+                required: true,
+                pattern: { value: /^\d{10}$/, message: "" },
+              }),
+            },
+            {
+              id: "emergencyPhoneNumber",
+              label: "Emergency Phone Number",
+              field: register("emergencyPhoneNumber"),
+            },
+            {
+              id: "birthDate",
+              label: "Birth Date",
+              type: "date",
+              field: register("birthDate", { required: true }),
+            },
+          ].map(({ id, label, field, type }) => (
+            <div key={id} className={id === "birthDate" ? "col-span-1" : ""}>
+              <label
+                htmlFor={id}
+                className="block font-semibold mb-1"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                {label}
+              </label>
+              <input
+                id={id}
+                type={(type as any) || "text"}
+                {...field}
+                className="w-full rounded px-2 py-1"
+                style={{
+                  backgroundColor: "var(--input-bg)",
+                  border: "1px solid var(--border)",
+                  color: "var(--text-primary)",
+                }}
+              />
+            </div>
+          ))}
 
           <div className="col-span-2 flex space-x-4 mt-4">
             <button
               type="submit"
-              className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+              className="px-4 py-2 rounded transition"
+              style={{
+                backgroundColor: "var(--accent)",
+                color: "var(--accent-foreground)",
+              }}
             >
               Save
             </button>
             <button
               type="button"
               onClick={onCancel}
-              className="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500"
+              className="px-4 py-2 rounded transition"
+              style={{
+                backgroundColor: "var(--secondary)",
+                color: "var(--secondary-foreground)",
+              }}
             >
               Cancel
             </button>

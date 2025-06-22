@@ -27,22 +27,39 @@ const AccountInfo = () => {
       navigate("/");
       return;
     }
-
     loadProfile();
   }, [isLoggedIn]);
 
-  if (!profile) return <p className="p-4">Loading profile...</p>;
+  if (!profile) {
+    return (
+      <p className="p-4 text-center" style={{ color: "var(--text-secondary)" }}>
+        Loading profile...
+      </p>
+    );
+  }
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Profile</h2>
+    <div
+      className="p-6 max-w-4xl mx-auto rounded-lg shadow-sm"
+      style={{ backgroundColor: "var(--surface)" }}
+    >
+      <h2
+        className="text-2xl font-bold mb-4"
+        style={{ color: "var(--text-primary)" }}
+      >
+        Profile
+      </h2>
+
       <ProfileSummary
         fullName={`${profile.firstName} ${profile.lastName}`}
         phoneNumber={profile.accountPhoneNumber}
         balance={profile.currentBalance}
       />
+
       <PersonalAccountInfo profile={profile} onProfileUpdated={loadProfile} />
+
       <PersonalInformation profile={profile} onProfileUpdated={loadProfile} />
+
       <BankAccountDetails profile={profile} onProfileUpdated={loadProfile} />
     </div>
   );

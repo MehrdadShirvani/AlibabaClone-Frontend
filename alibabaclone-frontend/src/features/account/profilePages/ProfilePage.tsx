@@ -15,25 +15,54 @@ const tabs = [
 
 const ProfilePage = () => {
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div
+      className="min-h-screen"
+      style={{ backgroundColor: "var(--background)" }}
+    >
       {/* Sidebar */}
       <nav
-        className="sticky top-0 h-screen w-48 bg-white shadow-md flex flex-col"
-        style={{ minHeight: "100vh" }}
+        className="fixed top-0 left-0 w-48 h-screen shadow-md flex flex-col z-10"
+        style={{ backgroundColor: "var(--surface)" }}
       >
-        <div className="p-4 font-bold text-lg border-b">Profile Menu</div>
-        <ul className="flex flex-col flex-grow">
+        <div
+          className="p-4 font-bold text-lg"
+          style={{
+            color: "var(--text-primary)",
+            borderBottom: "1px solid var(--border)",
+          }}
+        >
+          Profile Menu
+        </div>
+        <ul className="flex flex-col flex-grow overflow-auto">
           {tabs.map(({ path, label }) => (
             <li key={path}>
               <NavLink
                 to={path}
                 className={({ isActive }) =>
-                  `w-full block text-left px-4 py-3 transition-colors ${
-                    isActive
-                      ? "bg-blue-500 text-white font-semibold"
-                      : "text-gray-700 hover:bg-blue-100"
+                  `block px-4 py-3 transition-colors ${
+                    isActive ? "font-semibold" : ""
                   }`
                 }
+                style={({ isActive }) => ({
+                  backgroundColor: isActive ? "var(--primary)" : "transparent",
+                  color: isActive
+                    ? "var(--primary-foreground)"
+                    : "var(--text-primary)",
+                })}
+                onMouseEnter={(e) => {
+                  if (!e.currentTarget.style.backgroundColor) {
+                    e.currentTarget.style.backgroundColor =
+                      "var(--accent-hover)";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (
+                    e.currentTarget.style.backgroundColor ===
+                    "var(--accent-hover)"
+                  ) {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                  }
+                }}
               >
                 {label}
               </NavLink>
@@ -43,7 +72,14 @@ const ProfilePage = () => {
       </nav>
 
       {/* Main content */}
-      <main className="flex-grow p-6">
+      <main
+        className="ml-48 p-6 overflow-auto"
+        style={{
+          color: "var(--text-primary)",
+          minWidth: "600px",
+          height: "100vh",
+        }}
+      >
         <Outlet />
       </main>
     </div>
