@@ -70,102 +70,60 @@ const RegisterModal: React.FC<Props> = ({ onClose }) => {
   };
 
   return (
-    <div style={styles.overlay}>
-      <div style={styles.modal}>
-        <h2 style={{ marginBottom: "1rem" }}>Register</h2>
-        <form
-          onSubmit={handleSubmit}
-          style={{ display: "flex", flexDirection: "column" }}
-        >
+    <div
+      className="fixed inset-0 flex items-center justify-center z-50"
+      style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+    >
+      <div className="bg-[var(--surface)] p-6 rounded-lg shadow-lg w-80 flex flex-col">
+        <h2 className="text-xl font-semibold mb-4 text-[var(--text-primary)]">
+          Register
+        </h2>
+
+        <form onSubmit={handleSubmit} className="flex flex-col">
           <input
-            type="text"
             name="phoneNumber"
+            type="text"
+            placeholder="Phone Number"
             value={form.phoneNumber}
             onChange={handleChange}
-            placeholder="Phone Number"
-            style={styles.input}
+            className="input mb-4"
           />
+
           <input
-            type="password"
             name="password"
+            type="password"
+            placeholder="Password"
             value={form.password}
             onChange={handleChange}
-            placeholder="Password"
-            style={styles.input}
+            className="input mb-4"
           />
+
           <input
-            type="password"
             name="confirmPassword"
+            type="password"
+            placeholder="Confirm Password"
             value={form.confirmPassword}
             onChange={handleChange}
-            placeholder="Confirm Password"
-            style={styles.input}
+            className="input mb-4"
           />
+
           {error && (
-            <p
-              style={{ color: "red", marginTop: "0.5rem", fontWeight: "bold" }}
-            >
+            <p className="text-[var(--destructive)] font-medium mb-2">
               {error}
             </p>
           )}
-          <button type="submit" style={styles.button}>
+
+          <button type="submit" className="button-primary mb-2">
             Register
           </button>
         </form>
-        <button
-          onClick={onClose}
-          style={{
-            ...styles.button,
-            marginTop: "0.5rem",
-            backgroundColor: "#ccc",
-            color: "#333",
-          }}
-        >
+
+        <button onClick={onClose} className="button-secondary" type="button">
           Cancel
         </button>
       </div>
     </div>
   );
-};
-
-const styles: { [key: string]: React.CSSProperties } = {
-  overlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 1000,
-  },
-  modal: {
-    backgroundColor: "white",
-    padding: "2rem",
-    borderRadius: "8px",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
-    width: "320px",
-    display: "flex",
-    flexDirection: "column",
-  },
-  input: {
-    marginBottom: "1rem",
-    padding: "0.5rem",
-    fontSize: "1rem",
-    borderRadius: "4px",
-    border: "1px solid #ccc",
-  },
-  button: {
-    padding: "0.6rem 1.2rem",
-    fontSize: "1rem",
-    borderRadius: "4px",
-    border: "none",
-    backgroundColor: "#007bff",
-    color: "white",
-    cursor: "pointer",
-  },
 };
 
 export default RegisterModal;
