@@ -1,11 +1,23 @@
 import React from "react";
 import { TransportationSearchResult } from "@/shared/models/transportation/transportationSearchResult";
+import { useReservationStore } from "@/store/useReservationStore";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   transportation: TransportationSearchResult;
 }
 
 const TransportationCard: React.FC<Props> = ({ transportation }) => {
+  const setTransportationId = useReservationStore(
+    (state) => state.setTransportation
+  );
+  const navigate = useNavigate();
+
+  const handleSelectTransportation = () => {
+    setTransportationId(transportation);
+    navigate("/reserve/travelers");
+  };
+
   const formattedDate = new Date(transportation.startDateTime).toLocaleString(
     "en",
     {
@@ -22,10 +34,15 @@ const TransportationCard: React.FC<Props> = ({ transportation }) => {
         <div className="text-blue-600 font-bold text-xl mb-2">
           {transportation.price.toLocaleString()} Toman
         </div>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded transition">
+        <button
+          onClick={handleSelectTransportation}
+          className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded transition"
+        >
           Select Ticket
         </button>
-        <div className="text-xs text-gray-500 mt-2">? seats left</div>
+        <div className="text-xs text-gray-500 mt-2">
+          {transportation.remainingCapacity} seats left
+        </div>
       </div>
 
       {/* Middle Section: Route and Info */}

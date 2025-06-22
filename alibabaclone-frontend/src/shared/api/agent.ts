@@ -14,16 +14,19 @@ import { TravelerTicketDto } from '../models/transportation/TravelerTicketDto';
 import { TicketOrderSummaryDto } from '../models/transportation/TicketOrderSummaryDto';
 import { useAuthStore } from '@/store/authStore';
 import { TransactionDto } from '../models/transaction/TransactionDto';
+import { createTicketOrderDto } from '../models/ticketOrder/createTicketOrderDto';
+import { topUpDto } from '../models/account/topUpDto';
+import { transportationSeatDto } from '../models/transportation/transportationSeatDto';
 
 axios.defaults.baseURL = 'https://localhost:44377/api';
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 const request = {
-    get: <T>(url: string) => axios.get<T>(url).then(responseBody),
-    post: <T>(url: string, body: {}) => axios.post<T>(url, body).then(responseBody),
-    put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
-    delete: <T>(url: string) => axios.delete<T>(url).then(responseBody)
+    get: <T>(url: string, config = {}) =>  axios.get<T>(url, config).then(responseBody),
+    post: <T>(url: string, body: {}, config = {}) => axios.post<T>(url, body, config).then(responseBody),
+    put: <T>(url: string, body: {}, config = {}) => axios.put<T>(url, body, config).then(responseBody),
+    delete: <T>(url: string, config = {}) => axios.delete<T>(url, config).then(responseBody)
 }
 
 
@@ -45,7 +48,12 @@ axios.interceptors.response.use(
   }
 );
 
-
+const TicketOrder = {
+  create: (data : createTicketOrderDto) => request.post<number>('/ticketOrder/create', data),
+  downloadPdf: (ticketOrderId : number) => request.get<Blob>(`/ticketOrder/${ticketOrderId}/pdf`, {
+      responseType: 'blob',
+    }),
+}
 const Profile = {
   getProfile: () => request.get<ProfileDto>('/account/profile'),
   editEmail: (data: EditEmailDto) => request.put<void>('/account/email', data),
@@ -59,28 +67,32 @@ const Profile = {
   getTravelOrderDetails: (ticketOrderId: number) =>
     request.get<TravelerTicketDto[]>(`/account/my-travels/${ticketOrderId}`),
   getMyTransactions: () => request.get<TransactionDto[]>('/account/my-transactions'), 
+  topUp: (data : topUpDto) => request.post<number>('/account/top-up', data)
 };
 
 
 const TransportationSearch = {
     search: (data: TransportationSearchRequest) => request.post<TransportationSearchResult[]>('/transportation/search', data),
+    getSeats: (transportationId: number) => 
+      request.get<transportationSeatDto[]>(`/transportation/${transportationId}/seats`)
 }
 
 const Cities = {
     list: () => request.get<City[]>('/city'),
 }
 const Auth = {
-register: (data: RegisterRequestDto) =>
+  register: (data: RegisterRequestDto) =>
     request.post<AuthResponseDto>('/auth/register', data),
   login: (data: LoginRequestDto) =>
     request.post<AuthResponseDto>('/auth/login', data),
 };
 
 const agent = {
-    Profile,
-    TransportationSearch,
-    Cities,
-    Auth
+  TicketOrder,
+  Profile,
+  TransportationSearch,
+  Cities,
+  Auth
 }
 
 

@@ -1,5 +1,6 @@
 export interface TransportationSearchResult{
     id : number;
+    vehicleTypeId : number;
     companyTitle : string;
     fromLocationTitle : string;
     toLocationTitle : string;
@@ -8,4 +9,5 @@ export interface TransportationSearchResult{
     startDateTime : Date | string;
     endDateTime ?: Date | string;
     price : number;
+    remainingCapacity : number;
 }

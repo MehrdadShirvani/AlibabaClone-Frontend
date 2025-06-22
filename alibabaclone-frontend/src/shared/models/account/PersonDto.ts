@@ -6,7 +6,7 @@ export interface PersonDto {
   idNumber: string;
   genderId: number;
   phoneNumber: string;
-  birthDate: string | Date | null; 
+  birthDate: string ; 
   englishFirstName: string;
   englishLastName: string;
 }
