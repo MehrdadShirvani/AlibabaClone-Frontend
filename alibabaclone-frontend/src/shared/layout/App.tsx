@@ -17,10 +17,12 @@ import TravelerDetailsForm from "@/features/transportation/reservation/TravelerD
 import ReviewAndConfirm from "@/features/transportation/reservation/ReviewAndConfirm";
 import PaymentForm from "@/features/transportation/reservation/PaymentForm";
 import TicketIssued from "@/features/transportation/reservation/TicketIssued";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 function App() {
   return (
     <Router>
+      <ThemeSwitcher></ThemeSwitcher>
       <Navbar /> {/* Navbar will show on all pages */}
       <div className="pt-16">
         {" "}
