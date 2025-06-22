@@ -7,10 +7,13 @@ import agent from "@/shared/api/agent";
 
 interface Props {
   profile: ProfileDto;
-  onProfileUpdated: () => void; // Callback to refresh profile
+  onProfileUpdated: () => void;
 }
 
-const PersonalAccountInfo = ({ profile, onProfileUpdated }: Props) => {
+const PersonalAccountInfo: React.FC<Props> = ({
+  profile,
+  onProfileUpdated,
+}) => {
   const [emailModalOpen, setEmailModalOpen] = useState(false);
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
 
@@ -20,7 +23,6 @@ const PersonalAccountInfo = ({ profile, onProfileUpdated }: Props) => {
     reset,
     formState: { errors },
   } = useForm<EditEmailDto>();
-
   const {
     register: registerPassword,
     handleSubmit: handleSubmitPassword,
@@ -41,26 +43,48 @@ const PersonalAccountInfo = ({ profile, onProfileUpdated }: Props) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-xl p-6 mb-6">
-      <h2 className="text-xl font-semibold mb-4">
+    <div
+      className="p-6 mb-6 rounded-lg shadow-sm"
+      style={{
+        backgroundColor: "var(--surface)",
+        border: "1px solid var(--border)",
+      }}
+    >
+      <h2
+        className="text-xl font-semibold mb-4"
+        style={{ color: "var(--text-primary)" }}
+      >
         Personal Account Information
       </h2>
 
       <div className="mb-3">
-        <label className="font-medium block">Phone Number:</label>
-        <p>{profile.accountPhoneNumber}</p>
+        <label
+          className="font-medium block mb-1"
+          style={{ color: "var(--text-secondary)" }}
+        >
+          Phone Number:
+        </label>
+        <p style={{ color: "var(--text-primary)" }}>
+          {profile.accountPhoneNumber}
+        </p>
       </div>
 
       <div className="mb-3">
-        <label className="font-medium block">Email:</label>
-        <p>
+        <label
+          className="font-medium block mb-1"
+          style={{ color: "var(--text-secondary)" }}
+        >
+          Email:
+        </label>
+        <p style={{ color: "var(--text-primary)" }}>
           {profile.email ?? "No email set"}{" "}
           <button
             onClick={() => {
               reset({ newEmail: profile.email || "" });
               setEmailModalOpen(true);
             }}
-            className="text-blue-600 underline ml-2"
+            className="underline transition"
+            style={{ color: "var(--primary)" }}
           >
             {profile.email ? "Edit" : "Add"}
           </button>
@@ -70,7 +94,11 @@ const PersonalAccountInfo = ({ profile, onProfileUpdated }: Props) => {
       <div className="mt-4">
         <button
           onClick={() => setPasswordModalOpen(true)}
-          className="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition"
+          className="px-4 py-2 rounded transition"
+          style={{
+            backgroundColor: "var(--accent)",
+            color: "var(--accent-foreground)",
+          }}
         >
           Change Password
         </button>
@@ -78,9 +106,23 @@ const PersonalAccountInfo = ({ profile, onProfileUpdated }: Props) => {
 
       {/* Email Modal */}
       {emailModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-md shadow-lg w-full max-w-md">
-            <h3 className="text-lg font-semibold mb-4">Update Email</h3>
+        <div
+          className="fixed inset-0 flex items-center justify-center z-50"
+          style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+        >
+          <div
+            className="p-6 rounded-md shadow-lg w-full max-w-md"
+            style={{
+              backgroundColor: "var(--surface)",
+              border: "1px solid var(--border)",
+            }}
+          >
+            <h3
+              className="text-lg font-semibold mb-4"
+              style={{ color: "var(--text-primary)" }}
+            >
+              Update Email
+            </h3>
             <form onSubmit={handleSubmit(onEmailSubmit)}>
               <input
                 {...register("newEmail", {
@@ -90,11 +132,19 @@ const PersonalAccountInfo = ({ profile, onProfileUpdated }: Props) => {
                     message: "Invalid email format",
                   },
                 })}
-                className="w-full p-2 border rounded mb-2"
+                className="w-full p-2 rounded mb-2"
+                style={{
+                  backgroundColor: "var(--input-bg)",
+                  border: "1px solid var(--border)",
+                  color: "var(--text-primary)",
+                }}
                 placeholder="Enter new email"
               />
               {errors.newEmail && (
-                <p className="text-red-600 text-sm">
+                <p
+                  className="text-sm mb-2"
+                  style={{ color: "var(--destructive)" }}
+                >
                   {errors.newEmail.message}
                 </p>
               )}
@@ -103,13 +153,22 @@ const PersonalAccountInfo = ({ profile, onProfileUpdated }: Props) => {
                 <button
                   type="button"
                   onClick={() => setEmailModalOpen(false)}
-                  className="px-4 py-2 rounded border"
+                  className="px-4 py-2 rounded transition"
+                  style={{
+                    backgroundColor: "transparent",
+                    border: "1px solid var(--border)",
+                    color: "var(--text-primary)",
+                  }}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800"
+                  className="px-4 py-2 rounded transition"
+                  style={{
+                    backgroundColor: "var(--primary)",
+                    color: "var(--primary-foreground)",
+                  }}
                 >
                   Save
                 </button>
@@ -121,9 +180,23 @@ const PersonalAccountInfo = ({ profile, onProfileUpdated }: Props) => {
 
       {/* Password Modal */}
       {passwordModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-md shadow-lg w-full max-w-md">
-            <h3 className="text-lg font-semibold mb-4">Change Password</h3>
+        <div
+          className="fixed inset-0 flex items-center justify-center z-50"
+          style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+        >
+          <div
+            className="p-6 rounded-md shadow-lg w-full max-w-md"
+            style={{
+              backgroundColor: "var(--surface)",
+              border: "1px solid var(--border)",
+            }}
+          >
+            <h3
+              className="text-lg font-semibold mb-4"
+              style={{ color: "var(--text-primary)" }}
+            >
+              Change Password
+            </h3>
             <form onSubmit={handleSubmitPassword(onPasswordSubmit)}>
               <input
                 type="password"
@@ -131,10 +204,18 @@ const PersonalAccountInfo = ({ profile, onProfileUpdated }: Props) => {
                   required: "Old password is required",
                 })}
                 placeholder="Old Password"
-                className="w-full p-2 border rounded mb-2"
+                className="w-full p-2 rounded mb-2"
+                style={{
+                  backgroundColor: "var(--input-bg)",
+                  border: "1px solid var(--border)",
+                  color: "var(--text-primary)",
+                }}
               />
               {passwordErrors.oldPassword && (
-                <p className="text-red-600 text-sm">
+                <p
+                  className="text-sm mb-2"
+                  style={{ color: "var(--destructive)" }}
+                >
                   {passwordErrors.oldPassword.message}
                 </p>
               )}
@@ -149,10 +230,18 @@ const PersonalAccountInfo = ({ profile, onProfileUpdated }: Props) => {
                   },
                 })}
                 placeholder="New Password"
-                className="w-full p-2 border rounded mb-2"
+                className="w-full p-2 rounded mb-2"
+                style={{
+                  backgroundColor: "var(--input-bg)",
+                  border: "1px solid var(--border)",
+                  color: "var(--text-primary)",
+                }}
               />
               {passwordErrors.newPassword && (
-                <p className="text-red-600 text-sm">
+                <p
+                  className="text-sm mb-2"
+                  style={{ color: "var(--destructive)" }}
+                >
                   {passwordErrors.newPassword.message}
                 </p>
               )}
@@ -165,10 +254,18 @@ const PersonalAccountInfo = ({ profile, onProfileUpdated }: Props) => {
                     "Passwords do not match",
                 })}
                 placeholder="Confirm New Password"
-                className="w-full p-2 border rounded mb-2"
+                className="w-full p-2 rounded mb-2"
+                style={{
+                  backgroundColor: "var(--input-bg)",
+                  border: "1px solid var(--border)",
+                  color: "var(--text-primary)",
+                }}
               />
               {passwordErrors.confirmNewPassword && (
-                <p className="text-red-600 text-sm">
+                <p
+                  className="text-sm mb-2"
+                  style={{ color: "var(--destructive)" }}
+                >
                   {passwordErrors.confirmNewPassword.message}
                 </p>
               )}
@@ -177,13 +274,22 @@ const PersonalAccountInfo = ({ profile, onProfileUpdated }: Props) => {
                 <button
                   type="button"
                   onClick={() => setPasswordModalOpen(false)}
-                  className="px-4 py-2 rounded border"
+                  className="px-4 py-2 rounded transition"
+                  style={{
+                    backgroundColor: "transparent",
+                    border: "1px solid var(--border)",
+                    color: "var(--text-primary)",
+                  }}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800"
+                  className="px-4 py-2 rounded transition"
+                  style={{
+                    backgroundColor: "var(--primary)",
+                    color: "var(--primary-foreground)",
+                  }}
                 >
                   Save
                 </button>
