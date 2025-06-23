@@ -2,7 +2,8 @@
 # Transportation Management App – Frontend
 
 ## 📝 About the Project
-[IMAGE]
+
+![home](https://github.com/user-attachments/assets/3b32e703-ad5f-40d0-9be9-349220580194)
 
 Welcome to the frontend of the **Transportation Management System**, a modern web interface for managing transportations, tickets, passengers, and accounts. Built with **React** and powered by **Zustand**, **Axios**, and **`TailwindCSS`**, this app emphasizes a **clean, scalable architecture** and a delightful user experience.
 
@@ -142,6 +143,7 @@ The app supports **built-in themes** with full dynamic switching capability usin
 - Easy to switch themes across the app using a single toggle or dropdown.
 - Theme styles are scoped via class names (e.g., `.theme-dark`) and applied to the root container.
 
+
 **Example Theme Definition**
 
 ```css
@@ -158,7 +160,12 @@ The app supports **built-in themes** with full dynamic switching capability usin
   --primary-hover:        #2563EB;
   ...
 }
+
 ```
+![theme-02](https://github.com/user-attachments/assets/880a822e-60d4-4aaa-b1e4-4a4c480c7876)
+![theme-03](https://github.com/user-attachments/assets/8faa84de-bd0e-4b35-b011-4405a75cc660)
+![theme-04](https://github.com/user-attachments/assets/6d5176e2-1dfd-4940-863f-e8c678cff27e)
+
 
 
 ---
@@ -213,6 +220,15 @@ Includes support for:
     ```bash
     npm run dev
     ```
+
+---
+## 📸 Screenshots
+![home](https://github.com/user-attachments/assets/7d494d96-ad46-496c-822e-c97ecc32f451)
+![search-result](https://github.com/user-attachments/assets/c2367341-f964-4705-a359-92d4b5bed682)
+![traveler-selection](https://github.com/user-attachments/assets/b2b06eb8-bf8d-423b-94b1-1b75e9b9d0ca)
+![review-confirm](https://github.com/user-attachments/assets/a05e0ca2-a766-4a6c-9a63-ad56f47ee230)
+![download-ticket](https://github.com/user-attachments/assets/6e968329-a202-4fc9-b014-ad38d8d69a08)
+![ticket-order-detail](https://github.com/user-attachments/assets/dd1dac8c-037a-4565-9e6c-1437ced57f2f)
 
 ---
 ## 📚 Resources
