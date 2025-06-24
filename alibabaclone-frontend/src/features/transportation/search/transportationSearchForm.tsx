@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import agent from "@/shared/api/agent";
 import { City } from "@/shared/models/location/city";
 import { TransportationSearchRequest } from "@/shared/models/transportation/transportationSearchRequest";
-import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 
 const vehicleTypes = [
   { id: 1, name: "Bus", imageUrl: "/images/bus.png" },
   { id: 2, name: "Train", imageUrl: "/images/train.png" },
-  { id: 3, name: "Airplane", imageUrl: "/images/airplane.png" },
+  { id: 3, name: "Flights", imageUrl: "/images/airplane.png" },
 ];
 
 const TransportationSearchForm = () => {
@@ -51,18 +50,24 @@ const TransportationSearchForm = () => {
 
   return (
     <div
-      className="rounded-xl shadow-lg p-6 mx-auto mt-6 max-w-6xl overflow-x-auto"
+      className="rounded-xl shadow-lg p-6 mx-auto mt-6 max-w-6xl overflow-x-auto border border-[var(--color-border)]"
       style={{
         backgroundColor: "var(--color-bg)",
         color: "var(--color-text)",
       }}
     >
       <h2
-        className="text-2xl font-bold mb-6"
-        style={{ color: "var(--color-text)" }}
+        className="text-3xl font-bold mb-2 tracking-tight text-center"
+        style={{ color: "var(--text-primary)" }}
       >
-        Search Transportations
+        Welcome to Alibaba
       </h2>
+      <p
+        className="text-base mb-6 text-center"
+        style={{ color: "var(--text-secondary)" }}
+      >
+        Your trusted travel companion
+      </p>
 
       {/* Vehicle Type Selection */}
       <div className="flex flex-wrap justify-center gap-4 mb-6">
@@ -92,18 +97,19 @@ const TransportationSearchForm = () => {
           </button>
         ))}
       </div>
-
+      <br></br>
+      <br></br>
       {/* Filters + Search */}
-      <div className="flex flex-wrap gap-6 mb-6 items-stretch">
+      <div className="flex flex-wrap gap-6 mb-6 items-end">
         {/* From City */}
-        <div className="flex flex-col w-60">
-          <label
+        <div className="flex flex-col w-50">
+          {/* <label
             htmlFor="fromCity"
             className="mb-1 font-medium"
             style={{ color: "var(--color-text)" }}
           >
             From
-          </label>
+          </label> */}
           <select
             id="fromCity"
             value={form.fromCityId ?? ""}
@@ -115,14 +121,9 @@ const TransportationSearchForm = () => {
                   : undefined,
               }))
             }
-            className="w-full rounded-md px-3 py-2"
-            style={{
-              backgroundColor: "var(--surface)",
-              borderColor: "var(--border)",
-              color: "var(--text-primary)",
-            }}
+            className="w-full px-3 py-2 rounded-md h-[40px] text-[var(--color-text)] bg-[var(--color-bg)] border border-[var(--color-border)]"
           >
-            <option value="">Select city</option>
+            <option value="">From</option>
             {cities.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.title}
@@ -130,16 +131,15 @@ const TransportationSearchForm = () => {
             ))}
           </select>
         </div>
-
         {/* To City */}
-        <div className="flex flex-col w-60">
-          <label
+        <div className="flex flex-col w-50">
+          {/* <label
             htmlFor="toCity"
             className="mb-1 font-medium"
             style={{ color: "var(--color-text)" }}
           >
             To
-          </label>
+          </label> */}
           <select
             id="toCity"
             value={form.toCityId ?? ""}
@@ -149,14 +149,9 @@ const TransportationSearchForm = () => {
                 toCityId: e.target.value ? parseInt(e.target.value) : undefined,
               }))
             }
-            className="w-full rounded-md px-3 py-2"
-            style={{
-              backgroundColor: "var(--color-bg)",
-              borderColor: "var(--color-border)",
-              color: "var(--color-text)",
-            }}
+            className="w-full px-3 py-2 rounded-md h-[40px] text-[var(--color-text)] bg-[var(--color-bg)] border border-[var(--color-border)]"
           >
-            <option value="">Select city</option>
+            <option value="">To</option>
             {cities.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.title}
@@ -164,16 +159,15 @@ const TransportationSearchForm = () => {
             ))}
           </select>
         </div>
-
         {/* Start Date */}
-        <div className="flex flex-col w-60">
-          <label
+        <div className="flex flex-col w-50">
+          {/* <label
             htmlFor="startDate"
             className="mb-1 font-medium"
             style={{ color: "var(--color-text)" }}
           >
             Start Date
-          </label>
+          </label> */}
           <input
             id="startDate"
             type="date"
@@ -184,60 +178,45 @@ const TransportationSearchForm = () => {
                 startDate: e.target.value || null,
               }))
             }
-            className="input-date"
-            style={{
-              backgroundColor: "var(--color-bg)",
-              borderColor: "var(--color-border)",
-              color: "var(--color-text)",
-            }}
+            className="w-full px-3 py-2 rounded-md h-[40px] text-[var(--color-text)] bg-[var(--color-bg)] border border-[var(--color-border)]"
           />
-          {form.startDate && (
-            <p className="mt-1 text-sm" style={{ color: "var(--color-text)" }}>
-              {format(new Date(form.startDate), "PPP")}
-            </p>
-          )}
         </div>
-
-        {/* End Date */}
-        <div className="flex flex-col w-60">
-          <label
-            htmlFor="endDate"
-            className="mb-1 font-medium"
-            style={{ color: "var(--color-text)" }}
-          >
-            End Date
-          </label>
-          <input
-            id="endDate"
-            type="date"
-            value={form.endDate ? form.endDate.slice(0, 10) : ""}
-            onChange={(e) =>
-              setForm((prev) => ({
-                ...prev,
-                endDate: e.target.value || null,
-              }))
-            }
-            className="input-date"
-            style={{
-              backgroundColor: "var(--color-bg)",
-              borderColor: "var(--color-border)",
-              color: "var(--color-text)",
-            }}
-          />
-          {form.endDate && (
-            <p className="mt-1 text-sm" style={{ color: "var(--color-text)" }}>
-              {format(new Date(form.endDate), "PPP")}
-            </p>
-          )}
-        </div>
+        {true ? (
+          <>
+            {/* Return Date */}
+            <div className="flex flex-col w-50">
+              {/* <label
+                htmlFor="endDate"
+                className="mb-1 font-medium"
+                style={{ color: "var(--color-text)" }}
+              >
+                Return Date
+              </label> */}
+              <input
+                id="endDate"
+                type="date"
+                value={form.endDate ? form.endDate.slice(0, 10) : ""}
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    endDate: e.target.value || null,
+                  }))
+                }
+                className="w-full px-3 py-2 rounded-md h-[40px] text-[var(--color-text)] bg-[var(--color-bg)] border border-[var(--color-border)]"
+              />
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
 
         {/* Search Button */}
-        <div className="flex flex-col justify-center w-60">
+        <div className="flex flex-col w-30">
+          <label className="mb-1 font-medium invisible">Search</label>
           <button
             type="button"
             onClick={handleSearch}
-            className="button-primary w-full sm:w-auto"
-            // button-primary styles in your index.css already use var(--color-primary)
+            className="w-full h-[40px] px-4 py-2 rounded-md font-semibold bg-[var(--primary)] text-[var(--primary-foreground)] hover:bg-[var(--primary-hover)] transition"
           >
             Search
           </button>

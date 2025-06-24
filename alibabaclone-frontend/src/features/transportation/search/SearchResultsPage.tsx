@@ -37,8 +37,8 @@ const SearchResultsPage = () => {
   }, [vehicleId, fromCityId, toCityId, departing, arriving]);
 
   return (
-    <div className="container mx-auto py-6">
-      <h2 className="text-2xl font-bold mb-4">Search Results</h2>
+    <div className="max-w-7xl mx-auto py-6 px-4">
+      <h2 className="text-2xl font-bold mb-4">Available Transportations</h2>
       {loading ? (
         <p>Loading...</p>
       ) : results.length === 0 ? (
