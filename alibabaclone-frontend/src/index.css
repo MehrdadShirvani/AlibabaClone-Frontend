@@ -7,7 +7,7 @@
   :root {
     /* Core semantics */
     --background:          #FFFFFF;
-    --surface:             #F9FAFB;
+    --surface:             #fcfdfe;
     --text-primary:        #1F2937;
     --text-secondary:      #4B5563;
     --border:              #E5E7EB;
@@ -50,8 +50,8 @@
     --background:          #121212;
     --surface:             #1E1E1E;
     --text-primary:        #ffffff;
-    --text-secondary:      #3b3b3b;
-    --border:              #2C2C2C;
+    --text-secondary:      #8b8b8b;
+    --border:              #c6c6c6;
     --ring:                #3B82F6;
 
     --primary:             #3B82F6;
@@ -76,32 +76,32 @@
 
   /* ──────────────── Red Theme ──────────────── */
   .theme-red {
-    --background:          #FFF1F2;
-    --surface:             #FFE4E6;
-    --text-primary:        #881337;
-    --text-secondary:      #6B0E1E;
-    --border:              #FECACA;
-    --ring:                #DC2626;
+  --background:          #1A0B0B; /* very dark red-brown */
+  --surface:             #2C0D0E; /* surface panels */
+  --text-primary:        #FECACA; /* light pink text */
+  --text-secondary:      #F87171; /* soft red text */
+  --border:              #7F1D1D;
+  --ring:                #EF4444;
 
-    --primary:             #DC2626;
-    --primary-foreground:  #FFFFFF;
-    --primary-hover:       #B91C1C;
+  --primary:             #DC2626; /* strong red */
+  --primary-foreground:  #FFFFFF;
+  --primary-hover:       #B91C1C;
 
-    --accent:              #F43F5E;
-    --accent-foreground:   #FFFFFF;
-    --accent-hover:        #B91C1C;
+  --accent:              #F43F5E;
+  --accent-foreground:   #FFFFFF;
+  --accent-hover:        #B91C1C;
 
-    --destructive:         #991B1B;
-    --destructive-foreground: #FFF5F5;
-    --destructive-hover:   #7F1D1D;
+  --destructive:         #991B1B;
+  --destructive-foreground: #FFF1F2;
+  --destructive-hover:   #7F1D1D;
 
-    --input-bg:            #FEE2E2;
-    --input-hover-bg:      #FECACA;
+  --input-bg:            #3F1212;
+  --input-hover-bg:      #5B1515;
 
-    --secondary:           #9F1239;
-    --secondary-foreground: #FFFFFF;
-    --secondary-hover:     #881337;
-  }
+  --secondary:           #9F1239;
+  --secondary-foreground: #FFFFFF;
+  --secondary-hover:     #BE123C;
+}
 
   /* ──────────────── Green Theme ──────────────── */
   .theme-green {
@@ -153,7 +153,7 @@
   }
 
   input::placeholder {
-    color:            #000000d3;
+    color:            var(--text-secondary);
   }
 
   select,
@@ -216,7 +216,7 @@ select option:checked {
 }
 
 .button-secondary {
-  @apply px-6 py-3;
+  @apply px-6 py-3 rounded-xl;
   background-color: transparent;
   border:           1px solid var(--border);
   color:            var(--text-primary);
@@ -282,4 +282,45 @@ select option:checked {
   @apply p-6 rounded shadow-lg w-full max-w-lg;
   background-color: var(--surface);
   color:            var(--text-primary);
+}
+
+
+.theme-dark input,
+.theme-dark select,
+.theme-dark textarea {
+  border: 1px solid white;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+}
+
+.theme-dark input:focus,
+.theme-dark select:focus,
+.theme-dark textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--ring);
+}
+.theme-dark .button-vehicle-inactive img {
+  background-color: rgba(109, 109, 109, 0.943);
+  border-radius: 999px;
+  padding: 0.5rem;
+  margin: 0.2rem;
+}
+
+.theme-red .button-vehicle-inactive img {
+  background-color: rgba(102, 86, 86, 0.943);
+  border-radius: 999px;
+  padding: 0.5rem;
+  margin: 0.2rem;
+}
+
+
+button,
+a {
+  cursor: pointer;
+}
+
+button:disabled,
+button[disabled] {
+  cursor: not-allowed;
 }
