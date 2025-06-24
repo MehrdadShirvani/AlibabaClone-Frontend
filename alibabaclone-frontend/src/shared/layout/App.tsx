@@ -17,12 +17,11 @@ import TravelerDetailsForm from "@/features/transportation/reservation/TravelerD
 import ReviewAndConfirm from "@/features/transportation/reservation/ReviewAndConfirm";
 import PaymentForm from "@/features/transportation/reservation/PaymentForm";
 import TicketIssued from "@/features/transportation/reservation/TicketIssued";
-import { ThemeSwitcher } from "./ThemeSwitcher";
+import { ProtectedRoute } from "../components/ProtectedRoute";
 
 function App() {
   return (
     <Router>
-      <ThemeSwitcher></ThemeSwitcher>
       <Navbar /> {/* Navbar will show on all pages */}
       <div className="pt-16">
         {" "}
@@ -33,20 +32,22 @@ function App() {
             path="/:vehicleId/:fromCityId/:toCityId"
             element={<SearchResultsPage />}
           />
-          <Route path="/profile" element={<ProfilePage />}>
-            <Route path="account-info" element={<AccountInfo />} />
-            <Route path="my-travels" element={<MyTravels />} />
-            <Route path="my-travels/:id" element={<TravelOrderDetails />} />
-            <Route path="list-of-travelers" element={<ListOfTravelers />} />
-            <Route path="favorites" element={<Favorites />} />
-            <Route path="support" element={<Support />} />
-            <Route path="transactions" element={<MyTransactions />} />
-          </Route>
-          <Route path="/reserve" element={<ReservationLayout />}>
-            <Route path="travelers" element={<TravelerDetailsForm />} />
-            <Route path="review" element={<ReviewAndConfirm />} />
-            <Route path="payment" element={<PaymentForm />} />
-            <Route path="success" element={<TicketIssued />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/profile" element={<ProfilePage />}>
+              <Route path="account-info" element={<AccountInfo />} />
+              <Route path="my-travels" element={<MyTravels />} />
+              <Route path="my-travels/:id" element={<TravelOrderDetails />} />
+              <Route path="list-of-travelers" element={<ListOfTravelers />} />
+              <Route path="favorites" element={<Favorites />} />
+              <Route path="support" element={<Support />} />
+              <Route path="transactions" element={<MyTransactions />} />
+            </Route>
+            <Route path="/reserve" element={<ReservationLayout />}>
+              <Route path="travelers" element={<TravelerDetailsForm />} />
+              <Route path="review" element={<ReviewAndConfirm />} />
+              <Route path="payment" element={<PaymentForm />} />
+              <Route path="success" element={<TicketIssued />} />
+            </Route>
           </Route>
         </Routes>
       </div>
