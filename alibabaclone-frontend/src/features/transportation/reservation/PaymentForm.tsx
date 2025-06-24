@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import agent from "@/shared/api/agent";
 import { useReservationStore } from "@/store/useReservationStore";
@@ -7,32 +8,59 @@ export default function PaymentForm() {
   const reservationStore = useReservationStore();
   const navigate = useNavigate();
   const { setTicketOrderId } = useReservationStore();
-  async function handleNext(): Promise<void> {
-    const tId: number = reservationStore.transportation?.id ?? 0;
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleFinalizeReservation(): Promise<void> {
+    setError(null);
+    setLoading(true);
+
+    const transportationId = reservationStore.transportation?.id ?? 0;
 
     try {
-      agent.TicketOrder.create({
-        couponId: null,
-        transportationId: tId,
+      const ticketOrderId = await agent.TicketOrder.create({
+        couponId: null, // You may want to pass actual couponId if available
+        transportationId,
         travelers: reservationStore.travelers,
-      }).then((data) => {
-        console.log("ticketOrder:" + data);
-        setTicketOrderId(data);
-        navigate("/reserve/success");
       });
-    } catch (error) {
-      console.error("Failed to create ticket order:", error);
-      // Optionally show error to user here
+
+      setTicketOrderId(ticketOrderId);
+      navigate("/reserve/success");
+    } catch (err) {
+      console.error("Failed to create ticket order:", err);
+      setError("Failed to finalize reservation. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
-    <>
-      (<div>Payment has been done.</div>
-      <div className="mt-6">
-        <Button onClick={handleNext}>Next</Button>
-      </div>
-      )
-    </>
+    <div className="max-w-md mx-auto p-6 bg-var-surface rounded-lg shadow-md">
+      <p
+        className="text-lg font-medium mb-6"
+        style={{ color: "var(--text-primary)" }}
+      >
+        Payment has been completed.
+      </p>
+
+      {error && (
+        <div
+          className="mb-4 p-3 rounded border border-red-500 text-red-700 bg-red-100"
+          role="alert"
+        >
+          {error}
+        </div>
+      )}
+
+      <Button
+        onClick={handleFinalizeReservation}
+        disabled={loading}
+        className="w-full"
+        variant="default"
+      >
+        {loading ? "Finalizing..." : "Finalize Reservation"}
+      </Button>
+    </div>
   );
 }

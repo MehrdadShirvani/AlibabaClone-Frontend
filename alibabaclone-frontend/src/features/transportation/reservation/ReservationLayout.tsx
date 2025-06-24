@@ -24,7 +24,14 @@ export default function ReservationLayout() {
   const currentStep = stepRoutes.indexOf(location.pathname);
 
   return (
-    <div className="p-4 max-w-3xl mx-auto">
+    <div
+      className="p-6 mx-auto rounded-lg shadow-md"
+      style={{
+        width: "900px", // or any fixed size you want
+        backgroundColor: "var(--surface)",
+        color: "var(--text-primary)",
+      }}
+    >
       <StepIndicator steps={steps} currentStep={currentStep} />
       <div className="mt-6">
         <Outlet />
