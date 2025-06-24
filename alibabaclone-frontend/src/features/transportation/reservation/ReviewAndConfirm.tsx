@@ -1,28 +1,19 @@
-// src/pages/ReviewAndConfirmPage.tsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useReservationStore } from "@/store/useReservationStore";
 import agent from "@/shared/api/agent";
 
-interface TransportationDetails {
-  fromCity: string;
-  toCity: string;
-  departingDateTime: string;
-  companyName: string;
-  vehicleName: string;
-  pricePerSeat: number;
-}
-
 export default function ReviewAndConfirmPage() {
   const { transportation, travelers, couponCode, setCouponCode } =
     useReservationStore();
-  useState<TransportationDetails | null>(null);
   const [couponInput, setCouponInput] = useState("");
   const [paymentMethod, setPaymentMethod] = useState<"balance" | null>(
     "balance"
   );
   const navigate = useNavigate();
+
+  const totalPrice = (transportation?.price || 0) * travelers.length;
 
   const handleApplyCoupon = () => {
     setCouponCode(couponInput);
@@ -37,93 +28,118 @@ export default function ReviewAndConfirmPage() {
       navigate("/reserve/payment");
     } catch (error) {
       console.error("Failed to create ticket order:", error);
-      // Optionally show error to user here
     }
   }
 
-  const totalPrice = (transportation?.price || 0) * travelers.length;
-
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Review & Confirm</h2>
+    <div className="max-w-3xl mx-auto p-6 bg-var-surface rounded-lg shadow-md">
+      <h2
+        className="text-2xl font-semibold mb-6"
+        style={{ color: "var(--text-primary)" }}
+      >
+        Review & Confirm
+      </h2>
 
       {transportation && (
-        <table className="w-full text-left border mb-6">
+        <table
+          className="w-full mb-8 border-collapse"
+          style={{ borderSpacing: 0 }}
+        >
           <tbody>
-            <tr>
-              <th>From</th>
-              <td>{transportation.fromCityTitle}</td>
-            </tr>
-            <tr>
-              <th>To</th>
-              <td>{transportation.toCityTitle}</td>
-            </tr>
-            <tr>
-              <th>Date & Time</th>
-              <td>{transportation.startDateTime.toLocaleString()}</td>
-            </tr>
-            <tr>
-              <th>Company</th>
-              <td>{transportation.companyTitle}</td>
-            </tr>
-            <tr>
-              <th>Vehicle</th>
-              <td>{transportation.companyTitle}</td>
-            </tr>
-            <tr>
-              <th>Number of Travelers</th>
-              <td>{travelers.length}</td>
-            </tr>
-            <tr>
-              <th>Price per Seat</th>
-              <td>{transportation.price} $</td>
-            </tr>
-            <tr>
-              <th>Total Price</th>
-              <td>{totalPrice} $</td>
-            </tr>
+            {[
+              ["From", transportation.fromCityTitle],
+              ["To", transportation.toCityTitle],
+              ["Date & Time", transportation.startDateTime.toLocaleString()],
+              ["Company", transportation.companyTitle],
+              ["Vehicle", transportation.vehicleTitle],
+              ["Number of Travelers", travelers.length.toString()],
+              ["Price per Seat", `$${transportation.price}`],
+              ["Total Price", `$${totalPrice}`],
+            ].map(([label, value]) => (
+              <tr
+                key={label}
+                className="border-b border-var-border last:border-0"
+              >
+                <th
+                  className="text-left py-3 pr-6 font-medium"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  {label}
+                </th>
+                <td className="py-3" style={{ color: "var(--text-primary)" }}>
+                  {value}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       )}
 
-      <div className="mb-4">
-        <h3 className="text-lg font-medium mb-2">Travelers</h3>
-        <ul className="list-disc pl-6">
+      <section className="mb-8">
+        <h3
+          className="text-xl font-semibold mb-3"
+          style={{ color: "var(--text-primary)" }}
+        >
+          Travelers
+        </h3>
+        <ul className="list-disc pl-6 space-y-1 text-var-text-primary">
           {travelers.map((t, i) => (
-            <li key={i}>
-              {t.firstName} {t.lastName} - {t.idNumber}
+            <li key={i} className="text-base">
+              {t.firstName} {t.lastName} —{" "}
+              <span className="font-mono">{t.idNumber}</span>
             </li>
           ))}
         </ul>
-      </div>
+      </section>
 
-      <div className="mb-4">
-        <h3 className="text-lg font-medium mb-2">Coupon</h3>
-        <input
-          type="text"
-          placeholder="Enter coupon code"
-          value={couponInput}
-          onChange={(e) => setCouponInput(e.target.value)}
-        />
-        <Button onClick={handleApplyCoupon} className="ml-2">
-          Apply
-        </Button>
-      </div>
+      <section className="mb-6">
+        <h3
+          className="text-xl font-semibold mb-2"
+          style={{ color: "var(--text-primary)" }}
+        >
+          Coupon
+        </h3>
+        <div className="flex items-center gap-3">
+          <input
+            type="text"
+            placeholder="Enter coupon code"
+            value={couponInput}
+            onChange={(e) => setCouponInput(e.target.value)}
+            className="flex-grow rounded-md border border-var-border px-3 py-2 text-var-text-primary focus:outline-none focus:ring-2 focus:ring-var-primary"
+            style={{
+              backgroundColor: "var(--input-bg)",
+              color: "var(--text-primary)",
+              borderColor: "var(--border)",
+            }}
+          />
+          <Button onClick={handleApplyCoupon} className="whitespace-nowrap">
+            Apply
+          </Button>
+        </div>
+      </section>
 
-      <div className="mb-6">
-        <h3 className="text-lg font-medium mb-2">Payment Method</h3>
-        <label className="flex items-center gap-2">
+      <section className="mb-8">
+        <h3
+          className="text-xl font-semibold mb-3"
+          style={{ color: "var(--text-primary)" }}
+        >
+          Payment Method
+        </h3>
+        <label className="flex items-center gap-2 text-var-text-primary cursor-pointer">
           <input
             type="radio"
             checked={paymentMethod === "balance"}
             onChange={() => setPaymentMethod("balance")}
+            className="cursor-pointer"
           />
           Pay from Current Balance
         </label>
-      </div>
+      </section>
 
       <div>
-        <Button onClick={handlePay}>Pay and Reserve</Button>
+        <Button onClick={handlePay} className="w-full sm:w-auto">
+          Pay and Reserve
+        </Button>
       </div>
     </div>
   );
