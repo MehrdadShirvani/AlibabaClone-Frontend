@@ -4,26 +4,47 @@ import { useEffect, useState } from "react";
 const themes = ["", "theme-dark", "theme-red", "theme-green"];
 
 export const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState("theme-dark");
+  const [theme, setTheme] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const root = document.documentElement;
-    // Remove all theme classes first
     themes.filter(Boolean).forEach((t) => root.classList.remove(t));
     if (theme) root.classList.add(theme);
   }, [theme]);
 
   return (
-    <div className="fixed top-4 right-4 bg-white shadow-md rounded p-2 z-50 space-x-2">
-      {themes.map((t) => (
-        <button
-          key={t || "default"}
-          onClick={() => setTheme(t)}
-          className="text-sm px-3 py-1 border rounded hover:bg-gray-100"
+    <div className="relative">
+      <button
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="nav-link"
+        style={{ color: "var(--text-primary)" }}
+      >
+        Theme
+      </button>
+
+      {isOpen && (
+        <div
+          className="absolute right-0 mt-2 w-40 bg-white dark:bg-neutral-900 border border-gray-300 dark:border-gray-700 rounded shadow z-50"
+          style={{
+            color: "var(--text-primary)",
+            backgroundColor: "var(--surface)",
+          }}
         >
-          {t ? t.replace("theme-", "") : "Default"}
-        </button>
-      ))}
+          {themes.map((t) => (
+            <button
+              key={t || "default"}
+              onClick={() => {
+                setTheme(t);
+                setIsOpen(false);
+              }}
+              className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-neutral-800"
+            >
+              {t ? t.replace("theme-", "") : "Default"}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

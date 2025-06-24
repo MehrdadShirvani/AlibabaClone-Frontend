@@ -3,10 +3,11 @@ import RegisterModal from "@/features/authentication/modals/RegisterModal";
 import { useAuthStore } from "@/store/authStore";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { ThemeSwitcher } from "../layout/ThemeSwitcher";
 
 const Navbar = () => {
-  const { isLoggedIn, logout } = useAuthStore();
-  const [showLogin, setShowLogin] = useState(false);
+  const { isLoggedIn, logout, showLoginModal, setShowLoginModal } =
+    useAuthStore();
   const [showRegister, setShowRegister] = useState(false);
   const location = useLocation();
 
@@ -16,9 +17,9 @@ const Navbar = () => {
   ];
 
   const userLinks = [
-    { label: "Profile", to: "/profile" },
-    { label: "My Travels", to: "/my-travels" },
-    { label: "Online Support", to: "/support" },
+    { label: "Profile", to: "/profile/account-info" },
+    { label: "My Travels", to: "/profile/my-travels" },
+    { label: "Online Support", to: "/profile/support" },
   ];
 
   const isActive = (path: string) =>
@@ -60,7 +61,7 @@ const Navbar = () => {
                 href="#login"
                 onClick={(e) => {
                   e.preventDefault();
-                  setShowLogin(true);
+                  setShowLoginModal(true);
                 }}
                 className="nav-link"
                 style={{ color: "var(--text-primary)" }}
@@ -111,11 +112,14 @@ const Navbar = () => {
               </a>
             </>
           )}
+          <ThemeSwitcher></ThemeSwitcher>
         </div>
       </nav>
 
       {/* Modals */}
-      {showLogin && <LoginModal onClose={() => setShowLogin(false)} />}
+      {showLoginModal && (
+        <LoginModal onClose={() => setShowLoginModal(false)} />
+      )}
       {showRegister && <RegisterModal onClose={() => setShowRegister(false)} />}
     </>
   );
