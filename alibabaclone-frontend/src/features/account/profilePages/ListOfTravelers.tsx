@@ -101,7 +101,7 @@ const ListOfTravelers = () => {
             {people.map((p) => (
               <tr
                 key={p.id}
-                className="border-t hover:bg-gray-50"
+                className="border-t "
                 style={{
                   borderColor: "var(--border)",
                   color: "var(--text-primary)",
@@ -141,8 +141,11 @@ const ListOfTravelers = () => {
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
           <div
-            className="bg-white p-6 rounded shadow-md w-full max-w-xl"
-            style={{ border: "1px solid var(--border)" }}
+            className=" p-6 rounded shadow-md w-full max-w-xl"
+            style={{
+              border: "1px solid var(--border)",
+              background: "var(--background)",
+            }}
           >
             <h3
               className="text-lg font-bold mb-4"

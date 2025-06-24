@@ -14,7 +14,7 @@ const ProfileSummary: React.FC<ProfileSummaryProps> = ({
 }) => {
   return (
     <div
-      className="flex justify-between items-center p-6 rounded-xl shadow-md mb-6"
+      className="flex justify-between  items-center p-6 rounded-xl shadow-md mb-6"
       style={{
         backgroundColor: "var(--surface)",
         border: "1px solid var(--border)",
@@ -23,7 +23,7 @@ const ProfileSummary: React.FC<ProfileSummaryProps> = ({
       {/* Left: Profile Image */}
       <div className="flex items-center">
         <img
-          src="/images/sample-avatar.png"
+          src="/images/profile.png"
           alt="Profile"
           className="w-20 h-20 rounded-full object-cover mr-6"
           style={{ border: "2px solid var(--border)" }}
@@ -53,7 +53,7 @@ const ProfileSummary: React.FC<ProfileSummaryProps> = ({
           className="text-2xl font-bold mb-2"
           style={{ color: "var(--accent)" }}
         >
-          {balance.toLocaleString()} تومان
+          ${balance.toLocaleString()}
         </p>
         <button
           className="px-4 py-2 rounded-md transition"

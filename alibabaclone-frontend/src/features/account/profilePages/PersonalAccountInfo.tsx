@@ -37,9 +37,14 @@ const PersonalAccountInfo: React.FC<Props> = ({
   };
 
   const onPasswordSubmit = async (data: EditPasswordDto) => {
-    await agent.Profile.editPassword(data);
-    setPasswordModalOpen(false);
-    resetPassword();
+    agent.Profile.editPassword(data)
+      .then(() => {
+        setPasswordModalOpen(false);
+        resetPassword();
+      })
+      .catch(() => {
+        alert("You entered the wrong password");
+      });
   };
 
   return (

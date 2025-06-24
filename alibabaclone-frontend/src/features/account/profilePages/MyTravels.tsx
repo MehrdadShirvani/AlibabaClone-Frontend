@@ -17,6 +17,31 @@ const MyTravels = () => {
     agent.Profile.getMyTravels().then(setOrders);
   }, []);
 
+  const [loading, setLoading] = useState(false);
+  const [, setError] = useState<string | null>(null);
+
+  async function handleDownloadPdf(id: number) {
+    setError(null);
+    setLoading(true);
+    try {
+      const response = await agent.TicketOrder.downloadPdf(id);
+      const blob = new Blob([response], { type: "application/pdf" });
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `ticket-${id}.pdf`;
+      a.click();
+
+      window.URL.revokeObjectURL(url); // cleanup
+    } catch (err) {
+      console.error("Failed to download PDF:", err);
+      setError("Failed to download ticket PDF. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="space-y-6">
       <h2
@@ -63,22 +88,33 @@ const MyTravels = () => {
                 Total Price:{" "}
                 <span
                   className="font-semibold"
-                  style={{ color: "var(--accent)" }}
+                  style={{ color: "var(--primary)" }}
                 >
-                  {order.totalPrice.toLocaleString()} تومان
+                  ${order.totalPrice.toLocaleString()}
                 </span>
               </span>
             </div>
 
             <button
               onClick={() => handleViewDetails(order)}
-              className="mt-2 px-4 py-1 rounded transition"
+              className="mt-2 px-4 py-1 mr-2 rounded transition"
               style={{
                 backgroundColor: "var(--primary)",
                 color: "var(--primary-foreground)",
               }}
             >
               Details of Order
+            </button>
+            <button
+              onClick={() => handleDownloadPdf(order.id)}
+              disabled={loading}
+              className="mt-2 px-4 py-1 rounded transition"
+              style={{
+                backgroundColor: "var(--primary)",
+                color: "var(--primary-foreground)",
+              }}
+            >
+              {loading ? "Downloading..." : "Download PDF"}
             </button>
           </div>
         ))

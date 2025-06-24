@@ -103,8 +103,8 @@ const MyTransactions = () => {
                         : "#ef4444" /* red-500 */,
                   }}
                 >
-                  {t.transactionTypeId === 1 ? "+" : "-"}
-                  {t.finalAmount.toLocaleString()} تومان
+                  {t.transactionTypeId === 1 ? "+" : "-"}$
+                  {t.finalAmount.toLocaleString()}
                 </td>
                 <td
                   className="px-6 py-3"
