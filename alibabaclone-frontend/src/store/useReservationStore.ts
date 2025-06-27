@@ -32,7 +32,7 @@ interface ReservationState {
   removeTraveler: (index: number) => void;
   setTicketOrderId: (newId: number) => void;
   setTransportation: (transportation: TransportationSearchResult) => void;
-  setCouponCode: (code: string) => void;
+  setCouponCode: (code: string | null) => void;
   setPaymentInfo: (info: any) => void;
   setPeople: (people: PersonDto[]) => void;
 }
