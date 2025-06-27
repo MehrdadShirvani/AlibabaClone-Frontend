@@ -81,6 +81,9 @@ function TravelerForm({
       >
         <p className="mb-4 text-sm" style={{ color: "var(--text-secondary)" }}>
           Seat ID: <span className="font-semibold">{traveler.seatId}</span>
+          {errors?.seatId && (
+            <div className={errorTextClass}>Select a seat</div>
+          )}
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
