@@ -20,7 +20,7 @@ export default function PaymentForm() {
 
     try {
       const ticketOrderId = await agent.TicketOrder.create({
-        couponId: null, // You may want to pass actual couponId if available
+        couponCode: reservationStore.couponCode,
         transportationId,
         travelers: reservationStore.travelers,
       });
