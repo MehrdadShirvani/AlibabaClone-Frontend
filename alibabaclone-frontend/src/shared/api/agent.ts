@@ -17,6 +17,8 @@ import { TransactionDto } from '../models/transaction/TransactionDto';
 import { createTicketOrderDto } from '../models/ticketOrder/createTicketOrderDto';
 import { topUpDto } from '../models/account/topUpDto';
 import { transportationSeatDto } from '../models/transportation/transportationSeatDto';
+import { discountDto } from '../models/transaction/discountDto';
+import { couponValidationRequestDto } from '../models/transaction/couponValidationRequestDto';
 
 axios.defaults.baseURL = 'https://localhost:44377/api';
 
@@ -54,6 +56,12 @@ const TicketOrder = {
       responseType: 'blob',
     }),
 }
+
+const Coupon = {
+  validate: (data : couponValidationRequestDto) => request.post<discountDto>('/coupon/validate', data),
+}
+
+
 const Profile = {
   getProfile: () => request.get<ProfileDto>('/account/profile'),
   editEmail: (data: EditEmailDto) => request.put<void>('/account/email', data),
@@ -92,7 +100,8 @@ const agent = {
   Profile,
   TransportationSearch,
   Cities,
-  Auth
+  Auth,
+  Coupon
 }
 
 
