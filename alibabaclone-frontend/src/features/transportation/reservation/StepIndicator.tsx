@@ -20,7 +20,7 @@ const StepIndicator: React.FC<Props> = ({ steps, currentStep }) => {
             >
               {step}
             </div>
-            {index < steps.length - 1 && (
+            {index < steps.length && (
               <div
                 className="mx-2 mt-1 border-t-2"
                 style={{
