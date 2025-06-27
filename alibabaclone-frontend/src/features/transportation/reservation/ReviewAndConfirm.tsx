@@ -5,25 +5,45 @@ import { useReservationStore } from "@/store/useReservationStore";
 import agent from "@/shared/api/agent";
 
 export default function ReviewAndConfirmPage() {
-  const { transportation, travelers, couponCode, setCouponCode } =
-    useReservationStore();
+  const { transportation, travelers, setCouponCode } = useReservationStore();
   const [couponInput, setCouponInput] = useState("");
+  const [couponMessage, setCouponMessage] = useState<string | null>(null);
   const [paymentMethod, setPaymentMethod] = useState<"balance" | null>(
     "balance"
   );
+  const [discountAmount, setDiscountAmount] = useState(0);
+
   const navigate = useNavigate();
 
   const totalPrice = (transportation?.price || 0) * travelers.length;
 
-  const handleApplyCoupon = () => {
-    setCouponCode(couponInput);
-    alert("Coupon applied (validate in backend on final submit)");
+  const handleApplyCoupon = async () => {
+    try {
+      const response = await agent.Coupon.validate({
+        code: couponInput,
+        originalPrice: totalPrice,
+      });
+      if (response.isValid) {
+        setCouponCode(couponInput);
+        setDiscountAmount(response.discountAmount);
+        setCouponMessage("✅ Coupon Applied ");
+      } else {
+        setCouponCode(null);
+        setDiscountAmount(0);
+        setCouponMessage(`❌ ${response.message || "Coupon is not valid."}`);
+      }
+    } catch (err) {
+      setCouponCode(null);
+      setDiscountAmount(0);
+      setCouponMessage("❌ Failed to validate coupon. Try again.");
+      console.error("Coupon validation error:", err);
+    }
   };
 
   async function handlePay(): Promise<void> {
     try {
       await agent.Profile.topUp({
-        amount: totalPrice,
+        amount: totalPrice - discountAmount,
       });
       navigate("/reserve/payment");
     } catch (error) {
@@ -55,6 +75,15 @@ export default function ReviewAndConfirmPage() {
               ["Number of Travelers", travelers.length.toString()],
               ["Price per Seat", `$${transportation.price}`],
               ["Total Price", `$${totalPrice}`],
+              ...(discountAmount > 0
+                ? [
+                    ["Discount", `-$${discountAmount.toFixed(2)}`],
+                    [
+                      "Total After Discount",
+                      `$${(totalPrice - discountAmount).toFixed(2)}`,
+                    ],
+                  ]
+                : []),
             ].map(([label, value]) => (
               <tr
                 key={label}
@@ -99,7 +128,7 @@ export default function ReviewAndConfirmPage() {
         >
           Coupon
         </h3>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 mb-2">
           <input
             type="text"
             placeholder="Enter coupon code"
@@ -116,6 +145,14 @@ export default function ReviewAndConfirmPage() {
             Apply
           </Button>
         </div>
+        {couponMessage && (
+          <div
+            className="text-sm mt-1"
+            style={{ color: couponMessage.startsWith("✅") ? "green" : "red" }}
+          >
+            {couponMessage}
+          </div>
+        )}
       </section>
 
       <section className="mb-8">
