@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useReservationStore } from "@/store/useReservationStore";
 import agent from "@/shared/api/agent";
+import { useStepGuard } from "./StepGaurd";
 
 export default function ReviewAndConfirmPage() {
   const { transportation, travelers, setCouponCode } = useReservationStore();
@@ -14,6 +15,7 @@ export default function ReviewAndConfirmPage() {
   const [discountAmount, setDiscountAmount] = useState(0);
 
   const navigate = useNavigate();
+  useStepGuard("review");
 
   const totalPrice = (transportation?.price || 0) * travelers.length;
 
@@ -45,6 +47,7 @@ export default function ReviewAndConfirmPage() {
       await agent.Profile.topUp({
         amount: totalPrice - discountAmount,
       });
+      useReservationStore().setIsConfirmed(true);
       navigate("/reserve/payment");
     } catch (error) {
       console.error("Failed to create ticket order:", error);

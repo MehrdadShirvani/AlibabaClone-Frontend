@@ -7,13 +7,16 @@ import { createTravelerTicketDto } from "@/shared/models/ticketOrder/createTrave
 import SeatGridSelector from "./SeatGridSelector";
 import { transportationSeatDto } from "@/shared/models/transportation/transportationSeatDto";
 import agent from "@/shared/api/agent";
+import { useStepGuard } from "./StepGaurd";
 
 export default function TravelerDetailsForm() {
   const [seatList, setSeatList] = useState<transportationSeatDto[]>([]);
   const [selectedSeatIds, setSelectedSeatIds] = useState<number[]>([]);
   const vehicleTypeId = useReservationStore().transportation?.vehicleTypeId;
   const transportationId = useReservationStore().transportation?.id ?? 0;
-  const { travelers, setTravelers } = useReservationStore();
+  const { travelers, setTravelers, setIsTravelerPartDone } =
+    useReservationStore();
+
   const [errors, setErrors] = useState<
     Record<number, Partial<Record<keyof createTravelerTicketDto, boolean>>>
   >({});
@@ -31,6 +34,7 @@ export default function TravelerDetailsForm() {
         errs.phoneNumber = true;
       if (!t.idNumber.trim() || !/^\d{10}$/.test(t.idNumber))
         errs.idNumber = true;
+      if (vehicleTypeId == 1 && !t.seatId) errs.seatId = true;
       if (t.genderId === 0) errs.genderId = true;
       if (idSet.has(t.idNumber)) errs.idNumber = true;
       idSet.add(t.idNumber);
@@ -70,6 +74,8 @@ export default function TravelerDetailsForm() {
   };
 
   const navigate = useNavigate();
+
+  useStepGuard("travelers");
 
   useEffect(() => {
     if (vehicleTypeId === 1) {
@@ -112,6 +118,7 @@ export default function TravelerDetailsForm() {
       return;
     }
 
+    setIsTravelerPartDone(true);
     navigate("/reserve/review");
   };
 

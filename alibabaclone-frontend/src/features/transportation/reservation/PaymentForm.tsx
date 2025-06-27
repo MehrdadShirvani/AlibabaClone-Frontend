@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import agent from "@/shared/api/agent";
 import { useReservationStore } from "@/store/useReservationStore";
 import { useNavigate } from "react-router-dom";
+import { useStepGuard } from "./StepGaurd";
 
 export default function PaymentForm() {
   const reservationStore = useReservationStore();
@@ -11,6 +12,8 @@ export default function PaymentForm() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useStepGuard("payment");
 
   async function handleFinalizeReservation(): Promise<void> {
     setError(null);
@@ -25,6 +28,7 @@ export default function PaymentForm() {
         travelers: reservationStore.travelers,
       });
 
+      useReservationStore().setIsPayed(true);
       setTicketOrderId(ticketOrderId);
       navigate("/reserve/success");
     } catch (err) {

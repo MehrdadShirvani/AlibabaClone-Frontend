@@ -2,11 +2,14 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import agent from "@/shared/api/agent";
 import { useReservationStore } from "@/store/useReservationStore";
+import { useStepGuard } from "./StepGaurd";
 
 export default function TicketIssued() {
   const { ticketOrderId } = useReservationStore();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  useStepGuard("success");
 
   async function handleDownloadPdf() {
     setError(null);
@@ -22,6 +25,8 @@ export default function TicketIssued() {
       a.click();
 
       window.URL.revokeObjectURL(url); // cleanup
+
+      useReservationStore().resetReservation();
     } catch (err) {
       console.error("Failed to download PDF:", err);
       setError("Failed to download ticket PDF. Please try again.");
