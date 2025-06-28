@@ -6,7 +6,8 @@ import agent from "@/shared/api/agent";
 import { useStepGuard } from "./StepGaurd";
 
 export default function ReviewAndConfirmPage() {
-  const { transportation, travelers, setCouponCode } = useReservationStore();
+  const { transportation, travelers, setCouponCode, setIsConfirmed } =
+    useReservationStore();
   const [couponInput, setCouponInput] = useState("");
   const [couponMessage, setCouponMessage] = useState<string | null>(null);
   const [paymentMethod, setPaymentMethod] = useState<"balance" | null>(
@@ -47,7 +48,7 @@ export default function ReviewAndConfirmPage() {
       await agent.Profile.topUp({
         amount: totalPrice - discountAmount,
       });
-      useReservationStore().setIsConfirmed(true);
+      setIsConfirmed(true);
       navigate("/reserve/payment");
     } catch (error) {
       console.error("Failed to create ticket order:", error);
