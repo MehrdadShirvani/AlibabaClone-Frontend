@@ -175,6 +175,8 @@ select option:hover {
   color:            var(--accent-foreground);
 }
 
+
+
 /* the selected option when the list is closed */
 select option:checked {
   background-color: var(--primary);
@@ -323,4 +325,8 @@ a {
 button:disabled,
 button[disabled] {
   cursor: not-allowed;
+}
+.themeSwitcherButton:hover {
+  background-color: var(--accent-hover);
+  color:            var(--accent-foreground);
 }
