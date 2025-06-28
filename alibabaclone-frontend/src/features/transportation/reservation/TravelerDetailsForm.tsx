@@ -27,12 +27,12 @@ export default function TravelerDetailsForm() {
     travelers.forEach((t, i) => {
       const errs: Partial<Record<keyof createTravelerTicketDto, boolean>> = {};
 
-      if (!t.firstName.trim()) errs.firstName = true;
+      if (!(t.firstName ?? "").trim()) errs.firstName = true;
       if (!t.lastName.trim()) errs.lastName = true;
       if (!t.birthDate.trim()) errs.birthDate = true;
-      if (!t.phoneNumber.trim() || !/^\d{11}$/.test(t.phoneNumber))
+      if (!(t.phoneNumber ?? "").trim() || !/^\d{11}$/.test(t.phoneNumber))
         errs.phoneNumber = true;
-      if (!t.idNumber.trim() || !/^\d{10}$/.test(t.idNumber))
+      if (!(t.idNumber ?? "").trim() || !/^\d{10}$/.test(t.idNumber))
         errs.idNumber = true;
       if (vehicleTypeId == 1 && !t.seatId) errs.seatId = true;
       if (t.genderId === 0) errs.genderId = true;
