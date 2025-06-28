@@ -14,6 +14,11 @@ interface TravelerFormProps {
   errors?: Partial<Record<keyof createTravelerTicketDto, boolean>>;
 }
 
+const formatDate = (dateString: string | Date) => {
+  const date = new Date(dateString);
+  return date.toISOString().split("T")[0]; // "yyyy-MM-dd"
+};
+
 function TravelerForm({
   index,
   traveler,
@@ -41,7 +46,7 @@ function TravelerForm({
         ...{
           firstName: person.firstName,
           lastName: person.lastName,
-          birthDate: person.birthDate,
+          birthDate: formatDate(person.birthDate),
           creatorAccountId: 0,
           description: "",
           englishFirstName: person.englishFirstName,
