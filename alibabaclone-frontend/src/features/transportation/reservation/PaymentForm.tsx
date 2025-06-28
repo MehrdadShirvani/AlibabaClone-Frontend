@@ -8,7 +8,7 @@ import { useStepGuard } from "./StepGaurd";
 export default function PaymentForm() {
   const reservationStore = useReservationStore();
   const navigate = useNavigate();
-  const { setTicketOrderId } = useReservationStore();
+  const { setTicketOrderId, setIsPayed } = useReservationStore();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -28,7 +28,7 @@ export default function PaymentForm() {
         travelers: reservationStore.travelers,
       });
 
-      useReservationStore().setIsPayed(true);
+      setIsPayed(true);
       setTicketOrderId(ticketOrderId);
       navigate("/reserve/success");
     } catch (err) {
