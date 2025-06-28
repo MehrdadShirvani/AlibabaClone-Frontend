@@ -25,68 +25,21 @@ const SeatGridSelector: React.FC<SeatGridSelectorProps> = ({
     return seat.genderId === 1 ? "Female" : "Male";
   };
 
+  const maxRow = Math.max(...seats.map((seat) => seat.row || 0)) || 5;
   const maxCol = Math.max(...seats.map((seat) => seat.column || 0)) || 5;
+
+  // Organize seats in column-major order to simulate rotation
+  const rotatedSeats: (transportationSeatDto | null)[] = [];
+  for (let col = 1; col <= maxCol; col++) {
+    for (let row = 1; row <= maxRow; row++) {
+      const seat = seats.find((s) => s.row === row && s.column === col);
+      rotatedSeats.push(seat || null); // Fill gaps with null if no seat exists
+    }
+  }
 
   return (
     <>
-      <div
-        className="grid gap-x-[1px] gap-y-[4px] p-2 "
-        style={{
-          gridTemplateColumns: `repeat(${maxCol}, 2.5rem)`,
-        }}
-      >
-        {seats.map((seat) => {
-          const isSelected = selectedSeats.includes(seat.id);
-          const isReserved = seat.isReserved;
-
-          let bgColor: string;
-          let textColor: string;
-          let cursor: string;
-          let hoverBg: string;
-
-          if (isReserved) {
-            bgColor = "var(--secondary)";
-            textColor = "var(--secondary-foreground)";
-            cursor = "not-allowed";
-          } else if (isSelected) {
-            bgColor = "var(--primary)";
-            textColor = "var(--primary-foreground)";
-            cursor = "pointer";
-          } else {
-            bgColor = "var(--background)";
-            textColor = "var(--text-primary)";
-            cursor = "pointer";
-            hoverBg = "var(--primary-hover)";
-          }
-
-          return (
-            <div
-              key={seat.id}
-              onClick={() => !isReserved && handleToggle(seat.id)}
-              className="w-9 h-9 flex items-center justify-center border rounded text-xs transition-all duration-150"
-              style={{
-                backgroundColor: bgColor,
-                color: textColor,
-                borderColor: "var(--border-color)",
-                cursor,
-              }}
-              onMouseEnter={(e) => {
-                if (hoverBg)
-                  (e.currentTarget as HTMLElement).style.backgroundColor =
-                    hoverBg;
-              }}
-              onMouseLeave={(e) => {
-                if (hoverBg)
-                  (e.currentTarget as HTMLElement).style.backgroundColor =
-                    bgColor;
-              }}
-            >
-              {getSeatLabel(seat)}
-            </div>
-          );
-        })}
-      </div>
-      <div className="flex gap-4 mb-3 flex-wrap">
+      <div className="flex gap-4 flex-wrap mt-2 p-2">
         <div className="flex items-center gap-2">
           <div
             className="w-4 h-4 rounded border"
@@ -114,6 +67,67 @@ const SeatGridSelector: React.FC<SeatGridSelectorProps> = ({
             Available
           </span>
         </div>
+      </div>
+      <div
+        className="grid gap-x-[4px] gap-y-[4px] p-2"
+        style={{
+          gridTemplateColumns: `repeat(${maxRow}, 2.5rem)`, // now rows are columns
+        }}
+      >
+        {rotatedSeats.map((seat, index) => {
+          if (!seat) {
+            return <div key={index + 1000} className="w-9 h-9"></div>; // empty cell for spacing
+          }
+
+          const isSelected = selectedSeats.includes(seat.id);
+          const isReserved = seat.isReserved;
+
+          let bgColor: string;
+          let textColor: string;
+          let cursor: string;
+          let hoverBg: string;
+
+          if (isReserved) {
+            bgColor = "var(--secondary)";
+            textColor = "var(--secondary-foreground)";
+            cursor = "not-allowed";
+          } else if (isSelected) {
+            bgColor = "var(--primary)";
+            textColor = "var(--primary-foreground)";
+            cursor = "pointer";
+          } else {
+            bgColor = "var(--background)";
+            textColor = "var(--text-primary)";
+            cursor = "pointer";
+            hoverBg = "var(--primary-hover)";
+          }
+
+          return (
+            <div
+              key={seat.id}
+              onClick={() => !isReserved && handleToggle(seat.id)}
+              className="w-10 h-10 flex items-center justify-center border rounded text-xs transition-all duration-150 px-2"
+              style={{
+                backgroundColor: bgColor,
+                color: textColor,
+                borderColor: "var(--border-color)",
+                cursor,
+              }}
+              onMouseEnter={(e) => {
+                if (hoverBg)
+                  (e.currentTarget as HTMLElement).style.backgroundColor =
+                    hoverBg;
+              }}
+              onMouseLeave={(e) => {
+                if (hoverBg)
+                  (e.currentTarget as HTMLElement).style.backgroundColor =
+                    bgColor;
+              }}
+            >
+              {getSeatLabel(seat)}
+            </div>
+          );
+        })}
       </div>
     </>
   );
