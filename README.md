@@ -224,7 +224,8 @@ Includes support for:
 ---
 ## 📸 Screenshots
 ![home](https://github.com/user-attachments/assets/7d494d96-ad46-496c-822e-c97ecc32f451)
-![search-result](https://github.com/user-attachments/assets/c2367341-f964-4705-a359-92d4b5bed682)
+![Screenshot 2025-06-29 135302](https://github.com/user-attachments/assets/3be04dfb-80ce-4fbe-b0a2-9011ca219bcc)
+![Screenshot 2025-06-29 135329](https://github.com/user-attachments/assets/0689fbb1-20b9-451d-80e9-fe7773ce377c)
 ![traveler-selection](https://github.com/user-attachments/assets/b2b06eb8-bf8d-423b-94b1-1b75e9b9d0ca)
 ![review-confirm](https://github.com/user-attachments/assets/a05e0ca2-a766-4a6c-9a63-ad56f47ee230)
 ![download-ticket](https://github.com/user-attachments/assets/6e968329-a202-4fc9-b014-ad38d8d69a08)
