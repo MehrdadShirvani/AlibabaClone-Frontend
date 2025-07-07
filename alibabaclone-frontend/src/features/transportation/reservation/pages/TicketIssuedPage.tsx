@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import api from "@/services/api";
 import { useReservationStore } from "@/stores/useReservationStore";
-import { useStepGuard } from "./StepGaurd";
+import { useStepGuard } from "../components/StepGaurd";
 
-export default function TicketIssued() {
+export default function TicketIssuedPage() {
   const { ticketOrderId } = useReservationStore();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import api from "@/services/api";
 import { TransportationSearchResult } from "@/shared/models/transportation/transportationSearchResult";
-import TransportationCard from "@/features/transportation/search/transportationCard";
+import TransportationCard from "@/features/transportation/search/components/transportationCard";
 import { format, addDays } from "date-fns";
 
 function useQuery() {

@@ -1,6 +1,6 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/shared/components/ui/button";
-import StepIndicator from "./StepIndicator";
+import StepIndicator from "../components/StepIndicator";
 
 const steps = [
   //   "Select Transportation",
@@ -18,7 +18,7 @@ const stepRoutes = [
   "/reserve/success",
 ];
 
-export default function ReservationLayout() {
+export default function ReservationPage() {
   const location = useLocation();
   const navigate = useNavigate();
   const currentStep = stepRoutes.indexOf(location.pathname);

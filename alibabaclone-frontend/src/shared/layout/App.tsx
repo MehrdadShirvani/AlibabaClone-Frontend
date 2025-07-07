@@ -1,8 +1,8 @@
 import "./App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SearchPage from "@/features/transportation/search/SearchPage";
-import SearchResultsPage from "@/features/transportation/search/SearchResultsPage";
+import SearchPage from "@/features/transportation/search/pages/SearchPage";
+import SearchResultsPage from "@/features/transportation/search/pages/SearchResultsPage";
 import ProfilePage from "@/features/account/profile/pages/ProfilePage";
 import TravelOrderDetailsPage from "@/features/account/profile/pages/TravelOrderDetailsPage";
 import MyTravelsPage from "@/features/account/profile/pages/MyTravelsPage";
@@ -11,11 +11,11 @@ import ListOfTravelersPage from "@/features/account/profile/pages/ListOfTraveler
 import FavoritesPage from "@/features/account/profile/pages/FavoritesPage";
 import MyTransactionsPage from "@/features/account/profile/pages/MyTransactionsPage";
 import SupportPage from "@/features/account/profile/pages/SupportPage";
-import ReservationLayout from "@/features/transportation/reservation/ReservationLayout";
-import TravelerDetailsForm from "@/features/transportation/reservation/TravelerDetailsForm";
-import ReviewAndConfirm from "@/features/transportation/reservation/ReviewAndConfirm";
-import PaymentForm from "@/features/transportation/reservation/PaymentForm";
-import TicketIssued from "@/features/transportation/reservation/TicketIssued";
+import ReservationPage from "@/features/transportation/reservation/pages/ReservationPage";
+import TravelerDetailsPage from "@/features/transportation/reservation/pages/TravelerDetailsPage";
+import ReviewAndConfirmPage from "@/features/transportation/reservation/pages/ReviewAndConfirmPage";
+import PaymentPage from "@/features/transportation/reservation/pages/PaymentPage";
+import TicketIssuedPage from "@/features/transportation/reservation/pages/TicketIssuedPage";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 import MyNavbar from "../components/MyNavbar";
 
@@ -48,11 +48,11 @@ function App() {
               <Route path="support" element={<SupportPage />} />
               <Route path="transactions" element={<MyTransactionsPage />} />
             </Route>
-            <Route path="/reserve" element={<ReservationLayout />}>
-              <Route path="travelers" element={<TravelerDetailsForm />} />
-              <Route path="review" element={<ReviewAndConfirm />} />
-              <Route path="payment" element={<PaymentForm />} />
-              <Route path="success" element={<TicketIssued />} />
+            <Route path="/reserve" element={<ReservationPage />}>
+              <Route path="travelers" element={<TravelerDetailsPage />} />
+              <Route path="review" element={<ReviewAndConfirmPage />} />
+              <Route path="payment" element={<PaymentPage />} />
+              <Route path="success" element={<TicketIssuedPage />} />
             </Route>
           </Route>
         </Routes>

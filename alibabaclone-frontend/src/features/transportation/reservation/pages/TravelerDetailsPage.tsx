@@ -1,15 +1,15 @@
 import { useReservationStore } from "@/stores/useReservationStore";
 import { useEffect, useState } from "react";
-import TravelerForm from "./TravelerForm";
+import TravelerForm from "../components/TravelerForm";
 import { Button } from "@/shared/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { createTravelerTicketDto } from "@/shared/models/ticketOrder/createTravelerTicketDto";
-import SeatGridSelector from "./SeatGridSelector";
+import SeatGridSelector from "../components/SeatGridSelector";
 import { transportationSeatDto } from "@/shared/models/transportation/transportationSeatDto";
 import api from "@/services/api";
-import { useStepGuard } from "./StepGaurd";
+import { useStepGuard } from "../components/StepGaurd";
 
-export default function TravelerDetailsForm() {
+export default function TravelerDetailsPage() {
   const [seatList, setSeatList] = useState<transportationSeatDto[]>([]);
   const [selectedSeatIds, setSelectedSeatIds] = useState<number[]>([]);
   const vehicleTypeId = useReservationStore().transportation?.vehicleTypeId;

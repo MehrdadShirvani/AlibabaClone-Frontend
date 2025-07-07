@@ -3,9 +3,9 @@ import { Button } from "@/shared/components/ui/button";
 import api from "@/services/api";
 import { useReservationStore } from "@/stores/useReservationStore";
 import { useNavigate } from "react-router-dom";
-import { useStepGuard } from "./StepGaurd";
+import { useStepGuard } from "../components/StepGaurd";
 
-export default function PaymentForm() {
+export default function PaymentPage() {
   const reservationStore = useReservationStore();
   const navigate = useNavigate();
   const { setTicketOrderId, setIsPayed } = useReservationStore();

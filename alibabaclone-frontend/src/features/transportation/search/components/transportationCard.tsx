@@ -4,7 +4,7 @@ import { useReservationStore } from "@/stores/useReservationStore";
 import { useNavigate } from "react-router-dom";
 import { transportationSeatDto } from "@/shared/models/transportation/transportationSeatDto";
 import api from "@/services/api";
-import ReadOnlySeatMap from "../reservation/ReadOnlySeatMap";
+import ReadOnlySeatMap from "../../reservation/components/ReadOnlySeatMap";
 
 interface Props {
   transportation: TransportationSearchResult;

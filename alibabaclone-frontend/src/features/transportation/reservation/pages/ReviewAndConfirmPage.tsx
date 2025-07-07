@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/shared/components/ui/button";
 import { useReservationStore } from "@/stores/useReservationStore";
 import api from "@/services/api";
-import { useStepGuard } from "./StepGaurd";
+import { useStepGuard } from "../components/StepGaurd";
 
 export default function ReviewAndConfirmPage() {
   const { transportation, travelers, setCouponCode, setIsConfirmed } =
