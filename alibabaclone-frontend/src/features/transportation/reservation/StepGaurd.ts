@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useReservationStore } from "@/store/useReservationStore";
+import { useReservationStore } from "@/stores/useReservationStore";
 
 export function useStepGuard(requiredStep: "travelers" | "review" | "payment" | "success") {
   const { transportation, travelers, currentStep, isConfirmed, isPayed } = useReservationStore();

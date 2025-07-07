@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuthStore } from "@/store/authStore";
+import { useAuthStore } from "@/stores/useAuthStore";
 import { ProfileDto } from "@/shared/models/account/ProfileDto";
 import api from "@/services/api";
 import { useNavigate } from "react-router-dom";

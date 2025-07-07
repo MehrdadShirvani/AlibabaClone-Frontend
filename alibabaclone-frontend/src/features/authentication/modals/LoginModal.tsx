@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAuthStore } from "@/store/authStore";
+import { useAuthStore } from "@/stores/useAuthStore";
 import api from "@/services/api";
 import { LoginRequestDto } from "@/shared/models/authentication/LoginRequestDto";
 

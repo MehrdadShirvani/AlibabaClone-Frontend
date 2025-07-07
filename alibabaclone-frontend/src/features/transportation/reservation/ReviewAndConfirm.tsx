@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/shared/components/ui/button";
-import { useReservationStore } from "@/store/useReservationStore";
+import { useReservationStore } from "@/stores/useReservationStore";
 import api from "@/services/api";
 import { useStepGuard } from "./StepGaurd";
 

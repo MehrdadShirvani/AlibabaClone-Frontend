@@ -1,4 +1,4 @@
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { City } from "@/shared/models/location/city";
 import { useEffect, useState } from "react";
 
@@ -7,7 +7,7 @@ const CityDropdown = () => {
   const [selectedCity, setSelectedCity] = useState<number | undefined>();
 
   useEffect(() => {
-    agent.Cities.list()
+    api.Cities.list()
       .then(setCities)
       .catch((err) => console.error("error loading cities", err));
   }, []);

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import api from "@/services/api";
-import { useReservationStore } from "@/store/useReservationStore";
+import { useReservationStore } from "@/stores/useReservationStore";
 import { useStepGuard } from "./StepGaurd";
 
 export default function TicketIssued() {

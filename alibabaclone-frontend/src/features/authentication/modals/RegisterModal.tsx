@@ -1,6 +1,6 @@
 import api from "@/services/api";
 import { RegisterRequestDto } from "@/shared/models/authentication/RegisterRequestDto";
-import { useAuthStore } from "@/store/authStore";
+import { useAuthStore } from "@/stores/useAuthStore";
 import React, { useState } from "react";
 
 interface Props {

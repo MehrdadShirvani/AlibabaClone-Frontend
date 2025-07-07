@@ -1,4 +1,4 @@
-import { useReservationStore } from "@/store/useReservationStore";
+import { useReservationStore } from "@/stores/useReservationStore";
 import { useEffect, useState } from "react";
 import TravelerForm from "./TravelerForm";
 import { Button } from "@/shared/components/ui/button";

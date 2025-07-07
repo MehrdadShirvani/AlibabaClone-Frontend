@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
-import agent from "@/shared/api/agent";
-import { useReservationStore } from "@/store/useReservationStore";
+import api from "@/services/api";
+import { useReservationStore } from "@/stores/useReservationStore";
 import { useNavigate } from "react-router-dom";
 import { useStepGuard } from "./StepGaurd";
 
@@ -22,7 +22,7 @@ export default function PaymentForm() {
     const transportationId = reservationStore.transportation?.id ?? 0;
 
     try {
-      const ticketOrderId = await agent.TicketOrder.create({
+      const ticketOrderId = await api.TicketOrder.create({
         couponCode: reservationStore.couponCode,
         transportationId,
         travelers: reservationStore.travelers,

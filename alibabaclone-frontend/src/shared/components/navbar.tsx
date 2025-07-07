@@ -1,6 +1,6 @@
 import LoginModal from "@/features/authentication/modals/LoginModal";
 import RegisterModal from "@/features/authentication/modals/RegisterModal";
-import { useAuthStore } from "@/store/authStore";
+import { useAuthStore } from "@/stores/useAuthStore";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ThemeSwitcher } from "../layout/ThemeSwitcher";

@@ -12,7 +12,7 @@ import { PersonDto } from '../shared/models/account/PersonDto';
 import { UpsertBankAccountDetailDto } from '../shared/models/account/UpsertBankAccountDetailDto';
 import { TravelerTicketDto } from '../shared/models/transportation/TravelerTicketDto';
 import { TicketOrderSummaryDto } from '../shared/models/transportation/TicketOrderSummaryDto';
-import { useAuthStore } from '@/store/authStore';
+import { useAuthStore } from '@/stores/useAuthStore';
 import { TransactionDto } from '../shared/models/transaction/TransactionDto';
 import { createTicketOrderDto } from '../shared/models/ticketOrder/createTicketOrderDto';
 import { topUpDto } from '../shared/models/account/topUpDto';

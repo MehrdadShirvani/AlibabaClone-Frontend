@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TransportationSearchResult } from "@/shared/models/transportation/transportationSearchResult";
-import { useReservationStore } from "@/store/useReservationStore";
+import { useReservationStore } from "@/stores/useReservationStore";
 import { useNavigate } from "react-router-dom";
 import { transportationSeatDto } from "@/shared/models/transportation/transportationSeatDto";
 import api from "@/services/api";
