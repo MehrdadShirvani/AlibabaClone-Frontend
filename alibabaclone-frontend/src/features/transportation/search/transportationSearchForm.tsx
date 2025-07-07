@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { City } from "@/shared/models/location/city";
 import { TransportationSearchRequest } from "@/shared/models/transportation/transportationSearchRequest";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ const TransportationSearchForm = () => {
   });
 
   useEffect(() => {
-    agent.Cities.list()
+    api.Cities.list()
       .then(setCities)
       .catch((error) => console.error("Failed to load cities:", error));
   }, []);

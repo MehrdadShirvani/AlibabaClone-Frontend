@@ -1,4 +1,4 @@
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { ProfileDto } from "@/shared/models/account/ProfileDto";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -41,7 +41,7 @@ const PersonalInformation: React.FC<Props> = ({
 
   const onSubmit = async (data: any) => {
     try {
-      await agent.Profile.upsertAccountPerson(data);
+      await api.Profile.upsertAccountPerson(data);
       setIsEditing(false);
       onProfileUpdated();
     } catch (error) {

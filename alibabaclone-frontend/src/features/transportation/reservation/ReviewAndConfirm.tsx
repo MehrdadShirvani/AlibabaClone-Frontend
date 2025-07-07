@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/shared/components/ui/button";
 import { useReservationStore } from "@/store/useReservationStore";
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { useStepGuard } from "./StepGaurd";
 
 export default function ReviewAndConfirmPage() {
@@ -22,7 +22,7 @@ export default function ReviewAndConfirmPage() {
 
   const handleApplyCoupon = async () => {
     try {
-      const response = await agent.Coupon.validate({
+      const response = await api.Coupon.validate({
         code: couponInput,
         originalPrice: totalPrice,
       });
@@ -45,7 +45,7 @@ export default function ReviewAndConfirmPage() {
 
   async function handlePay(): Promise<void> {
     try {
-      await agent.Profile.topUp({
+      await api.Profile.topUp({
         amount: totalPrice - discountAmount,
       });
       setIsConfirmed(true);

@@ -1,4 +1,4 @@
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { TicketOrderSummaryDto } from "@/shared/models/transportation/TicketOrderSummaryDto";
 import { TravelerTicketDto } from "@/shared/models/transportation/TravelerTicketDto";
 import { useEffect, useState } from "react";
@@ -16,7 +16,7 @@ const TravelOrderDetails = () => {
   useEffect(() => {
     if (ticketOrder?.id) {
       setLoading(true);
-      agent.Profile.getTravelOrderDetails(ticketOrder.id)
+      api.Profile.getTravelOrderDetails(ticketOrder.id)
         .then(setTravelers)
         .finally(() => setLoading(false));
     }

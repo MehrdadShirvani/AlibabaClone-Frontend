@@ -1,4 +1,4 @@
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { PersonDto } from "@/shared/models/account/PersonDto";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -24,7 +24,7 @@ const ListOfTravelers = () => {
   const { register, handleSubmit, reset } = useForm<PersonDto>();
 
   const loadPeople = async () => {
-    const data = await agent.Profile.getMyPeople();
+    const data = await api.Profile.getMyPeople();
     setPeople(data);
   };
 
@@ -44,7 +44,7 @@ const ListOfTravelers = () => {
   };
 
   const onSubmit = async (data: PersonDto) => {
-    await agent.Profile.upsertPerson(data);
+    await api.Profile.upsertPerson(data);
     await loadPeople();
     closeModal();
   };

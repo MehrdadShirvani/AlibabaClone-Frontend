@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { useReservationStore } from "@/store/useReservationStore";
 import { useStepGuard } from "./StepGaurd";
 
@@ -15,7 +15,7 @@ export default function TicketIssued() {
     setError(null);
     setLoading(true);
     try {
-      const response = await agent.TicketOrder.downloadPdf(ticketOrderId);
+      const response = await api.TicketOrder.downloadPdf(ticketOrderId);
       const blob = new Blob([response], { type: "application/pdf" });
       const url = window.URL.createObjectURL(blob);
 

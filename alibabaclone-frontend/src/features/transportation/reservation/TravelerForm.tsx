@@ -1,5 +1,5 @@
 import { Button } from "@/shared/components/ui/button";
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { PersonDto } from "@/shared/models/account/PersonDto";
 import { createTravelerTicketDto } from "@/shared/models/ticketOrder/createTravelerTicketDto";
 import { useReservationStore } from "@/store/useReservationStore";
@@ -33,7 +33,7 @@ function TravelerForm({
   const handleSelectFromPeople = async (index: number) => {
     setSelectingIndex(index);
     if (people.length === 0) {
-      const loaded = await agent.Profile.getMyPeople();
+      const loaded = await api.Profile.getMyPeople();
       setPeople(loaded);
     }
     setIsModalOpen(true);

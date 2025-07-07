@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { format } from "date-fns";
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { TransactionDto } from "@/shared/models/transaction/TransactionDto";
 
 const MyTransactions = () => {
@@ -12,7 +12,7 @@ const MyTransactions = () => {
 
   const loadCurrentBalance = async () => {
     try {
-      const data = await agent.Profile.getProfile();
+      const data = await api.Profile.getProfile();
       setCurrentBalance(data.currentBalance);
     } catch (err) {
       console.error("Failed to load current balance", err);
@@ -20,7 +20,7 @@ const MyTransactions = () => {
   };
 
   useEffect(() => {
-    agent.Profile.getMyTransactions().then(setTransactions);
+    api.Profile.getMyTransactions().then(setTransactions);
     loadCurrentBalance();
   }, []);
 

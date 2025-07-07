@@ -3,8 +3,7 @@ import { TransportationSearchResult } from "@/shared/models/transportation/trans
 import { useReservationStore } from "@/store/useReservationStore";
 import { useNavigate } from "react-router-dom";
 import { transportationSeatDto } from "@/shared/models/transportation/transportationSeatDto";
-import agent from "@/shared/api/agent";
-import { Trophy } from "lucide-react";
+import api from "@/services/api";
 import ReadOnlySeatMap from "../reservation/ReadOnlySeatMap";
 
 interface Props {
@@ -55,7 +54,7 @@ const TransportationCard: React.FC<Props> = ({ transportation }) => {
     if (tab === "Seat Map" && seats === null) {
       setLoadingSeats(true);
       try {
-        const result = await agent.TransportationSearch.getSeats(
+        const result = await api.TransportationSearch.getSeats(
           transportation.id
         );
         setSeats(result);

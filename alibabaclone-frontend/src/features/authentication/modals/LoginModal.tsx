@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAuthStore } from "@/store/authStore";
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { LoginRequestDto } from "@/shared/models/authentication/LoginRequestDto";
 
 interface LoginModalProps {
@@ -35,7 +35,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
     }
 
     try {
-      const response = await agent.Auth.login(form);
+      const response = await api.Auth.login(form);
       login(response);
       setError(null);
       onClose();

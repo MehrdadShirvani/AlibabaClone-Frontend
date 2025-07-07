@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { ProfileDto } from "@/shared/models/account/ProfileDto";
 import { EditEmailDto } from "@/shared/models/account/EditEmailDto";
 import { EditPasswordDto } from "@/shared/models/account/EditPasswordDto";
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 
 interface Props {
   profile: ProfileDto;
@@ -31,13 +31,13 @@ const PersonalAccountInfo: React.FC<Props> = ({
   } = useForm<EditPasswordDto>();
 
   const onEmailSubmit = async (data: EditEmailDto) => {
-    await agent.Profile.editEmail(data);
+    await api.Profile.editEmail(data);
     setEmailModalOpen(false);
     onProfileUpdated();
   };
 
   const onPasswordSubmit = async (data: EditPasswordDto) => {
-    agent.Profile.editPassword(data)
+    api.Profile.editPassword(data)
       .then(() => {
         setPasswordModalOpen(false);
         resetPassword();

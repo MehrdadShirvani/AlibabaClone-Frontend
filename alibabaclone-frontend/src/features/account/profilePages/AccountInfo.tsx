@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuthStore } from "@/store/authStore";
 import { ProfileDto } from "@/shared/models/account/ProfileDto";
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { useNavigate } from "react-router-dom";
 import ProfileSummary from "./ProfileSummary";
 import PersonalInformation from "./PersonalInformation";
@@ -15,7 +15,7 @@ const AccountInfo = () => {
 
   const loadProfile = async () => {
     try {
-      const data = await agent.Profile.getProfile();
+      const data = await api.Profile.getProfile();
       setProfile(data);
     } catch (err) {
       console.error("Failed to load profile", err);

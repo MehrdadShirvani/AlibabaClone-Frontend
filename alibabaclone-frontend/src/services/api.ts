@@ -1,24 +1,24 @@
 import axios, { AxiosResponse } from 'axios';
-import { TransportationSearchRequest } from '../models/transportation/transportationSearchRequest';
-import { TransportationSearchResult } from '../models/transportation/transportationSearchResult';
-import { City } from '../models/location/city';
-import { RegisterRequestDto } from '../models/authentication/RegisterRequestDto';
-import { LoginRequestDto } from '../models/authentication/LoginRequestDto';
-import { AuthResponseDto } from '../models/authentication/AuthResponseDto';
-import { ProfileDto } from '../models/account/ProfileDto';
-import { EditEmailDto } from '../models/account/EditEmailDto';
-import { EditPasswordDto } from '../models/account/EditPasswordDto';
-import { PersonDto } from '../models/account/PersonDto';
-import { UpsertBankAccountDetailDto } from '../models/account/UpsertBankAccountDetailDto';
-import { TravelerTicketDto } from '../models/transportation/TravelerTicketDto';
-import { TicketOrderSummaryDto } from '../models/transportation/TicketOrderSummaryDto';
+import { TransportationSearchRequest } from '../shared/models/transportation/transportationSearchRequest';
+import { TransportationSearchResult } from '../shared/models/transportation/transportationSearchResult';
+import { City } from '../shared/models/location/city';
+import { RegisterRequestDto } from '../shared/models/authentication/RegisterRequestDto';
+import { LoginRequestDto } from '../shared/models/authentication/LoginRequestDto';
+import { AuthResponseDto } from '../shared/models/authentication/AuthResponseDto';
+import { ProfileDto } from '../shared/models/account/ProfileDto';
+import { EditEmailDto } from '../shared/models/account/EditEmailDto';
+import { EditPasswordDto } from '../shared/models/account/EditPasswordDto';
+import { PersonDto } from '../shared/models/account/PersonDto';
+import { UpsertBankAccountDetailDto } from '../shared/models/account/UpsertBankAccountDetailDto';
+import { TravelerTicketDto } from '../shared/models/transportation/TravelerTicketDto';
+import { TicketOrderSummaryDto } from '../shared/models/transportation/TicketOrderSummaryDto';
 import { useAuthStore } from '@/store/authStore';
-import { TransactionDto } from '../models/transaction/TransactionDto';
-import { createTicketOrderDto } from '../models/ticketOrder/createTicketOrderDto';
-import { topUpDto } from '../models/account/topUpDto';
-import { transportationSeatDto } from '../models/transportation/transportationSeatDto';
-import { discountDto } from '../models/transaction/discountDto';
-import { couponValidationRequestDto } from '../models/transaction/couponValidationRequestDto';
+import { TransactionDto } from '../shared/models/transaction/TransactionDto';
+import { createTicketOrderDto } from '../shared/models/ticketOrder/createTicketOrderDto';
+import { topUpDto } from '../shared/models/account/topUpDto';
+import { transportationSeatDto } from '../shared/models/transportation/transportationSeatDto';
+import { discountDto } from '../shared/models/transaction/discountDto';
+import { couponValidationRequestDto } from '../shared/models/transaction/couponValidationRequestDto';
 
 axios.defaults.baseURL = 'https://localhost:44377/api';
 
@@ -95,7 +95,7 @@ const Auth = {
     request.post<AuthResponseDto>('/auth/login', data),
 };
 
-const agent = {
+const api = {
   TicketOrder,
   Profile,
   TransportationSearch,
@@ -104,6 +104,4 @@ const agent = {
   Coupon
 }
 
-
-
-export default agent;
+export default api;

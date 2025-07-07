@@ -1,4 +1,4 @@
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { ProfileDto } from "@/shared/models/account/ProfileDto";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -32,7 +32,7 @@ const BankAccountDetails: React.FC<Props> = ({ profile, onProfileUpdated }) => {
 
   const onSubmit = async (data: any) => {
     try {
-      await agent.Profile.upsertBankDetail(data);
+      await api.Profile.upsertBankDetail(data);
       setIsEditing(false);
       onProfileUpdated();
     } catch (error) {

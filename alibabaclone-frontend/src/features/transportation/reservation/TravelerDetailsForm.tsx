@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { createTravelerTicketDto } from "@/shared/models/ticketOrder/createTravelerTicketDto";
 import SeatGridSelector from "./SeatGridSelector";
 import { transportationSeatDto } from "@/shared/models/transportation/transportationSeatDto";
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { useStepGuard } from "./StepGaurd";
 
 export default function TravelerDetailsForm() {
@@ -79,7 +79,7 @@ export default function TravelerDetailsForm() {
 
   useEffect(() => {
     if (vehicleTypeId === 1) {
-      agent.TransportationSearch.getSeats(transportationId)
+      api.TransportationSearch.getSeats(transportationId)
         .then(setSeatList)
         .catch(() => {
           console.log("Error in getting seats");

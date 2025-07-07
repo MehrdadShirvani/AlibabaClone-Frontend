@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { TransportationSearchResult } from "@/shared/models/transportation/transportationSearchResult";
 import TransportationCard from "@/features/transportation/search/transportationCard";
 import { format, addDays } from "date-fns";
@@ -47,7 +47,7 @@ const SearchResultsPage = () => {
     };
 
     setLoading(true);
-    agent.TransportationSearch.search(form)
+    api.TransportationSearch.search(form)
       .then(setResults)
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));

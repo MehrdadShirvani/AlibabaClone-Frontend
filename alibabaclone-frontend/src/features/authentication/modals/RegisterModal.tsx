@@ -1,4 +1,4 @@
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { RegisterRequestDto } from "@/shared/models/authentication/RegisterRequestDto";
 import { useAuthStore } from "@/store/authStore";
 import React, { useState } from "react";
@@ -59,7 +59,7 @@ const RegisterModal: React.FC<Props> = ({ onClose }) => {
         confirmPassword: form.confirmPassword,
       };
 
-      const response = await agent.Auth.register(requestData);
+      const response = await api.Auth.register(requestData);
 
       login(response);
       setForm({ phoneNumber: "", password: "", confirmPassword: "" });

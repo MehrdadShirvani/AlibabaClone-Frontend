@@ -1,4 +1,4 @@
-import agent from "@/shared/api/agent";
+import api from "@/services/api";
 import { TicketOrderSummaryDto } from "@/shared/models/transportation/TicketOrderSummaryDto";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ const MyTravels = () => {
   };
 
   useEffect(() => {
-    agent.Profile.getMyTravels().then(setOrders);
+    api.Profile.getMyTravels().then(setOrders);
   }, []);
 
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ const MyTravels = () => {
     setError(null);
     setLoading(true);
     try {
-      const response = await agent.TicketOrder.downloadPdf(id);
+      const response = await api.TicketOrder.downloadPdf(id);
       const blob = new Blob([response], { type: "application/pdf" });
       const url = window.URL.createObjectURL(blob);
 
