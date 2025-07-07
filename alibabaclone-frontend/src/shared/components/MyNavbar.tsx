@@ -1,11 +1,11 @@
-import LoginModal from "@/features/authentication/modals/LoginModal";
-import RegisterModal from "@/features/authentication/modals/RegisterModal";
+import LoginModal from "@/features/account/authentication/components/LoginModal";
+import RegisterModal from "@/features/account/authentication/components/RegisterModal";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ThemeSwitcher } from "../layout/ThemeSwitcher";
 
-const Navbar = () => {
+const MyNavbar = () => {
   const { isLoggedIn, logout, showLoginModal, setShowLoginModal } =
     useAuthStore();
   const [showRegister, setShowRegister] = useState(false);
@@ -125,4 +125,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default MyNavbar;

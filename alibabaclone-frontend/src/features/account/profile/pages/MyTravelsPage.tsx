@@ -3,7 +3,7 @@ import { TicketOrderSummaryDto } from "@/shared/models/transportation/TicketOrde
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const MyTravels = () => {
+const MyTravelsPage = () => {
   const [orders, setOrders] = useState<TicketOrderSummaryDto[]>([]);
   const navigate = useNavigate();
 
@@ -123,4 +123,4 @@ const MyTravels = () => {
   );
 };
 
-export default MyTravels;
+export default MyTravelsPage;

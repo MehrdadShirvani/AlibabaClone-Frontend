@@ -3,12 +3,12 @@ import { useAuthStore } from "@/stores/useAuthStore";
 import { ProfileDto } from "@/shared/models/account/ProfileDto";
 import api from "@/services/api";
 import { useNavigate } from "react-router-dom";
-import ProfileSummary from "./ProfileSummary";
-import PersonalInformation from "./PersonalInformation";
-import BankAccountDetails from "./BankAccountDetails";
-import PersonalAccountInfo from "./PersonalAccountInfo";
+import ProfileSummary from "../components/ProfileSummary";
+import PersonalInformation from "../components/PersonalInformation";
+import BankAccountDetails from "../components/BankAccountDetails";
+import PersonalAccountInfo from "../components/PersonalAccountInfo";
 
-const AccountInfo = () => {
+const AccountInfoPage = () => {
   const { isLoggedIn } = useAuthStore();
   const [profile, setProfile] = useState<ProfileDto | null>(null);
   const navigate = useNavigate();
@@ -65,4 +65,4 @@ const AccountInfo = () => {
   );
 };
 
-export default AccountInfo;
+export default AccountInfoPage;

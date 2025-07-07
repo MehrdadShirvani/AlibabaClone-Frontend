@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import api from "@/services/api";
 import { TransactionDto } from "@/shared/models/transaction/TransactionDto";
 
-const MyTransactions = () => {
+const MyTransactionsPage = () => {
   const [transactions, setTransactions] = useState<TransactionDto[]>([]);
   const [currentBalance, setCurrentBalance] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -172,4 +172,4 @@ const MyTransactions = () => {
   );
 };
 
-export default MyTransactions;
+export default MyTransactionsPage;

@@ -16,7 +16,7 @@ const emptyPerson: PersonDto = {
   englishLastName: "",
 };
 
-const ListOfTravelers = () => {
+const ListOfTravelersPage = () => {
   const [people, setPeople] = useState<PersonDto[]>([]);
   const [editingPerson, setEditingPerson] = useState<PersonDto | null>(null);
   const [showModal, setShowModal] = useState(false);
@@ -264,4 +264,4 @@ const ListOfTravelers = () => {
   );
 };
 
-export default ListOfTravelers;
+export default ListOfTravelersPage;

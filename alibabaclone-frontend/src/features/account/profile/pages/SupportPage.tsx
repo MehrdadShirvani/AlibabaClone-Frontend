@@ -1,7 +1,7 @@
 import React from "react";
 
-const Support: React.FC = () => {
+const SupportPage: React.FC = () => {
   return <h2>Hi there, hello, support</h2>;
 };
 
-export default Support;
+export default SupportPage;

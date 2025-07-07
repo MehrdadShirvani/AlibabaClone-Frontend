@@ -4,7 +4,7 @@ import { TravelerTicketDto } from "@/shared/models/transportation/TravelerTicket
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const TravelOrderDetails = () => {
+const TravelOrderDetailsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const ticketOrder: TicketOrderSummaryDto = location.state?.ticketOrder;
@@ -167,4 +167,4 @@ const TravelOrderDetails = () => {
   );
 };
 
-export default TravelOrderDetails;
+export default TravelOrderDetailsPage;

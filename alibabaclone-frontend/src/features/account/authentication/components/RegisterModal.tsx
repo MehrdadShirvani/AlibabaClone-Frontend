@@ -7,8 +7,6 @@ interface Props {
   onClose: () => void;
 }
 
-// Define RegisterRequestDto interface explicitly for form and request typing
-
 const RegisterModal: React.FC<Props> = ({ onClose }) => {
   const [form, setForm] = useState<RegisterRequestDto>({
     phoneNumber: "",
