@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import agent from "@/shared/api/agent";
 import { useReservationStore } from "@/store/useReservationStore";
 import { useNavigate } from "react-router-dom";

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { format } from "date-fns";
 import agent from "@/shared/api/agent";
 import { TransactionDto } from "@/shared/models/transaction/TransactionDto";

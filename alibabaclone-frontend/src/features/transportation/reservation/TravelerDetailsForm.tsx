@@ -1,7 +1,7 @@
 import { useReservationStore } from "@/store/useReservationStore";
 import { useEffect, useState } from "react";
 import TravelerForm from "./TravelerForm";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { createTravelerTicketDto } from "@/shared/models/ticketOrder/createTravelerTicketDto";
 import SeatGridSelector from "./SeatGridSelector";

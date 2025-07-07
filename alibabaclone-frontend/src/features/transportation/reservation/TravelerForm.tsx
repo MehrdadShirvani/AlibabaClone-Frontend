@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import agent from "@/shared/api/agent";
 import { PersonDto } from "@/shared/models/account/PersonDto";
 import { createTravelerTicketDto } from "@/shared/models/ticketOrder/createTravelerTicketDto";

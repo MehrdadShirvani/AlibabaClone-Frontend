@@ -1,5 +1,5 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import StepIndicator from "./StepIndicator";
 
 const steps = [
