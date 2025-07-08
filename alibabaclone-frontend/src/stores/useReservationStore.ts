@@ -1,9 +1,9 @@
 import { PersonDto } from '@/shared/models/account/PersonDto';
-import { createTravelerTicketDto } from '@/shared/models/ticketOrder/createTravelerTicketDto';
-import { TransportationSearchResult } from '@/shared/models/transportation/transportationSearchResult';
+import { CreateTravelerTicketDto } from '@/shared/models/ticketOrder/CreateTravelerTicketDto';
+import { TransportationSearchResult } from '@/shared/models/transportation/TransportationSearchResult';
 import { create } from 'zustand';
 
-const defaultTraveler: createTravelerTicketDto = {
+const defaultTraveler: CreateTravelerTicketDto = {
   id: 0,
   creatorAccountId: 0,
   firstName: '',
@@ -23,7 +23,7 @@ type ReservationStep = "transportation" | "travelers" | "review" | "payment" | "
 
 interface ReservationState {
   transportation: TransportationSearchResult | null;
-  travelers: createTravelerTicketDto[];
+  travelers: CreateTravelerTicketDto[];
   ticketOrderId: number;
   couponCode: string | null;
   paymentInfo: any;
@@ -32,9 +32,9 @@ interface ReservationState {
   isConfirmed: boolean,
   isPayed: boolean,
   isTravelerPartDone: boolean, 
-  addTraveler: (traveler: createTravelerTicketDto) => void;
-  setTravelers: (travelers: createTravelerTicketDto[]) => void;
-  updateTraveler: (index: number, traveler: createTravelerTicketDto) => void;
+  addTraveler: (traveler: CreateTravelerTicketDto) => void;
+  setTravelers: (travelers: CreateTravelerTicketDto[]) => void;
+  updateTraveler: (index: number, traveler: CreateTravelerTicketDto) => void;
   removeTraveler: (index: number) => void;
   setTicketOrderId: (newId: number) => void;
   setTransportation: (transportation: TransportationSearchResult) => void;

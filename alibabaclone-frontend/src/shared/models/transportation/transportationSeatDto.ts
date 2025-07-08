@@ -1,4 +1,4 @@
-export interface transportationSeatDto{
+export interface TransportationSeatDto{
     id : number,
     vehicleId : number,
     row : number,

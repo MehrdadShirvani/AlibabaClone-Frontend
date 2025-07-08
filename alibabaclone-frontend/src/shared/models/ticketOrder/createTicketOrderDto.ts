@@ -1,7 +1,7 @@
-import { createTravelerTicketDto } from "./createTravelerTicketDto";
+import { CreateTravelerTicketDto } from "./CreateTravelerTicketDto";
 
-export interface createTicketOrderDto{
+export interface CreateTicketOrderDto{
     transportationId: number,
     couponCode : string | null,
-    travelers : createTravelerTicketDto[]
+    travelers : CreateTravelerTicketDto[]
 } 

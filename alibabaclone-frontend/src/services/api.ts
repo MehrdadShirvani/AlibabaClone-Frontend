@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import { TransportationSearchRequest } from '../shared/models/transportation/transportationSearchRequest';
-import { TransportationSearchResult } from '../shared/models/transportation/transportationSearchResult';
-import { City } from '../shared/models/location/city';
+import { TransportationSearchRequest } from '../shared/models/transportation/TransportationSearchRequest';
+import { TransportationSearchResult } from '../shared/models/transportation/TransportationSearchResult';
+import { City } from '../shared/models/location/City';
 import { RegisterRequestDto } from '../shared/models/authentication/RegisterRequestDto';
 import { LoginRequestDto } from '../shared/models/authentication/LoginRequestDto';
 import { AuthResponseDto } from '../shared/models/authentication/AuthResponseDto';
@@ -14,11 +14,11 @@ import { TravelerTicketDto } from '../shared/models/transportation/TravelerTicke
 import { TicketOrderSummaryDto } from '../shared/models/transportation/TicketOrderSummaryDto';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { TransactionDto } from '../shared/models/transaction/TransactionDto';
-import { createTicketOrderDto } from '../shared/models/ticketOrder/createTicketOrderDto';
-import { topUpDto } from '../shared/models/account/topUpDto';
-import { transportationSeatDto } from '../shared/models/transportation/transportationSeatDto';
-import { discountDto } from '../shared/models/transaction/discountDto';
-import { couponValidationRequestDto } from '../shared/models/transaction/couponValidationRequestDto';
+import { CreateTicketOrderDto } from '../shared/models/ticketOrder/CreateTicketOrderDto';
+import { TopUpDto } from '../shared/models/account/TopUpDto';
+import { TransportationSeatDto } from '../shared/models/transportation/TransportationSeatDto';
+import { DiscountDto } from '../shared/models/transaction/DiscountDto';
+import { CouponValidationRequestDto } from '../shared/models/transaction/CouponValidationRequestDto';
 
 axios.defaults.baseURL = 'https://localhost:44377/api';
 
@@ -51,14 +51,14 @@ axios.interceptors.response.use(
 );
 
 const TicketOrder = {
-  create: (data : createTicketOrderDto) => request.post<number>('/ticketOrder/create', data),
+  create: (data : CreateTicketOrderDto) => request.post<number>('/ticketOrder/create', data),
   downloadPdf: (ticketOrderId : number) => request.get<Blob>(`/ticketOrder/${ticketOrderId}/pdf`, {
       responseType: 'blob',
     }),
 }
 
 const Coupon = {
-  validate: (data : couponValidationRequestDto) => request.post<discountDto>('/coupon/validate', data),
+  validate: (data : CouponValidationRequestDto) => request.post<DiscountDto>('/coupon/validate', data),
 }
 
 
@@ -75,14 +75,14 @@ const Profile = {
   getTravelOrderDetails: (ticketOrderId: number) =>
     request.get<TravelerTicketDto[]>(`/account/my-travels/${ticketOrderId}`),
   getMyTransactions: () => request.get<TransactionDto[]>('/account/my-transactions'), 
-  topUp: (data : topUpDto) => request.post<number>('/account/top-up', data)
+  topUp: (data : TopUpDto) => request.post<number>('/account/top-up', data)
 };
 
 
 const TransportationSearch = {
     search: (data: TransportationSearchRequest) => request.post<TransportationSearchResult[]>('/transportation/search', data),
     getSeats: (transportationId: number) => 
-      request.get<transportationSeatDto[]>(`/transportation/${transportationId}/seats`)
+      request.get<TransportationSeatDto[]>(`/transportation/${transportationId}/seats`)
 }
 
 const Cities = {
