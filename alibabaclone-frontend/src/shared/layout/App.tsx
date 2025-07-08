@@ -1,31 +1,30 @@
-import Navbar from "@/shared/components/navbar";
 import "./App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SearchPage from "@/features/transportation/search/SearchPage";
-import SearchResultsPage from "@/features/transportation/search/SearchResultsPage";
-import ProfilePage from "@/features/account/profilePages/ProfilePage";
-import TravelOrderDetails from "@/features/account/profilePages/TravelOrderDetails";
-import MyTravels from "@/features/account/profilePages/MyTravels";
-import AccountInfo from "@/features/account/profilePages/AccountInfo";
-import ListOfTravelers from "@/features/account/profilePages/ListOfTravelers";
-import Favorites from "@/features/account/profilePages/Favorites";
-import MyTransactions from "@/features/account/profilePages/MyTransactions";
-import Support from "@/features/account/profilePages/Support";
-import ReservationLayout from "@/features/transportation/reservation/ReservationLayout";
-import TravelerDetailsForm from "@/features/transportation/reservation/TravelerDetailsForm";
-import ReviewAndConfirm from "@/features/transportation/reservation/ReviewAndConfirm";
-import PaymentForm from "@/features/transportation/reservation/PaymentForm";
-import TicketIssued from "@/features/transportation/reservation/TicketIssued";
+import SearchPage from "@/features/transportation/search/pages/SearchPage";
+import SearchResultsPage from "@/features/transportation/search/pages/SearchResultsPage";
+import ProfilePage from "@/features/account/profile/pages/ProfilePage";
+import TravelOrderDetailsPage from "@/features/account/profile/pages/TravelOrderDetailsPage";
+import MyTravelsPage from "@/features/account/profile/pages/MyTravelsPage";
+import AccountInfoPage from "@/features/account/profile/pages/AccountInfoPage";
+import ListOfTravelersPage from "@/features/account/profile/pages/ListOfTravelersPage";
+import FavoritesPage from "@/features/account/profile/pages/FavoritesPage";
+import MyTransactionsPage from "@/features/account/profile/pages/MyTransactionsPage";
+import SupportPage from "@/features/account/profile/pages/SupportPage";
+import ReservationPage from "@/features/transportation/reservation/pages/ReservationPage";
+import TravelerDetailsPage from "@/features/transportation/reservation/pages/TravelerDetailsPage";
+import ReviewAndConfirmPage from "@/features/transportation/reservation/pages/ReviewAndConfirmPage";
+import PaymentPage from "@/features/transportation/reservation/pages/PaymentPage";
+import TicketIssuedPage from "@/features/transportation/reservation/pages/TicketIssuedPage";
 import { ProtectedRoute } from "../components/ProtectedRoute";
+import MyNavbar from "../components/MyNavbar";
 
 function App() {
   return (
     <Router>
-      <Navbar /> {/* Navbar will show on all pages */}
+      <MyNavbar />
       <div className="pt-16">
         {" "}
-        {/* padding top if navbar is fixed */}
         <Routes>
           <Route path="/" element={<SearchPage />} />
           <Route
@@ -34,19 +33,25 @@ function App() {
           />
           <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<ProfilePage />}>
-              <Route path="account-info" element={<AccountInfo />} />
-              <Route path="my-travels" element={<MyTravels />} />
-              <Route path="my-travels/:id" element={<TravelOrderDetails />} />
-              <Route path="list-of-travelers" element={<ListOfTravelers />} />
-              <Route path="favorites" element={<Favorites />} />
-              <Route path="support" element={<Support />} />
-              <Route path="transactions" element={<MyTransactions />} />
+              <Route path="account-info" element={<AccountInfoPage />} />
+              <Route path="my-travels" element={<MyTravelsPage />} />
+              <Route
+                path="my-travels/:id"
+                element={<TravelOrderDetailsPage />}
+              />
+              <Route
+                path="list-of-travelers"
+                element={<ListOfTravelersPage />}
+              />
+              <Route path="favorites" element={<FavoritesPage />} />
+              <Route path="support" element={<SupportPage />} />
+              <Route path="transactions" element={<MyTransactionsPage />} />
             </Route>
-            <Route path="/reserve" element={<ReservationLayout />}>
-              <Route path="travelers" element={<TravelerDetailsForm />} />
-              <Route path="review" element={<ReviewAndConfirm />} />
-              <Route path="payment" element={<PaymentForm />} />
-              <Route path="success" element={<TicketIssued />} />
+            <Route path="/reserve" element={<ReservationPage />}>
+              <Route path="travelers" element={<TravelerDetailsPage />} />
+              <Route path="review" element={<ReviewAndConfirmPage />} />
+              <Route path="payment" element={<PaymentPage />} />
+              <Route path="success" element={<TicketIssuedPage />} />
             </Route>
           </Route>
         </Routes>

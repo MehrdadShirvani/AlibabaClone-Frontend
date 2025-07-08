@@ -1,4 +1,4 @@
-export interface couponValidationRequestDto{
+export interface CouponValidationRequestDto{
     code: string 
     originalPrice: number
 }

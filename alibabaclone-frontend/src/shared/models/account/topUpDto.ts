@@ -1,3 +1,3 @@
-export interface topUpDto{
+export interface TopUpDto{
     amount : number;
 }
