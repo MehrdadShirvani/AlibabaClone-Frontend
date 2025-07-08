@@ -40,27 +40,29 @@ const AccountInfoPage = () => {
 
   return (
     <div
-      className="p-6 max-w-4xl mx-auto rounded-lg shadow-sm"
-      style={{ backgroundColor: "var(--surface)" }}
+      className="rounded-lg shadow-md p-6 mb-6"
+      style={{ border: "1px solid var(--border)" }}
     >
-      <h2
-        className="text-2xl font-bold mb-4"
-        style={{ color: "var(--text-primary)" }}
-      >
-        Profile
-      </h2>
+      <div className="justify-between items-center mb-4">
+        <h2
+          className="text-xl font-semibold m-3"
+          style={{ color: "var(--text-primary)" }}
+        >
+          Profile
+        </h2>
 
-      <ProfileSummary
-        fullName={`${profile.firstName} ${profile.lastName}`}
-        phoneNumber={profile.accountPhoneNumber}
-        balance={profile.currentBalance}
-      />
+        <ProfileSummary
+          fullName={`${profile.firstName} ${profile.lastName}`}
+          phoneNumber={profile.accountPhoneNumber}
+          balance={profile.currentBalance}
+        />
 
-      <PersonalAccountInfo profile={profile} onProfileUpdated={loadProfile} />
+        <PersonalAccountInfo profile={profile} onProfileUpdated={loadProfile} />
 
-      <PersonalInformation profile={profile} onProfileUpdated={loadProfile} />
+        <PersonalInformation profile={profile} onProfileUpdated={loadProfile} />
 
-      <BankAccountDetails profile={profile} onProfileUpdated={loadProfile} />
+        <BankAccountDetails profile={profile} onProfileUpdated={loadProfile} />
+      </div>
     </div>
   );
 };

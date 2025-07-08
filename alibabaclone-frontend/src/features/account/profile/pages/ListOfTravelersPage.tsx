@@ -51,7 +51,7 @@ const ListOfTravelersPage = () => {
 
   return (
     <div
-      className=" rounded-lg shadow-md p-6 mb-6"
+      className="rounded-lg shadow-md p-6 mb-6"
       style={{ border: "1px solid var(--border)" }}
     >
       <div className="flex justify-between items-center mb-4">
@@ -76,14 +76,16 @@ const ListOfTravelersPage = () => {
         </button>
       </div>
 
-      <div className="overflow-x-auto">
-        <table
-          className="min-w-full border rounded text-sm"
-          style={{ borderColor: "var(--border)" }}
-        >
+      <div
+        className="overflow-x-auto rounded-lg shadow-sm"
+        style={{ border: "1px solid var(--border)" }}
+      >
+        <table className="w-full table-auto border-collapse">
           <thead
-            className="bg-gray-100"
-            style={{ color: "var(--text-secondary)" }}
+            style={{
+              backgroundColor: "var(--surface)",
+              color: "var(--text-primary)",
+            }}
           >
             <tr>
               <th className="p-3 text-left">First Name</th>

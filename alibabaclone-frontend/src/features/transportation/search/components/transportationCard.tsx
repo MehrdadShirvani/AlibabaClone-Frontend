@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { TransportationSearchResult } from "@/shared/models/transportation/transportationSearchResult";
+import { TransportationSearchResult } from "@/shared/models/transportation/TransportationSearchResult";
 import { useReservationStore } from "@/stores/useReservationStore";
 import { useNavigate } from "react-router-dom";
-import { transportationSeatDto } from "@/shared/models/transportation/transportationSeatDto";
+import { TransportationSeatDto } from "@/shared/models/transportation/TransportationSeatDto";
 import api from "@/services/api";
 import ReadOnlySeatMap from "../../reservation/components/ReadOnlySeatMap";
 
@@ -67,7 +67,7 @@ const TransportationCard: React.FC<Props> = ({ transportation }) => {
     }
   };
 
-  const [seats, setSeats] = useState<transportationSeatDto[] | null>(null);
+  const [seats, setSeats] = useState<TransportationSeatDto[] | null>(null);
   const [loadingSeats, setLoadingSeats] = useState(false);
 
   return (

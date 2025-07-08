@@ -1,17 +1,17 @@
 import { Button } from "@/shared/components/ui/button";
 import api from "@/services/api";
 import { PersonDto } from "@/shared/models/account/PersonDto";
-import { createTravelerTicketDto } from "@/shared/models/ticketOrder/createTravelerTicketDto";
+import { CreateTravelerTicketDto } from "@/shared/models/ticketOrder/CreateTravelerTicketDto";
 import { useReservationStore } from "@/stores/useReservationStore";
 import { useState } from "react";
 import SelectFromPeopleModal from "./SelectFromPeopleModal";
 
 interface TravelerFormProps {
   index: number;
-  traveler: createTravelerTicketDto;
-  onChange: (index: number, traveler: createTravelerTicketDto) => void;
+  traveler: CreateTravelerTicketDto;
+  onChange: (index: number, traveler: CreateTravelerTicketDto) => void;
   onRemove: (index: number) => void;
-  errors?: Partial<Record<keyof createTravelerTicketDto, boolean>>;
+  errors?: Partial<Record<keyof CreateTravelerTicketDto, boolean>>;
 }
 
 const formatDate = (dateString: string | Date) => {

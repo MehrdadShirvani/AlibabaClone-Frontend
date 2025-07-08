@@ -1,15 +1,15 @@
 import React from "react";
-import { transportationSeatDto } from "@/shared/models/transportation/transportationSeatDto";
+import { TransportationSeatDto } from "@/shared/models/transportation/TransportationSeatDto";
 
 interface ReadOnlySeatMapProps {
-  seats: transportationSeatDto[];
+  seats: TransportationSeatDto[];
 }
 
 const ReadOnlySeatMap: React.FC<ReadOnlySeatMapProps> = ({ seats }) => {
   const maxRow = Math.max(...seats.map((seat) => seat.row || 0)) || 5;
   const maxCol = Math.max(...seats.map((seat) => seat.column || 0)) || 5;
 
-  const rotatedSeats: (transportationSeatDto | null)[] = [];
+  const rotatedSeats: (TransportationSeatDto | null)[] = [];
   for (let col = 1; col <= maxCol; col++) {
     for (let row = 1; row <= maxRow; row++) {
       const seat = seats.find((s) => s.row === row && s.column === col);

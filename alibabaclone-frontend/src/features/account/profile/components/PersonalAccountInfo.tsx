@@ -101,8 +101,8 @@ const PersonalAccountInfo: React.FC<Props> = ({
           onClick={() => setPasswordModalOpen(true)}
           className="px-4 py-2 rounded transition"
           style={{
-            backgroundColor: "var(--accent)",
-            color: "var(--accent-foreground)",
+            backgroundColor: "var(--primary)",
+            color: "var(--primary-foreground)",
           }}
         >
           Change Password

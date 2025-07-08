@@ -17,11 +17,13 @@ const MyTravelsPage = () => {
     api.Profile.getMyTravels().then(setOrders);
   }, []);
 
+  const [id, setId] = useState(0);
   const [loading, setLoading] = useState(false);
   const [, setError] = useState<string | null>(null);
 
   async function handleDownloadPdf(id: number) {
     setError(null);
+    setId(id);
     setLoading(true);
     try {
       const response = await api.TicketOrder.downloadPdf(id);
@@ -39,13 +41,17 @@ const MyTravelsPage = () => {
       setError("Failed to download ticket PDF. Please try again.");
     } finally {
       setLoading(false);
+      setId(0);
     }
   }
 
   return (
-    <div className="space-y-6">
+    <div
+      className="rounded-lg shadow-md p-6 mb-6"
+      style={{ border: "1px solid var(--border)" }}
+    >
       <h2
-        className="text-xl font-semibold"
+        className="text-xl font-semibold mb-6"
         style={{ color: "var(--text-primary)" }}
       >
         My Travels
@@ -57,7 +63,7 @@ const MyTravelsPage = () => {
         orders.map((order) => (
           <div
             key={order.id}
-            className="p-4 rounded-lg shadow-sm space-y-2"
+            className="p-4 mb-4 rounded-lg shadow-sm space-y-2"
             style={{
               backgroundColor: "var(--surface)",
               border: "1px solid var(--border)",
@@ -114,7 +120,7 @@ const MyTravelsPage = () => {
                 color: "var(--primary-foreground)",
               }}
             >
-              {loading ? "Downloading..." : "Download PDF"}
+              {loading && id === order.id ? "Downloading..." : "Download PDF"}
             </button>
           </div>
         ))

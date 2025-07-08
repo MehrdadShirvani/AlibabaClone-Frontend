@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "@/services/api";
-import { City } from "@/shared/models/location/city";
-import { TransportationSearchRequest } from "@/shared/models/transportation/transportationSearchRequest";
+import { City } from "@/shared/models/location/City";
+import { TransportationSearchRequest } from "@/shared/models/transportation/TransportationSearchRequest";
 import { useNavigate } from "react-router-dom";
 
 const vehicleTypes = [

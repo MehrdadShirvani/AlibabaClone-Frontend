@@ -1,8 +1,8 @@
-import { transportationSeatDto } from "@/shared/models/transportation/transportationSeatDto";
+import { TransportationSeatDto } from "@/shared/models/transportation/TransportationSeatDto";
 import React from "react";
 
 interface SeatGridSelectorProps {
-  seats: transportationSeatDto[];
+  seats: TransportationSeatDto[];
   selectedSeats: number[]; // seat IDs
   onSelect: (seatIds: number[]) => void;
 }
@@ -20,7 +20,7 @@ const SeatGridSelector: React.FC<SeatGridSelectorProps> = ({
     }
   };
 
-  const getSeatLabel = (seat: transportationSeatDto) => {
+  const getSeatLabel = (seat: TransportationSeatDto) => {
     if (!seat.isReserved) return (seat.row - 1) * maxCol + seat.column;
     return seat.genderId === 1 ? "Female" : "Male";
   };
@@ -29,7 +29,7 @@ const SeatGridSelector: React.FC<SeatGridSelectorProps> = ({
   const maxCol = Math.max(...seats.map((seat) => seat.column || 0)) || 5;
 
   // Organize seats in column-major order to simulate rotation
-  const rotatedSeats: (transportationSeatDto | null)[] = [];
+  const rotatedSeats: (TransportationSeatDto | null)[] = [];
   for (let col = 1; col <= maxCol; col++) {
     for (let row = 1; row <= maxRow; row++) {
       const seat = seats.find((s) => s.row === row && s.column === col);

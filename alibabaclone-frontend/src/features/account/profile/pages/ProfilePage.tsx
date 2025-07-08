@@ -19,7 +19,7 @@ const ProfilePage = () => {
       className="min-h-screen"
       style={{ backgroundColor: "var(--background)" }}
     >
-      {/* Sidebar */}
+      {/* Fixed Sidebar */}
       <nav
         className="fixed top-0 left-0 w-48 h-screen shadow-md flex flex-col z-10"
         style={{ backgroundColor: "var(--surface)" }}
@@ -49,20 +49,6 @@ const ProfilePage = () => {
                     ? "var(--primary-foreground)"
                     : "var(--text-primary)",
                 })}
-                onMouseEnter={(e) => {
-                  if (!e.currentTarget.style.backgroundColor) {
-                    e.currentTarget.style.backgroundColor =
-                      "var(--accent-hover)";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (
-                    e.currentTarget.style.backgroundColor ===
-                    "var(--accent-hover)"
-                  ) {
-                    e.currentTarget.style.backgroundColor = "transparent";
-                  }
-                }}
               >
                 {label}
               </NavLink>
@@ -71,16 +57,23 @@ const ProfilePage = () => {
         </ul>
       </nav>
 
-      {/* Main content */}
+      {/* Main content with matching margin */}
       <main
-        className="ml-48 p-6 overflow-auto"
+        className="pl-1 min-h-screen"
         style={{
+          padding: "1.5rem", // same as p-6
           color: "var(--text-primary)",
-          minWidth: "600px",
-          height: "100vh",
+          backgroundColor: "var(--background)",
         }}
       >
-        <Outlet />
+        <div
+          className="max-w-5xl w-full"
+          style={{
+            margin: "0 auto",
+          }}
+        >
+          <Outlet />
+        </div>
       </main>
     </div>
   );

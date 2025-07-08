@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import TravelerForm from "../components/TravelerForm";
 import { Button } from "@/shared/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { createTravelerTicketDto } from "@/shared/models/ticketOrder/createTravelerTicketDto";
+import { CreateTravelerTicketDto } from "@/shared/models/ticketOrder/CreateTravelerTicketDto";
 import SeatGridSelector from "../components/SeatGridSelector";
-import { transportationSeatDto } from "@/shared/models/transportation/transportationSeatDto";
+import { TransportationSeatDto } from "@/shared/models/transportation/TransportationSeatDto";
 import api from "@/services/api";
 import { useStepGuard } from "../components/StepGaurd";
 
 export default function TravelerDetailsPage() {
-  const [seatList, setSeatList] = useState<transportationSeatDto[]>([]);
+  const [seatList, setSeatList] = useState<TransportationSeatDto[]>([]);
   const [selectedSeatIds, setSelectedSeatIds] = useState<number[]>([]);
   const vehicleTypeId = useReservationStore().transportation?.vehicleTypeId;
   const transportationId = useReservationStore().transportation?.id ?? 0;
@@ -18,14 +18,14 @@ export default function TravelerDetailsPage() {
     useReservationStore();
 
   const [errors, setErrors] = useState<
-    Record<number, Partial<Record<keyof createTravelerTicketDto, boolean>>>
+    Record<number, Partial<Record<keyof CreateTravelerTicketDto, boolean>>>
   >({});
-  const validateTravelers = (travelers: createTravelerTicketDto[]): boolean => {
+  const validateTravelers = (travelers: CreateTravelerTicketDto[]): boolean => {
     const newErrors: typeof errors = {};
     const idSet = new Set<string>();
 
     travelers.forEach((t, i) => {
-      const errs: Partial<Record<keyof createTravelerTicketDto, boolean>> = {};
+      const errs: Partial<Record<keyof CreateTravelerTicketDto, boolean>> = {};
 
       if (!(t.firstName ?? "").trim()) errs.firstName = true;
       if (!t.lastName.trim()) errs.lastName = true;
