@@ -22,10 +22,9 @@ import MyNavbar from "../components/MyNavbar";
 function App() {
   return (
     <Router>
-      <MyNavbar /> {/* Navbar will show on all pages */}
+      <MyNavbar />
       <div className="pt-16">
         {" "}
-        {/* padding top if navbar is fixed */}
         <Routes>
           <Route path="/" element={<SearchPage />} />
           <Route
