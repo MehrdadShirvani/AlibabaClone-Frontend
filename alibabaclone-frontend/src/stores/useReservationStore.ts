@@ -1,6 +1,6 @@
 import { PersonDto } from '@/shared/models/account/PersonDto';
-import { CreateTravelerTicketDto } from '@/shared/models/ticketOrder/CreateTravelerTicketDto';
-import { TransportationSearchResult } from '@/shared/models/transportation/TransportationSearchResult';
+import { CreateTravelerTicketDto } from '@/shared/models/ticketOrder/createTravelerTicketDto';
+import { TransportationSearchResult } from '@/shared/models/transportation/transportationSearchResult';
 import { create } from 'zustand';
 
 const defaultTraveler: CreateTravelerTicketDto = {
