@@ -1,68 +1,332 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "preline/variants.css";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+@layer base {
+  /* ──────────────── Light Theme (default) ──────────────── */
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    /* Core semantics */
+    --background:          #FFFFFF;
+    --surface:             #fcfdfe;
+    --text-primary:        #1F2937;
+    --text-secondary:      #4B5563;
+    --border:              #E5E7EB;
+    --ring:                #3B82F6;
+
+    /* Primary action */
+    --primary:             #3B82F6;
+    --primary-foreground:  #FFFFFF;
+    --primary-hover:       #2563EB;
+
+    /* Accent (secondary highlights) */
+    --accent:              #22D3EE;
+    --accent-foreground:   #000000;
+    --accent-hover:        #0E7490;
+
+    /* Destructive / error */
+    --destructive:         #DC2626;
+    --destructive-foreground: #FFFFFF;
+    --destructive-hover:   #B91C1C;
+
+    /* Inputs */
+    --input-bg:            #F3F4F6;
+    --input-hover-bg:      #E5E7EB;
+
+    /* Secondary buttons */
+    --secondary:           #6B7280;
+    --secondary-foreground: #FFFFFF;
+    --secondary-hover:     #4B5563;
+
+    /* Rounded corners */
+    --radius:              0.5rem;
+
+    /* Font */
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size:   16px;
+  }
+
+  /* ──────────────── Dark Theme Overrides ──────────────── */
+  .theme-dark {
+    --background:          #121212;
+    --surface:             #1E1E1E;
+    --text-primary:        #ffffff;
+    --text-secondary:      #8b8b8b;
+    --border:              #c6c6c6;
+    --ring:                #3B82F6;
+
+    --primary:             #3B82F6;
+    --primary-foreground:  #ffffff;
+    --primary-hover:       #2563EB;
+
+    --accent:              #03DAC6;
+    --accent-foreground:   #000000;
+    --accent-hover:        #018E79;
+
+    --destructive:         #CF6679;
+    --destructive-foreground: #FFFFFF;
+    --destructive-hover:   #B00020;
+
+    --input-bg:            #2C2C2C;
+    --input-hover-bg:      #383838;
+
+    --secondary:           #9CA3AF;
+    --secondary-foreground: #1F2937;
+    --secondary-hover:     #6B7280;
+  }
+
+  /* ──────────────── Red Theme ──────────────── */
+  .theme-red {
+  --background:          #1A0B0B; /* very dark red-brown */
+  --surface:             #2C0D0E; /* surface panels */
+  --text-primary:        #FECACA; /* light pink text */
+  --text-secondary:      #F87171; /* soft red text */
+  --border:              #7F1D1D;
+  --ring:                #EF4444;
+
+  --primary:             #DC2626; /* strong red */
+  --primary-foreground:  #FFFFFF;
+  --primary-hover:       #B91C1C;
+
+  --accent:              #F43F5E;
+  --accent-foreground:   #FFFFFF;
+  --accent-hover:        #B91C1C;
+
+  --destructive:         #991B1B;
+  --destructive-foreground: #FFF1F2;
+  --destructive-hover:   #7F1D1D;
+
+  --input-bg:            #3F1212;
+  --input-hover-bg:      #5B1515;
+
+  --secondary:           #9F1239;
+  --secondary-foreground: #FFFFFF;
+  --secondary-hover:     #BE123C;
+}
+
+  /* ──────────────── Green Theme ──────────────── */
+  .theme-green {
+    --background:          #F0FDF4;
+    --surface:             #DCFCE7;
+    --text-primary:        #064E3B;
+    --text-secondary:      #02543F;
+    --border:              #BBF7D0;
+    --ring:                #10B981;
+
+    --primary:             #10B981;
+    --primary-foreground:  #FFFFFF;
+    --primary-hover:       #059669;
+
+    --accent:              #34D399;
+    --accent-foreground:   #FFFFFF;
+    --accent-hover:        #059669;
+
+    --destructive:         #047857;
+    --destructive-foreground: #D1FAE5;
+    --destructive-hover:   #065F46;
+
+    --input-bg:            #BBF7D0;
+    --input-hover-bg:      #86EFAC;
+
+    --secondary:           #047857;
+    --secondary-foreground: #D1FAE5;
+    --secondary-hover:     #065F46;
+  }
+
+  /* ──────────────── Base Element Styles ──────────────── */
+  body {
+    @apply m-0 p-4 flex items-center justify-center min-h-screen;
+    background-color: var(--background);
+    color:            var(--text-primary);
+  }
+
+  a {
+    @apply font-medium transition;
+    color:            var(--primary);
   }
   a:hover {
-    color: #747bff;
+    color:            var(--primary-hover);
   }
-  button {
-    background-color: #f9f9f9;
+
+  button, select, input {
+    @apply rounded transition;
+    font-family:      inherit;
   }
+
+  input::placeholder {
+    color:            var(--text-secondary);
+  }
+
+  select,
+select:focus {
+  background-color: var(--surface);
+  color:            var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+/* each option’s background & text */
+select option {
+  background-color: var(--surface);
+  color:            var(--text-primary);
+}
+
+/* hover over an option in the list */
+select option:hover {
+  background-color: var(--accent-hover);
+  color:            var(--accent-foreground);
+}
+
+
+
+/* the selected option when the list is closed */
+select option:checked {
+  background-color: var(--primary);
+  color:            var(--primary-foreground);
+}
+}
+
+/* ──────────────── Component Utilities ──────────────── */
+
+.input {
+  @apply w-full px-3 py-2 shadow-sm focus:outline-none;
+  background-color: var(--input-bg);
+  border:           1px solid var(--border);
+  color:            var(--text-primary);
+}
+.input:hover,
+.input:focus {
+  background-color: var(--input-hover-bg);
+}
+
+.input-date {
+  @apply w-full px-2 py-1 focus:outline-none;
+  background-color: var(--input-bg);
+  border:           1px solid var(--border);
+  color:            var(--text-primary);
+}
+.input-date:hover,
+.input-date:focus {
+  background-color: var(--input-hover-bg);
+}
+
+.button-primary {
+  @apply px-6 py-3 font-semibold shadow-md rounded-xl;
+  background-color: var(--primary);
+  color:            var(--primary-foreground);
+}
+.button-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.button-secondary {
+  @apply px-6 py-3 rounded-xl;
+  background-color: transparent;
+  border:           1px solid var(--border);
+  color:            var(--text-primary);
+}
+.button-secondary:hover {
+  background-color: var(--secondary-hover);
+  color:            var(--secondary-foreground);
+}
+
+.button-vehicle-active {
+  @apply flex flex-col items-center px-4 py-3 rounded-lg w-28;
+  background-color: var(--primary);
+  border:           4px solid var(--primary);
+  color:            var(--primary-foreground);
+  box-shadow:       0 4px 6px rgba(0,0,0,0.2);
+}
+.button-vehicle-inactive {
+  @apply flex flex-col items-center px-4 py-3 rounded-lg w-28;
+  background-color: transparent;
+  border:           2px solid var(--border);
+  color:            var(--text-primary);
+}
+.button-vehicle-inactive:hover {
+  background-color: var(--primary-hover) / 10%;
+  border-color:     var(--primary);
+}
+
+.nav-link {
+  @apply px-3 py-2 rounded-md font-medium transition;
+  color:            var(--text-primary);
+}
+.nav-link:hover {
+  background-color: var(--surface);
+  color:            var(--primary);
+}
+.nav-link-active {
+  background-color: var(--primary);
+  color:            var(--primary-foreground);
+}
+
+/* Tables */
+.table {
+  @apply w-full border-collapse shadow rounded;
+  background-color: var(--surface);
+  color:            var(--text-primary);
+}
+.table th {
+  @apply p-3 text-left font-semibold text-sm;
+  background-color: var(--surface);
+  border-bottom:   1px solid var(--border);
+}
+.table td {
+  @apply p-3 text-sm;
+  border-top:      1px solid var(--border);
+}
+
+/* Modals */
+.modal-overlay {
+  @apply fixed inset-0 flex items-center justify-center;
+  background-color: rgba(0,0,0,0.6);
+}
+.modal-content {
+  @apply p-6 rounded shadow-lg w-full max-w-lg;
+  background-color: var(--surface);
+  color:            var(--text-primary);
+}
+
+
+.theme-dark input,
+.theme-dark select,
+.theme-dark textarea {
+  border: 1px solid white;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+}
+
+.theme-dark input:focus,
+.theme-dark select:focus,
+.theme-dark textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--ring);
+}
+.theme-dark .button-vehicle-inactive img {
+  background-color: rgba(109, 109, 109, 0.943);
+  border-radius: 999px;
+  padding: 0.5rem;
+  margin: 0.2rem;
+}
+
+.theme-red .button-vehicle-inactive img {
+  background-color: rgba(102, 86, 86, 0.943);
+  border-radius: 999px;
+  padding: 0.5rem;
+  margin: 0.2rem;
+}
+
+
+button,
+a {
+  cursor: pointer;
+}
+
+button:disabled,
+button[disabled] {
+  cursor: not-allowed;
+}
+.themeSwitcherButton:hover {
+  background-color: var(--accent-hover);
+  color:            var(--accent-foreground);
 }
