@@ -24,7 +24,7 @@ jobs:
         run: |
           docker build \
             --build-arg VITE_API_URL=${{ secrets.VITE_API_URL }} \
-            -t ${{ secrets.DOCKER_USERNAME }}/alibabaclone-frontend:${{ github.ref_name }} ./alibabaclone-frontend
+            -t ${{ secrets.DOCKER_USERNAME }}/alibabaclone-frontend:${{ github.ref_name }} .
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/alibabaclone-frontend:${{ github.ref_name }}
