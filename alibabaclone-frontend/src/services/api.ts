@@ -20,7 +20,7 @@ import { TransportationSeatDto } from '../shared/models/transportation/Transport
 import { DiscountDto } from '../shared/models/transaction/DiscountDto';
 import { CouponValidationRequestDto } from '../shared/models/transaction/CouponValidationRequestDto';
 
-axios.defaults.baseURL = 'https://localhost:44377/api';
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
