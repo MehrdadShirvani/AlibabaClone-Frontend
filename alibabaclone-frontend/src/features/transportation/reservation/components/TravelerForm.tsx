@@ -1,7 +1,7 @@
 import { Button } from "@/shared/components/ui/button";
 import api from "@/services/api";
 import { PersonDto } from "@/shared/models/account/PersonDto";
-import { CreateTravelerTicketDto } from "@/shared/models/ticketOrder/CreateTravelerTicketDto";
+import { CreateTravelerTicketDto } from "@/shared/models/ticketOrder/createTravelerTicketDto";
 import { useReservationStore } from "@/stores/useReservationStore";
 import { useState } from "react";
 import SelectFromPeopleModal from "./SelectFromPeopleModal";

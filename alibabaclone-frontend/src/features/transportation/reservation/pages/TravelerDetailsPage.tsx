@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import TravelerForm from "../components/TravelerForm";
 import { Button } from "@/shared/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { CreateTravelerTicketDto } from "@/shared/models/ticketOrder/CreateTravelerTicketDto";
+import { CreateTravelerTicketDto } from "@/shared/models/ticketOrder/createTravelerTicketDto";
 import SeatGridSelector from "../components/SeatGridSelector";
-import { TransportationSeatDto } from "@/shared/models/transportation/TransportationSeatDto";
+import { TransportationSeatDto } from "@/shared/models/transportation/transportationSeatDto";
 import api from "@/services/api";
 import { useStepGuard } from "../components/StepGaurd";
 

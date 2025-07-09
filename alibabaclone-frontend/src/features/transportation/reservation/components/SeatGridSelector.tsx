@@ -1,4 +1,4 @@
-import { TransportationSeatDto } from "@/shared/models/transportation/TransportationSeatDto";
+import { TransportationSeatDto } from "@/shared/models/transportation/transportationSeatDto";
 import React from "react";
 
 interface SeatGridSelectorProps {

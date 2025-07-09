@@ -1,4 +1,4 @@
-import { CreateTravelerTicketDto } from "./CreateTravelerTicketDto";
+import { CreateTravelerTicketDto } from "./createTravelerTicketDto";
 
 export interface CreateTicketOrderDto{
     transportationId: number,

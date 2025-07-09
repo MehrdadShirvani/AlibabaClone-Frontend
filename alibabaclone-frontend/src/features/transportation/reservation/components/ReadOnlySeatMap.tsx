@@ -1,5 +1,5 @@
 import React from "react";
-import { TransportationSeatDto } from "@/shared/models/transportation/TransportationSeatDto";
+import { TransportationSeatDto } from "@/shared/models/transportation/transportationSeatDto";
 
 interface ReadOnlySeatMapProps {
   seats: TransportationSeatDto[];

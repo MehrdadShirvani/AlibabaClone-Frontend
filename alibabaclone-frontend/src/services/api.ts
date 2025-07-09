@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import { TransportationSearchRequest } from '../shared/models/transportation/TransportationSearchRequest';
-import { TransportationSearchResult } from '../shared/models/transportation/TransportationSearchResult';
-import { City } from '../shared/models/location/City';
+import { TransportationSearchRequest } from '../shared/models/transportation/transportationSearchRequest';
+import { TransportationSearchResult } from '../shared/models/transportation/transportationSearchResult';
+import { City } from '../shared/models/location/city';
 import { RegisterRequestDto } from '../shared/models/authentication/RegisterRequestDto';
 import { LoginRequestDto } from '../shared/models/authentication/LoginRequestDto';
 import { AuthResponseDto } from '../shared/models/authentication/AuthResponseDto';
@@ -14,11 +14,11 @@ import { TravelerTicketDto } from '../shared/models/transportation/TravelerTicke
 import { TicketOrderSummaryDto } from '../shared/models/transportation/TicketOrderSummaryDto';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { TransactionDto } from '../shared/models/transaction/TransactionDto';
-import { CreateTicketOrderDto } from '../shared/models/ticketOrder/CreateTicketOrderDto';
-import { TopUpDto } from '../shared/models/account/TopUpDto';
-import { TransportationSeatDto } from '../shared/models/transportation/TransportationSeatDto';
-import { DiscountDto } from '../shared/models/transaction/DiscountDto';
-import { CouponValidationRequestDto } from '../shared/models/transaction/CouponValidationRequestDto';
+import { CreateTicketOrderDto } from '../shared/models/ticketOrder/createTicketOrderDto';
+import { TopUpDto } from '../shared/models/account/topUpDto';
+import { TransportationSeatDto } from '../shared/models/transportation/transportationSeatDto';
+import { DiscountDto } from '../shared/models/transaction/discountDto';
+import { CouponValidationRequestDto } from '../shared/models/transaction/couponValidationRequestDto';
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
