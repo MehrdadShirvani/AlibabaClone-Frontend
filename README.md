@@ -9,10 +9,6 @@ Welcome to the frontend of the **Transportation Management System**, a modern we
 
  💡 This frontend is powered by APIs provided by the [Transportation Management Backend](https://github.com/mehrdadShirvani/AlibabaClone-Backend/), which follows Clean Architecture and exposes a secure REST interface.
 
- 🐦‍🔥 This project is part of the first initiative by **The Order of the Phoenix** — a student-led movement aimed at building a culture of self-driven learning, teamwork, and meaningful project development. What started as a grassroots .NET learning group evolved into a full-stack travel management system inspired by platforms like Alibaba.ir, built with clean architecture on the backend and a modern React frontend.
-
- 🔗 For more information, and to explore the full documentation and creation process, visit: **[ASP.NET Project Documentation](https://theorderofphoenix.github.io/ASP.NET/)**  
-
 ---
 ## 🛠️ Tech Stack
 
@@ -253,6 +249,22 @@ Includes support for:
 - **W3Schools Guide**  
     [react router](https://www.w3schools.com/react/react_router.asp)
     
+---
+
+## 🐦‍🔥 Order of the Phoenix
+This project is part of the first initiative by **The Order of the Phoenix** — a student-led movement aimed at building a culture of self-driven learning, teamwork, and meaningful project development. What started as a grassroots .NET learning group evolved into a full-stack travel management system inspired by platforms like Alibaba.ir, built with clean architecture on the backend and a modern React frontend.
+
+ 🔗 For more information, and to explore the full documentation and creation process, visit: **[ASP.NET Project Documentation](https://theorderofphoenix.github.io/ASP.NET/)**  
+
+
+I should specially thank:
+
+[Amin Ghoorchian](https://github.com/AminGh05)
+
+[Ali Taherzadeh](https://github.com/AliThz)
+
+For their guidance, help and accompaniment.
+
 ---
 
 ## 📝 License
